@@ -26,9 +26,9 @@ const Buttonwrapper=styled.div`
 `
 const ButtonAnswer=styled.div`
     cursor: pointer;
-    background: #D9D9D9;
+    background: ${(props) => (props.$isSelected ? '#BED6F9' : '#D9D9D9')};
     border-radius: 3rem;
-    border: none;
+    border:  ${(props) => (props.$isSelected ? '0.3rem solid var(--Main-Color, #6BA6FF)' : 'none')};
     color: rgba(51, 62, 94, 0.80);
     text-align: center;
     font-family: var(--font-family-pretendard);
@@ -50,7 +50,7 @@ const Button=styled.div`
     width: 28rem;
     height: 8rem;
     border-radius: 3rem;
-    background: #D9D9D9;
+    background: ${(props) => (props.$isAnswerSelected ? 'var(--Main-Color, #6BA6FF)' : '#D9D9D9')};
     position: absolute;
     top: 74.2rem;
     display: flex;
@@ -72,14 +72,19 @@ const TestContent = () => {
         {question:'내가 추구하는 운동 루틴은', answer1:'체계적으로\n일정 계획',answer2:'원할때마다\n자유롭게'},  
     ];
     const [currentStep,setCurrentStep]=useState(0);
+    const [selectedAnswer, setSelectedAnswer] = useState(null);
     const navigate=useNavigate();
     const handleNext=()=>{
         if( currentStep <qnas.length -1){
             setCurrentStep(currentStep+1);
+            setSelectedAnswer(null);
         }else{
             navigate('/testfinish');
         }
     }
+    const handleAnswerClick = (answerIndex) => {
+        setSelectedAnswer(answerIndex);
+    };
     const isSpecialStep= currentStep===0 || currentStep===3;
    
   return (
@@ -87,7 +92,9 @@ const TestContent = () => {
     <TestItem key={currentStep}>
         <h1 className="question">{qnas[currentStep].question}</h1>
         <Buttonwrapper>
-        <ButtonAnswer $isSpecialStep={isSpecialStep}>
+        <ButtonAnswer $isSpecialStep={isSpecialStep}
+          $isSelected={selectedAnswer === 1}
+          onClick={() => handleAnswerClick(1)}>
             {qnas[currentStep].answer1.split('\n').map((line,index)=>(
                 <React.Fragment key={index}>
                     {line}
@@ -95,7 +102,9 @@ const TestContent = () => {
                 </React.Fragment>
             ))}
         </ButtonAnswer>
-        <ButtonAnswer $isSpecialStep={isSpecialStep}>
+        <ButtonAnswer $isSpecialStep={isSpecialStep}
+          $isSelected={selectedAnswer === 2}
+          onClick={() => handleAnswerClick(2)}>
             {qnas[currentStep].answer2.split('\n').map((line,index)=>(
                 <React.Fragment key={index}>
                     {line}
@@ -104,7 +113,7 @@ const TestContent = () => {
             ))}
         </ButtonAnswer>
         </Buttonwrapper>
-        <Button onClick={handleNext}>
+        <Button  $isAnswerSelected={selectedAnswer !== null} onClick={handleNext}>
         <div className='test-next-btn' >다음</div>
         </Button>
        
