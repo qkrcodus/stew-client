@@ -1,11 +1,11 @@
 import React from 'react'
-import Header from '../components/Header'
-import Footer from '../components/Footer'
-import Categories from '../components/Categories'
-import RecommendedSport from '../components/RecommendedSport'
-import TodayTutor from '../components/TodayTutor'
-import Advertisement from '../components/Advertisement'
-import Reviews from '../components/Reviews'
+import Header from '../components/main/Header'
+import Footer from '../components/main/Footer'
+import Categories from '../components/main/Categories'
+import RecommendedSport from '../components/main/RecommendedSport'
+import TodayTutor from '../components/main/TodayTutor'
+import Advertisement from '../components/main/Advertisement'
+import Reviews from '../components/main/Reviews'
 import styled from 'styled-components'
 
 const MainPageContainer=styled.div`

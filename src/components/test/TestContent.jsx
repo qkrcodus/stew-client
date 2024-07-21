@@ -41,6 +41,7 @@ const ButtonAnswer=styled.div`
     align-items: center;
     padding: 0 3rem;
     box-sizing: border-box;
+    line-height: 1.2;
     top: ${(props)=>{if(props.$isSpecialStep){ return '34.9rem';} else if(props.$isFinalStep){return '20rem';}else{return '14.7rem';}}};
     height: ${(props)=>(props.$isSpecialStep ? '34.9rem' :'14.7rem')};
 `

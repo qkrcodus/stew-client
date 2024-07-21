@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
-import taekwondo from '../assets/images/taekwondo.png';
-import archery from '../assets/images/archery.png';
-import surfing from '../assets/images/surfing.png';
-import fencing from '../assets/images/fencing.png';
-import figureSkating from '../assets/images/figureSkating.png';
-import weightlifting from '../assets/images/weightlifting.png';
+import taekwondo from '../../assets/images/taekwondo.png';
+import archery from '../../assets/images/archery.png';
+import surfing from '../../assets/images/surfing.png';
+import fencing from '../../assets/images/fencing.png';
+import figureSkating from '../../assets/images/figureSkating.png';
+import weightlifting from '../../assets/images/weightlifting.png';
 
 const Container = styled.div`
   display: flex;

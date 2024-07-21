@@ -1,5 +1,5 @@
 import React from 'react'
-import advertisement from '../assets/images/advertisement.png';
+import advertisement from '../../assets/images/advertisement.png';
 import styled from 'styled-components'
 const AdvertisementContainer=styled.div`
 img{

@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import HeaderForPages from './HeaderForPages';
-import introImage from '../assets/images/jogging.png';
-import searchbtn from '../assets/images/search.png';
+import HeaderForPages from '../HeaderForPages';
+import introImage from '../../assets/images/jogging.png';
+import searchbtn from '../../assets/images/search.png';
 import { useNavigate } from 'react-router-dom';
 
 const StyledHeader = styled.div`
@@ -23,6 +23,7 @@ const IntroSection = styled.div`
     position: absolute;
     top: 29.6rem;
     left: 39.6rem;
+    line-height: 1.1;
   }
 
   .buttons {

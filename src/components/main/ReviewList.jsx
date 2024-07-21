@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import stars from '../assets/images/star-fill.png';
+import stars from '../../assets/images/star-fill.png';
 
 const ReviewContainer = styled.div`
   display: grid;

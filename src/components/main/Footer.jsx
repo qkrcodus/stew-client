@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import "./footerstyle.css";
-import youtube from '../assets/images/youtube.png';
-import facebook from '../assets/images/facebook.png';
-import instagram from '../assets/images/instagram.png';
+import youtube from '../../assets/images/youtube.png';
+import facebook from '../../assets/images/facebook.png';
+import instagram from '../../assets/images/instagram.png';
 
 const Logo = styled.div`
   color: white;
