@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import HeaderForPages from './HeaderForPages';
 import introImage from '../assets/images/jogging.png';
 import searchbtn from '../assets/images/search.png';
+import { useNavigate } from 'react-router-dom';
 
 const StyledHeader = styled.div`
   width: 100vw;
@@ -137,13 +138,18 @@ const SearchSection = styled.div`
 `;
 
 const Header = () => {
+  const navigate = useNavigate();
+
+  const handleTestClick = () => {
+    navigate('/test');
+  };
   return (
     <StyledHeader>
       <HeaderForPages />
       <IntroSection>
         <h1>AI 맞춤형 운동추천부터<br />스포츠 튜터 매칭까지 한 번에</h1>
         <div className="buttons">
-          <button className="btn-left">테스트 하러가기</button>
+          <button className="btn-left" onClick={handleTestClick}>테스트 하러가기</button>
           <button className="btn-right">튜터 둘러보기</button>
         </div>
         <img src={introImage} alt="Intro" />

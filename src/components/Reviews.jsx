@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components';
+import ReviewList from './ReviewList';
 const ReviewContainer=styled.div`
     position: absolute;
     top: 323.4rem;
@@ -60,6 +61,7 @@ const Reviews = () => {
         <ReviewCard key={reviews.id} {...reviews} />
       ))}
     </div> */}
+    <ReviewList/>
     </ReviewContainer>
   )
 }

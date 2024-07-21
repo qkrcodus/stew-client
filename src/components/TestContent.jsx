@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components';
 import { useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 const TestItem=styled.div`
     position: relative;
     display: flex;
@@ -71,14 +71,16 @@ const TestContent = () => {
         {question:'내가 추구하는 운동 루틴은', answer1:'체계적으로\n일정 계획',answer2:'원할때마다\n자유롭게'},  
     ];
     const [currentStep,setCurrentStep]=useState(0);
+    const navigate=useNavigate();
     const handleNext=()=>{
         if( currentStep <qnas.length -1){
             setCurrentStep(currentStep+1);
         }else{
-            alert('로딩중');
+            navigate('/testfinish');
         }
     }
     const isSpecialStep= currentStep===0 || currentStep===3;
+   
   return (
     <>
     <TestItem key={currentStep}>
@@ -102,7 +104,7 @@ const TestContent = () => {
         </ButtonAnswer>
         </Buttonwrapper>
         <Button onClick={handleNext}>
-        <div className='test-next-btn'>다음</div>
+        <div className='test-next-btn' >다음</div>
         </Button>
        
         
