@@ -10,7 +10,9 @@ import weightlifting from '../assets/images/weightlifting.png';
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-`;
+  position: absolute;
+  top: 390.9rem;
+`
 
 const Title = styled.h2`
   font-size: 5.4rem;
@@ -29,26 +31,30 @@ const Subtitle = styled.p`
   color: var(--font-color-sub);
   margin-bottom: 8.3rem;
 `;
+const IconListWrapper = styled.div`
+  width: 100vw;
+  display: flex;
+  justify-content: center; /* 중앙 정렬 */
+`;
 
 const IconListContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 2.3rem;
+  gap: 2.3rem; 
 `;
 
 const IconItem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: 3rem;
-  width: 19.1rem;
-  height: 19.1rem;
 `;
 
 const IconImage = styled.img`
   width: 9.5rem;
   height: 10em;
+  width: 19.1rem;
+  height: 19.1rem;
 `;
 
 const IconLabel = styled.p`
@@ -71,6 +77,7 @@ const RecommendedSport = () => {
     <Container>
     <Title>2024 파리 올림픽을 맞이하여</Title>
     <Subtitle>이런 특색있는 운동은 어때요?</Subtitle>
+    <IconListWrapper>
     <IconListContainer>
       {icons.map((icon, index) => (
         <IconItem key={index}>
@@ -79,6 +86,7 @@ const RecommendedSport = () => {
         </IconItem>
       ))}
     </IconListContainer>
+    </IconListWrapper>
   </Container>
   )
 }

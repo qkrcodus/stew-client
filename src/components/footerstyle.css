@@ -1,0 +1,77 @@
+.frame {
+  align-items: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0px 9.2rem;
+  position: relative;
+  width: 137rem;
+  padding: 4.8rem 30rem 0 ;
+}
+
+.frame .element {
+  color: var(--sub-color);
+  font-family: "Pretendard-SemiBold", Helvetica;
+  font-size: 2rem;
+  font-weight: 400;
+  height: 21.7rem;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: -0.1rem;
+  position: relative;
+  width: 28.4rem;
+}
+
+.frame .text-wrapper {
+  font-weight: 600;
+}
+
+.frame .span {
+  font-family: "Pretendard-Regular", Helvetica;
+}
+
+.frame .div {
+  color: var(--sub-color);
+  font-family: "Pretendard-SemiBold", Helvetica;
+  font-size: 2rem;
+  font-weight: 600;
+  height: 21.5rem;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: -0.1rem;
+  position: relative;
+}
+
+.frame .text-wrapper-2 {
+  color: var(--sub-color);
+  font-family: "Pretendard-SemiBold", Helvetica;
+  font-size: 2rem;
+  font-weight: 600;
+  height: 7.2rem;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: -0.1rem;
+  position: relative;
+}
+
+.frame .element-studio {
+  color: var(--sub-color);
+  font-family: "Pretendard-Regular", Helvetica;
+  font-size: 2rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: -0.1rem;
+  position: relative;
+  text-align: right;
+  width: 49.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.footer-logos{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 2.2rem;
+}

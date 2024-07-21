@@ -9,12 +9,15 @@ const Logo = styled.div`
   cursor: pointer;
 `;
 const Nav = styled.div`
+  display: flex;
+  gap: 6.9rem;
+  cursor: pointer;
+  div{
   font-family: var(--font-family-pretendard);
   color: var(--font-color-white);
   font-size: var(--font-size-28px);
-  display: flex;
-  gap:5rem;
-  cursor: pointer;
+  font-weight: var(--font-weight-bold);
+  }
 `;
 const Headerwrapper=styled.div`
   margin:0rem 28rem;
@@ -34,8 +37,9 @@ const HeaderForPages=()=>{
       <Headerwrapper>
       <Logo>스튜</Logo>
       <Nav>
-        <div>튜터링 관리</div>
-        <div>마이페이지</div>
+        <div>게시글 관리</div>
+        <div>보낸 신청서</div>
+        <div>받은 신청서</div>
       </Nav>
       </Headerwrapper>
       </HeaderContainer>
