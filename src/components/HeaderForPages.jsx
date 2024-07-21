@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-
+import { useNavigate } from 'react-router-dom';
 const Logo = styled.div`
   color: white;
   font-size: var(--font-size-80px);
@@ -32,10 +32,14 @@ const HeaderContainer=styled.div`
 `
 
 const HeaderForPages=()=>{
+  const navigate = useNavigate();
+  const handleTestClick = () => {
+    navigate('/');
+  };
     return(
       <HeaderContainer>
       <Headerwrapper>
-      <Logo>스튜</Logo>
+      <Logo onClick={handleTestClick}>스튜</Logo>
       <Nav>
         <div>게시글 관리</div>
         <div>보낸 신청서</div>
