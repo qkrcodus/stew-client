@@ -13,10 +13,21 @@ const Nav = styled.div`
   gap: 6.9rem;
   cursor: pointer;
   div{
-  font-family: var(--font-family-pretendard);
-  color: var(--font-color-white);
-  font-size: var(--font-size-28px);
-  font-weight: var(--font-weight-bold);
+    font-family: var(--font-family-pretendard);
+    font-size: var(--font-size-28px);
+    font-weight: var(--font-weight-bold);
+    color: var(--font-color-white);
+     &:nth-child(1) {
+      color: ${(props) => (props.$forPostManagement ? 'var(--font-color-sub)' : 'var(--font-color-white)')};
+    }
+
+    &:nth-child(2) {
+      color: ${(props) => (props.$forSentApplications ? 'var(--font-color-sub)' : 'var(--font-color-white)')};
+    }
+
+    &:nth-child(3) {
+      color: ${(props) => (props.$forReceivedApplications ? 'var(--font-color-sub)' : 'var(--font-color-white)')};
+    }
   }
 `;
 const Headerwrapper=styled.div`
@@ -31,19 +42,30 @@ const HeaderContainer=styled.div`
   width: 100vw;
 `
 
-const HeaderForPages=()=>{
+const HeaderForPages=(props)=>{
   const navigate = useNavigate();
   const handleTestClick = () => {
     navigate('/');
   };
+  const handlePostManagementClick=()=>{
+    navigate('/postmanagement')
+  }
+  const handleSentApplicationsClick=()=>{
+    navigate('/sentapplications')
+  }
+  const handleReceivedApplicationsClick=()=>{
+    navigate('/receivedapplications')
+  }
     return(
       <HeaderContainer>
       <Headerwrapper>
       <Logo onClick={handleTestClick}>스튜</Logo>
-      <Nav>
-        <div>게시글 관리</div>
-        <div>보낸 신청서</div>
-        <div>받은 신청서</div>
+      <Nav $forPostManagement={props.forPostManagement}
+           $forSentApplications={props.forSentApplications}
+           $forReceivedApplications={props.forReceivedApplications}>
+        <div onClick={handlePostManagementClick}>게시글 관리</div>
+        <div onClick={handleSentApplicationsClick}>보낸 신청서</div>
+        <div onClick={handleReceivedApplicationsClick}>받은 신청서</div>
       </Nav>
       </Headerwrapper>
       </HeaderContainer>

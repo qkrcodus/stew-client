@@ -8,6 +8,7 @@ const TestItem=styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+ 
     h1{
         position: absolute;
         top: 19.4rem;
@@ -90,6 +91,7 @@ const TestContent = () => {
   return (
     <>
     <TestItem key={currentStep}>
+        <div className='progress-bar'></div>
         <h1 className="question">{qnas[currentStep].question}</h1>
         <Buttonwrapper>
         <ButtonAnswer $isSpecialStep={isSpecialStep}
@@ -113,7 +115,7 @@ const TestContent = () => {
             ))}
         </ButtonAnswer>
         </Buttonwrapper>
-        <Button  $isAnswerSelected={selectedAnswer !== null} onClick={handleNext}>
+        <Button  $isAnswerSelected={selectedAnswer !== null}onClick={handleNext}>
         <div className='test-next-btn' >다음</div>
         </Button>
        

@@ -34,7 +34,7 @@ const Subtitle = styled.p`
 const IconListWrapper = styled.div`
   width: 100vw;
   display: flex;
-  justify-content: center; /* 중앙 정렬 */
+  justify-content: center; 
 `;
 
 const IconListContainer = styled.div`

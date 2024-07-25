@@ -93,7 +93,7 @@ const SearchSection = styled.div`
   }
   
   .search-bar {
-    position: relative; /* relative positioning for the container */
+    position: relative; 
     display: flex;
     align-items: center;
     margin: 0 auto;
