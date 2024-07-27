@@ -11,6 +11,7 @@ const TutorDetailContainer=styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: 216rem;
 `
 const TutorThumbnail=styled.div`
     position: absolute;
@@ -46,6 +47,25 @@ const RatingImage = styled.img`
 const Space = styled.span`
     margin-left: 2rem; 
 `;
+const SignupBtn=styled.div`
+width: 18.7rem;
+height: 5.9453rem;
+border: 0.3rem solid #333E5E;
+border-radius: 4rem;
+flex-shrink: 0;
+display: flex;
+justify-content: center;
+align-items: center;
+color: var(--Sub-Color, #333E5E);
+font-family: Pretendard;
+font-size: 3.6rem;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+position: absolute;
+top: 177.4rem;
+right: 26.8rem;
+`
 
 const TutorDetail = () => {
   const {id}=useParams();
@@ -67,6 +87,10 @@ const TutorDetail = () => {
         </div>
     </TutorThumbnail>
     <LeftInfo/>
+    <RightInfo/>
+    <SignupBtn>
+        신청하기
+    </SignupBtn>
     </TutorDetailContainer>
   )
 }

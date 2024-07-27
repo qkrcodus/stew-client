@@ -9,7 +9,7 @@ const LeftInfoContainer = styled.div`
   left: 26.8rem;
 `;
 
-const TutorDetailContainer = styled.div`
+const TutorDetailContainerLeft = styled.div`
     position: relative;
     border-radius: 1rem;
     border: 0.1rem solid #6BA6FF;
@@ -39,7 +39,7 @@ const TutorFirstLine=styled.div`
 `
 const TutorSecondLine=styled.div`
     color: var(--Sub-Color, #333E5E);
-    font-family: Pretendard;
+    font-family: var(--font-family-pretendard);
     font-size: 2.8rem;
     font-style: normal;
     align-items: center;
@@ -57,7 +57,8 @@ const TutorSecondLine=styled.div`
     border-radius: 3rem;
     border: 0.1rem solid var(--Sub-Color, #333E5E);
     padding-left: 2.6rem;
-    padding-top: 0.4rem;
+    display: flex;
+    align-items: center;
     box-sizing: border-box;
     }
     & > div:nth-child(4){
@@ -67,7 +68,8 @@ const TutorSecondLine=styled.div`
     border-radius: 3rem;
     border: 0.1rem solid var(--Sub-Color, #333E5E);
     padding-left: 2.6rem;
-    padding-top: 0.4rem;
+    display: flex;
+    align-items: center;
     box-sizing: border-box;
     }
 
@@ -98,7 +100,7 @@ const InfoContainer = styled.div`
     left: 2.7rem;
     background: white;
     color: var(--Sub-Color, #333E5E);
-    font-family: Pretendard;
+    font-family: var(--font-family-pretendard);
     font-size: 2.8rem;
     font-style: normal;
     font-weight: 500;
@@ -118,7 +120,7 @@ const InfoRow = styled.div`
     gap: 1.7rem;
     & > div:first-child {
     color: #A6A6A6;
-    font-family: Pretendard;
+    font-family: var(--font-family-pretendard);
     font-size: 2.8rem;
     font-style: normal;
     font-weight: 500;
@@ -131,7 +133,7 @@ const InfoRow = styled.div`
     }
     & > div:nth-child(3) {
     color: var(--Sub-Color, #333E5E);
-    font-family: Pretendard;
+    font-family: var(--font-family-pretendard);
     font-size: 2.8rem;
     font-style: normal;
     font-weight: 500;
@@ -142,7 +144,7 @@ const InfoRow = styled.div`
 const Intro1=styled.div`
     & > div:first-child {
    color: var(--Main-Color, #6BA6FF);
-   font-family: Pretendard;
+   font-family: var(--font-family-pretendard);
    font-size: 24px;
    font-style: normal;
    font-weight: 500;
@@ -160,7 +162,7 @@ const Intro1=styled.div`
    display: flex;
    align-items: center;
    color: var(--Sub-Color, #333E5E);
-   font-family: Pretendard;
+   font-family: var(--font-family-pretendard);
    font-size: 2.4rem;
    font-style: normal;
    font-weight: 500;
@@ -176,7 +178,7 @@ const Intro1=styled.div`
 const Intro2=styled.div`
     & > div:first-child {
    color: var(--Main-Color, #6BA6FF);
-   font-family: Pretendard;
+   font-family: var(--font-family-pretendard);
    font-size: 24px;
    font-style: normal;
    font-weight: 500;
@@ -194,7 +196,7 @@ const Intro2=styled.div`
    display: flex;
    align-items: center;
    color: var(--Sub-Color, #333E5E);
-   font-family: Pretendard;
+   font-family: var(--font-family-pretendard);
    font-size: 2.4rem;
    font-style: normal;
    font-weight: 500;
@@ -223,7 +225,7 @@ const BioContainer = styled.div`
         resize: none;
         border: none;
         color: var(--Sub-Color, #333E5E);
-        font-family: Pretendard;
+        font-family: var(--font-family-pretendard);
         font-size: 2.4rem;
         font-style: normal;
         font-weight: 500;
@@ -239,7 +241,7 @@ const BioContainer = styled.div`
     left: 2.7rem;
     background: white;
     color: var(--Sub-Color, #333E5E);
-    font-family: Pretendard;
+    font-family: var(--font-family-pretendard);
     font-size: 2.8rem;
     font-style: normal;
     font-weight: 500;
@@ -256,7 +258,7 @@ const BioContainer = styled.div`
 const CharCount = styled.div`
     color: #A6A6A6;
     text-align: right;
-    font-family: Pretendard;
+    font-family: var(--font-family-pretendard);
     font-size: 2.4rem;
     font-style: normal;
     font-weight: 500;
@@ -279,7 +281,7 @@ const LeftInfo = () => {
     };
   return (
     <LeftInfoContainer>
-    <TutorDetailContainer>
+    <TutorDetailContainerLeft>
     <TutorThumbnail>
         <TutorFirstLine>
             <TutorImg>
@@ -339,11 +341,11 @@ const LeftInfo = () => {
         <textarea
             value={bio}
             onChange={handleBioChange}
-            maxLength={500}
+            maxLength={140}
         />
         <CharCount>({charCount}/140)</CharCount>
     </BioContainer>
-    </TutorDetailContainer>
+    </TutorDetailContainerLeft>
     </LeftInfoContainer>
   )
 }
