@@ -86,8 +86,8 @@ const TutorDetail = () => {
             <div>{tutor.price}</div>
         </div>
     </TutorThumbnail>
-    <LeftInfo/>
-    <RightInfo/>
+    <LeftInfo data={tutorData}/>
+    <RightInfo data={tutorData}/>
     <SignupBtn>
         신청하기
     </SignupBtn>

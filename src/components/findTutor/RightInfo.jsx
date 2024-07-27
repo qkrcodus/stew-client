@@ -148,9 +148,9 @@ const CharCount = styled.div`
     top: 22.7rem;
     left: 48.6rem;
 `;
-const RightInfo = () => {
+const RightInfo = ({data}) => {
   const { id } = useParams();
-  const tutor = tutorData.find(t => t.id === parseInt(id));
+  const tutor = data.find(t => t.id === parseInt(id));
 
   const [gyminfo, setGyminfo] = useState(tutor.gyminfo);
   const [charCount, setCharCount] = useState(tutor.gyminfo.length);

@@ -20,7 +20,7 @@ const FindTutor = () => {
     <HeaderForPages/>
     <Navbar/>
     <ShowTutor>
-    <PostContainer data={tutorData} />
+    <PostContainer data={tutorData}  isMyData={false}  />
     </ShowTutor>
     </FindTutorContainer>
   )

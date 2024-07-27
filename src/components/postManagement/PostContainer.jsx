@@ -165,11 +165,14 @@ const PlusButton = styled(Rectangle)`
     height: 3.5rem;
   }
 `
-const PostContainer = ({ data }) => {
+const PostContainer = ({ data , isMyData}) => {
     const navigate=useNavigate();
     const handleBoxClick=(id)=>{
+      if( isMyData){
+        navigate(`/mydetail/${id}`);
+      }else{
         navigate(`/tutordetail/${id}`);
-    }
+    }};
   return (
 <PostBox>
        {data.map((box) => (

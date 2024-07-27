@@ -1,7 +1,7 @@
 export const mydata = [
     {
         id: 1,
-        name: '김서준 튜터',
+        name: '박채연 튜터',
         gender: '남자',
         age: 25,
         location: '서울시 강남구',
@@ -16,7 +16,7 @@ export const mydata = [
     },
     {
         id: 2,
-        name: '이혜진 튜터',
+        name: '박채연 튜터',
         gender: '여자',
         age: 32,
         location: '서울시 마포구',
@@ -31,7 +31,7 @@ export const mydata = [
     },
     {
         id: 3,
-        name: '박준형 튜터',
+        name: '박채연 튜터',
         gender: '남자',
         age: 29,
         location: '서울시 용산구',

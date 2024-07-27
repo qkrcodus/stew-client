@@ -15,7 +15,7 @@ const PostManagement = () => {
         <>
          <PostManagementContainer>
          <HeaderForPages forPostManagement={true}/>
-         <PostContainer data={mydata}/>
+         <PostContainer data={mydata} isMyData={true} />
          </PostManagementContainer>
         </>
     )

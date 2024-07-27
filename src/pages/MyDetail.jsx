@@ -47,8 +47,8 @@ const RatingImage = styled.img`
 const Space = styled.span`
     margin-left: 2rem; 
 `;
-const SignupBtn=styled.div`
-width: 18.7rem;
+const UpdateBtn=styled.div`
+width: 12.2086rem;
 height: 5.9453rem;
 border: 0.3rem solid #333E5E;
 border-radius: 4rem;
@@ -64,7 +64,26 @@ font-weight: 700;
 line-height: normal;
 position: absolute;
 top: 177.4rem;
-right: 26.8rem;
+right: 41.491rem;
+`
+const DeleteBtn=styled.div`
+width: 12.2086rem;
+height: 5.9453rem;
+border: 0.3rem solid #333E5E;
+border-radius: 4rem;
+flex-shrink: 0;
+display: flex;
+justify-content: center;
+align-items: center;
+color: var(--Sub-Color, #333E5E);
+font-family: Pretendard;
+font-size: 3.6rem;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+position: absolute;
+top: 177.4rem;
+right: 26.798rem;
 `
 
 const MyDetail = () => {
@@ -86,11 +105,14 @@ const MyDetail = () => {
             <div>{my.price}</div>
         </div>
     </TutorThumbnail>
-    <LeftInfo/>
-    <RightInfo/>
-    <SignupBtn>
-        신청하기
-    </SignupBtn>
+    <LeftInfo  data={mydata}/>
+    <RightInfo data={mydata}/>
+    <UpdateBtn>
+        수정
+    </UpdateBtn>
+    <DeleteBtn>
+        삭제
+    </DeleteBtn>
     </TutorDetailContainer>
   )
 }
