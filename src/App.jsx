@@ -7,6 +7,7 @@ import PostManagement from './pages/PostManagement';
 import SentApplications from './pages/SentApplications';
 import ReceivedApplications from './pages/ReceivedApplications';
 import FindTutor from './pages/FindTutor';
+import TutorDetail from './pages/TutorDetail';
 const App = () => {
   return (
     <>
@@ -15,6 +16,7 @@ const App = () => {
         <Route path="/test" element={<Test />} />
         <Route path="/testfinish" element={<TestFinish />} />
         <Route path="/findtutor" element={<FindTutor/>} />
+        <Route path="/tutordetail/:id" element={<TutorDetail/>} />
         <Route path='/postmanagement' element={<PostManagement />} />
         <Route path='/sentapplications' element={<SentApplications />} />
         <Route path='/receivedapplications' element={<ReceivedApplications/>} />

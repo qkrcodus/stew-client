@@ -35,7 +35,7 @@ const Headerwrapper=styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height:16.1rem;
+  height: 16.1rem;
 `
 const HeaderContainer=styled.div`
   background: var(--font-color-main);

@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import stars from '../../assets/images/star-fill.png';
+import { useNavigate } from 'react-router-dom';
 
 const PostBox=styled.div`
     position: absolute;
@@ -136,7 +137,6 @@ const Comment=styled.div`
   font-weight: 500;
   line-height: normal;
 `
-
 const Price = styled.div`
   position: absolute;
   top: 27.9rem;
@@ -153,8 +153,6 @@ const Price = styled.div`
     line-height: normal;
   }
 `;
-
-
 const PlusButton = styled(Rectangle)`
   display: flex;
   justify-content: center;
@@ -167,12 +165,16 @@ const PlusButton = styled(Rectangle)`
   }
 `
 const PostContainer = () => {
+    const navigate=useNavigate();
     const boxes = [
         { id: 1, name: '김숭실 튜터', type: '헬스', location: '서울시 성북구', activity: '헬스 5년차', weight: '2개월 동안 10kg 감량', rating: 3, reviewNum: 4, comment: '강박 없이! 스트레스 없이! 재미있게 운동 시작해봐요~' ,price: '10,000원'},
         { id: 2, name: '박숭실 튜터', type: '수영', location: '서울시 성북구', activity: '헬스 5년차', weight: '2개월 동안 10kg 감량', rating: 4, reviewNum: 42, comment: '강박 없이! 스트레스 없이! 재미있게 운동 시작해봐요~' ,price: '10,000원' },
         { id: 3, name: '최숭실 튜터', type: '수영', location: '서울시 성북구', activity: '헬스 5년차', weight: '2개월 동안 10kg 감량', rating: 2, reviewNum: 420, comment: '강박 없이! 스트레스 없이! 재미있게 운동 시작해봐요~' ,price: '10,000원' },
         { id: 4, name: 'plus', location: '', activity: '', weight: '', rating: 0, price: '' },
     ]
+    const handleBoxClick=(id)=>{
+        navigate(`/tutordetail/${id}`);
+    }
   return (
     <PostBox>
     {boxes.map((box)=>
@@ -183,26 +185,26 @@ const PostContainer = () => {
         </svg>
         </PlusButton>
       ) : 
-      ( <Rectangle key={box.id}>
+      ( <Rectangle key={box.id} onClick={()=>handleBoxClick(box.id)}>
         <BoxContent>
-        <Thumbnail />
-        <Name>{box.name}<Type>{box.type}</Type></Name>
-        <Info>
-              <div>{box.location}</div>
-              <div>{box.activity}</div>
-              <div>{box.weight}</div>
-        </Info>
-        <RatingContainer>
-            {Array.from({ length: box.rating }, (_, index) => (
-                <RatingImage key={index} src={stars} alt="stars" />
-            ))}
-            <div>({box.reviewNum})</div>
-        </RatingContainer>
-        <Line></Line>
-        <Comment>
-            <div>{box.comment}</div>
-        </Comment>
-        <Price><div>{box.price}~</div></Price>
+            <Thumbnail />
+            <Name>{box.name}<Type>{box.type}</Type></Name>
+            <Info>
+                <div>{box.location}</div>
+                <div>{box.activity}</div>
+                <div>{box.weight}</div>
+            </Info>
+            <RatingContainer>
+                {Array.from({ length: box.rating }, (_, index) => (
+                    <RatingImage key={index} src={stars} alt="stars" />
+                ))}
+                <div>({box.reviewNum})</div>
+            </RatingContainer>
+            <Line></Line>
+            <Comment>
+                <div>{box.comment}</div>
+            </Comment>
+            <Price><div>{box.price}~</div></Price>
         </BoxContent>
         </Rectangle>
     ))}
