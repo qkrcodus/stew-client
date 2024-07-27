@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import stars from '../../assets/images/star-fill.png';
 import { useNavigate } from 'react-router-dom';
+import { tutorData } from '../../data/tutordata';
 
 const PostBox=styled.div`
     position: absolute;
@@ -164,50 +165,45 @@ const PlusButton = styled(Rectangle)`
     height: 3.5rem;
   }
 `
-const PostContainer = () => {
+const PostContainer = ({ data }) => {
     const navigate=useNavigate();
-    const boxes = [
-        { id: 1, name: '김숭실 튜터', type: '헬스', location: '서울시 성북구', activity: '헬스 5년차', weight: '2개월 동안 10kg 감량', rating: 3, reviewNum: 4, comment: '강박 없이! 스트레스 없이! 재미있게 운동 시작해봐요~' ,price: '10,000원'},
-        { id: 2, name: '박숭실 튜터', type: '수영', location: '서울시 성북구', activity: '헬스 5년차', weight: '2개월 동안 10kg 감량', rating: 4, reviewNum: 42, comment: '강박 없이! 스트레스 없이! 재미있게 운동 시작해봐요~' ,price: '10,000원' },
-        { id: 3, name: '최숭실 튜터', type: '수영', location: '서울시 성북구', activity: '헬스 5년차', weight: '2개월 동안 10kg 감량', rating: 2, reviewNum: 420, comment: '강박 없이! 스트레스 없이! 재미있게 운동 시작해봐요~' ,price: '10,000원' },
-        { id: 4, name: 'plus', location: '', activity: '', weight: '', rating: 0, price: '' },
-    ]
     const handleBoxClick=(id)=>{
         navigate(`/tutordetail/${id}`);
     }
   return (
-    <PostBox>
-    {boxes.map((box)=>
-     box.name === 'plus' ? (
-        <PlusButton key={box.id}>
-        <svg xmlns="http://www.w3.org/2000/svg" width="41" height="41" viewBox="0 0 41 41" fill="none">
-        <path d="M20.5 0.5C21.8807 0.5 23 1.61929 23 3V18H38C39.3807 18 40.5 19.1193 40.5 20.5C40.5 21.8807 39.3807 23 38 23H23V38C23 39.3807 21.8807 40.5 20.5 40.5C19.1193 40.5 18 39.3807 18 38V23H3C1.61929 23 0.5 21.8807 0.5 20.5C0.5 19.1193 1.61929 18 3 18H18V3C18 1.61929 19.1193 0.5 20.5 0.5Z" fill="#6BA6FF"/>
-        </svg>
-        </PlusButton>
-      ) : 
-      ( <Rectangle key={box.id} onClick={()=>handleBoxClick(box.id)}>
-        <BoxContent>
-            <Thumbnail />
-            <Name>{box.name}<Type>{box.type}</Type></Name>
-            <Info>
+<PostBox>
+       {data.map((box) => (
+        box.name === 'plus' ? (
+          <PlusButton key={box.id}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="41" height="41" viewBox="0 0 41 41" fill="none">
+              <path d="M20.5 0.5C21.8807 0.5 23 1.61929 23 3V18H38C39.3807 18 40.5 19.1193 40.5 20.5C40.5 21.8807 39.3807 23 38 23H23V38C23 39.3807 21.8807 40.5 20.5 40.5C19.1193 40.5 18 39.3807 18 38V23H3C1.61929 23 0.5 21.8807 0.5 20.5C0.5 19.1193 1.61929 18 3 18H18V3C18 1.61929 19.1193 0.5 20.5 0.5Z" fill="#6BA6FF"/>
+            </svg>
+          </PlusButton>
+        ) : (
+          <Rectangle key={box.id} onClick={() => handleBoxClick(box.id)}>
+            <BoxContent>
+              <Thumbnail />
+              <Name>{box.name}<Type>{box.type}</Type></Name>
+              <Info>
                 <div>{box.location}</div>
-                <div>{box.activity}</div>
-                <div>{box.weight}</div>
-            </Info>
-            <RatingContainer>
+                <div>{box.experience}</div>
+                <div>{box.introduction}</div>
+              </Info>
+              <RatingContainer>
                 {Array.from({ length: box.rating }, (_, index) => (
-                    <RatingImage key={index} src={stars} alt="stars" />
+                  <RatingImage key={index} src={stars} alt="stars" />
                 ))}
                 <div>({box.reviewNum})</div>
-            </RatingContainer>
-            <Line></Line>
-            <Comment>
-                <div>{box.comment}</div>
-            </Comment>
-            <Price><div>{box.price}~</div></Price>
-        </BoxContent>
-        </Rectangle>
-    ))}
+              </RatingContainer>
+              <Line></Line>
+              <Comment>
+                <div>{box.bio}</div>
+              </Comment>
+              <Price><div>{box.price}~</div></Price>
+            </BoxContent>
+          </Rectangle>
+        )
+      ))}
 </PostBox>
   )
 }

@@ -3,7 +3,7 @@ import Navbar from '../components/findTutor/Navbar'
 import HeaderForPages from '../components/HeaderForPages'
 import styled from 'styled-components'
 import PostContainer from '../components/postManagement/PostContainer'
-
+import { tutorData } from '../data/tutordata';
 const FindTutorContainer=styled.div`
     position: relative;
 `
@@ -20,7 +20,7 @@ const FindTutor = () => {
     <HeaderForPages/>
     <Navbar/>
     <ShowTutor>
-    <PostContainer/>
+    <PostContainer data={tutorData} />
     </ShowTutor>
     </FindTutorContainer>
   )
