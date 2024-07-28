@@ -38,6 +38,74 @@ box-shadow: 0px 0px 2rem 0px rgba(51, 62, 94, 0.30);
    top: 1.5rem;
    position: absolute;
   }
+  div:nth-child(3) {
+  color: #A6A6A6;
+  font-family: var(--font-family-pretendard);
+  font-size: 2.8rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  left: 28.7rem;
+  top: 7rem;
+  position: absolute;
+  }
+  div:nth-child(4) {
+  color: var(--Sub-Color, #333E5E);
+  font-family: var(--font-family-pretendard);
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  left: 42.4rem;
+  top: 7rem;
+  position: absolute;
+  }
+  div:nth-child(5) {
+  color: var(--Sub-Color, #333E5E);
+  font-family: var(--font-family-pretendard);
+  font-size: 28px;
+  font-style: normal;
+  line-height: normal;
+  left: 56.8rem;
+  top: 7rem;
+  position: absolute;
+  font-weight: 700;
+  }
+  div:nth-child(6) {
+  color: var(--Sub-Color, #333E5E);
+  font-family: var(--font-family-pretendard);
+  font-size: 2.8rem;
+  border-radius: 3rem;
+  border: 0.2rem solid #606575;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  left: 102.6rem;
+  top: 6.5rem;
+  position: absolute;
+  width: 14.1rem;
+  height: 4.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  }
+  div:nth-child(7) {
+  flex-shrink: 0;
+  color: var(--Sub-Color, #333E5E);
+  width: 12.9rem;
+  font-family: var(--font-family-pretendard);
+  font-size: 28px;
+  color: #A6A6A6;
+  text-align: right;
+  font-size: 2.8rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  left: 121.4rem;
+  top: 7rem;
+  position: absolute;
+  }
+  
 `
 const SentApplicationsList = () => {
   return (
@@ -47,7 +115,7 @@ const SentApplicationsList = () => {
          <div></div>
          <div></div>
          <div>튜터명</div>
-         <div>{data.title}</div>
+         <div>{data.nickname}</div>
          <div>{data.messageToTutor}</div>
          <div>수락대기</div>
          <div>{data.date}</div>

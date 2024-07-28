@@ -7,7 +7,7 @@ export const sentapplication = [
       location: "서울시 동작구",
       exerciseGoals: ["다이어트", "근력향상", "스트레스 해소", "취미활동"],
       preferredIntensity: "초급",
-      messageToTutor: "안녕하세요! 이번 여름 동안 체중을 줄이면서 근력을 키우고 싶습니다. 특히 복부와 하체 운동에 집중하고 싶어요. 스트레스를 해소할 수 있는 운동도 추천 부탁드립니다. 감사합니다!",
+      messageToTutor: "일이삼사오육칠팔구십일이삼사오육칠팔",
       date: "24.06.08" 
   },
   {
