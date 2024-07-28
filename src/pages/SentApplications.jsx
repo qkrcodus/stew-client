@@ -12,7 +12,7 @@ const SentApplicationsContainer=styled.div`
     background: #FFF;
     box-shadow: 0px 0px 2rem 0px rgba(51, 62, 94, 0.30);
     position: absolute;
-    top: 18.9rem;
+    top: 34rem;
     right: 18.3rem;
 `
 const SentApplications = () => {
