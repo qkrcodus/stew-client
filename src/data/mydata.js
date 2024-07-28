@@ -1,6 +1,7 @@
 export const mydata = [
     {
         id: 1,
+        registereddate:'2024.07.20',
         name: '박채연 튜터',
         gender: '남자',
         age: 25,
@@ -13,9 +14,56 @@ export const mydata = [
         rating: 5,
         reviewNum: 10,
         gyminfo: '전문적인 요가 자세와 호흡법을 알려드립니다.',
+        submittedApplications: [
+            {
+              title: "일이삼사오육칠팔구십일이삼사오육칠",
+              nickname: "신유정",
+              gender: "여자",
+              age: 30,
+              location: "서울시 강남구",
+              exerciseGoals: ["취미활동", "근력향상"],
+              preferredIntensity: "초급",
+              messageToTutor: "운동을 취미로 즐기고 싶습니다. 초급 강도로 시작할 수 있는 재미있는 운동을 추천해주세요.",
+              date: "24.07.15"
+            },
+            {
+                title: "일이삼사오육칠팔구십일이삼사오육칠",
+                nickname: "김유정",
+                gender: "여자",
+                age: 20,
+                location: "서울시 강남구",
+                exerciseGoals: ["취미활동", "근력향상"],
+                preferredIntensity: "초급",
+                messageToTutor: "운동을 취미로 즐기고 싶습니다. 초급 강도로 시작할 수 있는 재미있는 운동을 추천해주세요.",
+                date: "24.07.15"
+              },
+              {
+                title: "일이삼사오육칠팔구십일이삼사오육칠",
+                nickname: "신유정",
+                gender: "여자",
+                age: 30,
+                location: "서울시 강남구",
+                exerciseGoals: ["취미활동", "근력향상"],
+                preferredIntensity: "초급",
+                messageToTutor: "운동을 취미로 즐기고 싶습니다. 초급 강도로 시작할 수 있는 재미있는 운동을 추천해주세요.",
+                date: "24.07.15"
+              },
+              {
+                  title: "일이삼사오육칠팔구십일이삼사오육칠",
+                  nickname: "김유정",
+                  gender: "여자",
+                  age: 20,
+                  location: "서울시 강남구",
+                  exerciseGoals: ["취미활동", "근력향상"],
+                  preferredIntensity: "초급",
+                  messageToTutor: "운동을 취미로 즐기고 싶습니다. 초급 강도로 시작할 수 있는 재미있는 운동을 추천해주세요.",
+                  date: "24.07.15"
+                },
+        ]
     },
     {
         id: 2,
+        registereddate:'2024.07.20',
         name: '박채연 튜터',
         gender: '여자',
         age: 32,
@@ -28,9 +76,34 @@ export const mydata = [
         rating: 4,
         reviewNum: 30,
         gyminfo: '정확한 필라테스 동작과 자세 교정을 도와드립니다.',
+        submittedApplications: [
+            {
+              title: "취미활동 겸 운동",
+              nickname: "신유정",
+              gender: "여자",
+              age: 30,
+              location: "서울시 강남구",
+              exerciseGoals: ["취미활동", "근력향상"],
+              preferredIntensity: "초급",
+              messageToTutor: "운동을 취미로 즐기고 싶습니다. 초급 강도로 시작할 수 있는 재미있는 운동을 추천해주세요.",
+              date: "24.07.15"
+            },
+            {
+                title: "취미활동 겸 운동",
+                nickname: "김유정",
+                gender: "여자",
+                age: 20,
+                location: "서울시 강남구",
+                exerciseGoals: ["취미활동", "근력향상"],
+                preferredIntensity: "초급",
+                messageToTutor: "운동을 취미로 즐기고 싶습니다. 초급 강도로 시작할 수 있는 재미있는 운동을 추천해주세요.",
+                date: "24.07.15"
+              },
+        ]
     },
     {
         id: 3,
+        registereddate:'2024.07.20',
         name: '박채연 튜터',
         gender: '남자',
         age: 29,
@@ -43,9 +116,34 @@ export const mydata = [
         rating: 3,
         reviewNum: 15,
         gyminfo: '다양한 스피닝 프로그램과 맞춤형 운동을 제공합니다.',
+        submittedApplications: [
+            {
+              title: "일이삼사오육칠팔구십일이삼사오육칠팔구십일이삼사오육칠",
+              nickname: "신유정",
+              gender: "여자",
+              age: 30,
+              location: "서울시 강남구",
+              exerciseGoals: ["취미활동", "근력향상"],
+              preferredIntensity: "초급",
+              messageToTutor: "운동을 취미로 즐기고 싶습니다. 초급 강도로 시작할 수 있는 재미있는 운동을 추천해주세요.",
+              date: "24.07.15"
+            },
+            {
+                title: "취미활동 겸 운동",
+                nickname: "김유정",
+                gender: "여자",
+                age: 20,
+                location: "서울시 강남구",
+                exerciseGoals: ["취미활동", "근력향상"],
+                preferredIntensity: "초급",
+                messageToTutor: "운동을 취미로 즐기고 싶습니다. 초급 강도로 시작할 수 있는 재미있는 운동을 추천해주세요.",
+                date: "24.07.15"
+              },
+        ]
     },
     {
         id: 4,
+        registereddate:'2024.07.20',
         name: '정미선 튜터',
         gender: '여자',
         age: 27,
@@ -58,5 +156,29 @@ export const mydata = [
         rating: 4,
         reviewNum: 25,
         gyminfo: '체계적인 근력 운동 프로그램을 제공합니다.',
+        submittedApplications: [
+            {
+              title: "취미활동 겸 운동",
+              nickname: "신유정",
+              gender: "여자",
+              age: 30,
+              location: "서울시 강남구",
+              exerciseGoals: ["취미활동", "근력향상"],
+              preferredIntensity: "초급",
+              messageToTutor: "운동을 취미로 즐기고 싶습니다. 초급 강도로 시작할 수 있는 재미있는 운동을 추천해주세요.",
+              date: "24.07.15"
+            },
+            {
+                title: "취미활동 겸 운동",
+                nickname: "김유정",
+                gender: "여자",
+                age: 20,
+                location: "서울시 강남구",
+                exerciseGoals: ["취미활동", "근력향상"],
+                preferredIntensity: "초급",
+                messageToTutor: "운동을 취미로 즐기고 싶습니다. 초급 강도로 시작할 수 있는 재미있는 운동을 추천해주세요.",
+                date: "24.07.15"
+              },
+        ]
     }
 ];

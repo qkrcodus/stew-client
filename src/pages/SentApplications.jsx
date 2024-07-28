@@ -1,6 +1,6 @@
 import React from 'react'
 import HeaderForPages from '../components/HeaderForPages'
-import Navbar from '../components/sentapplications/Navbar'
+import Navbar1 from '../components/sentapplications/Navbar1'
 import styled from 'styled-components'
 import SentApplicationsList from '../components/sentapplications/SentApplicationsList.jsx'
 const SentApplicationsContainer=styled.div`
@@ -20,7 +20,7 @@ const SentApplications = () => {
     <>
     <HeaderForPages forSentApplications={true}/>
     <SentApplicationsContainer>
-    <Navbar/>
+    <Navbar1/>
     <SentApplicationsList/>
     </SentApplicationsContainer>
     </>

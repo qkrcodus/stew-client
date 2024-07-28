@@ -158,10 +158,10 @@ left: 11.4rem;
 `
 
 
-export const Navbar = () => {
+export const Navbar2 = () => {
   return (
     <BoxContainer>
-      <Title>보낸 신청서 목록</Title>
+      <Title>받은 신청서 목록</Title>
       <Group>
           <Rectangle />
           <SvgIcon>
@@ -204,4 +204,4 @@ export const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default Navbar2;

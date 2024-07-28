@@ -1,7 +1,7 @@
 export const sentapplication = [
   {
       title: "여름 다이어트 계획",
-      nickname: "김송실",
+      nickname: "박채연",
       gender: "여자",
       age: 23,
       location: "서울시 동작구",
@@ -12,7 +12,7 @@ export const sentapplication = [
   },
   {
       title: "건강한 라이프 스타일",
-      nickname: "이민수",
+      nickname: "박채연",
       gender: "남자",
       age: 30,
       location: "서울시 강남구",
@@ -23,7 +23,7 @@ export const sentapplication = [
   },
   {
       title: "체력 증진과 스트레스 해소",
-      nickname: "박지현",
+      nickname: "박채연",
       gender: "여자",
       age: 27,
       location: "부산시 해운대구",
@@ -34,7 +34,7 @@ export const sentapplication = [
   },
   {
       title: "취미활동 겸 운동",
-      nickname: "최준혁",
+      nickname: "박채연",
       gender: "남자",
       age: 35,
       location: "대구시 수성구",
