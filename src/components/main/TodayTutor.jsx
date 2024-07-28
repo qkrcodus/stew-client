@@ -22,29 +22,6 @@ const Subtitle=styled.p`
   margin-bottom: 8.3rem;
   margin-left: 39.7rem;
 `
-const reviews = [
-  {
-    src: 'image1.png',
-    title: '김승실 튜터',
-    location: '서울시 성북구',
-    experience: '헬스 5년차',
-    description: '2개월 동안 10kg 감량\n강박 없이! 스트레스 없이!\n재미있게 운동 시작해봐요~'
-  },
-  {
-    src: 'image1.png',
-    title: '박승실 튜터',
-    location: '서울시 성북구',
-    experience: '헬스 5년차',
-    description: '2개월 동안 10kg 감량\n강박 없이! 스트레스 없이!\n재미있게 운동 시작해봐요~'
-  },
-  {
-    src: 'image1.png',
-    title: '최승실 튜터',
-    location: '서울시 성북구',
-    experience: '헬스 5년차',
-    description: '2개월 동안 10kg 감량\n강박 없이! 스트레스 없이!\n재미있게 운동 시작해봐요~'
-  },
-];
 const TodayTutor = () => {
   return (
   <Container>
