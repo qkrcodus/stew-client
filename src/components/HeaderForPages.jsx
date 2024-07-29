@@ -40,9 +40,7 @@ const Headerwrapper=styled.div`
 const HeaderContainer=styled.div`
   background: var(--font-color-main);
   width: 100vw;
-  position: absolute;
-    top: 0rem;
-}
+
 `
 
 const HeaderForPages=(props)=>{

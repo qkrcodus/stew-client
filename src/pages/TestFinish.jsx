@@ -1,12 +1,12 @@
 import React from 'react'
 import HeaderForPages from '../components/HeaderForPages'
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import resultdata from '../data/resultdata';
 const TestFinishContainer=styled.div`
     position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     height: 245.5rem;
 `
@@ -122,7 +122,7 @@ box-shadow: 0px 0.4rem 0.4rem 0px rgba(0, 0, 0, 0.25);s
 `
 const TipTitle=styled.div`
 position: absolute;
-top: 10.3rem;
+top: 8rem;
 color: var(--Main-Color, #6BA6FF);
 font-family: var(--font-family-pretendard);
 font-size: 3.6rem;
@@ -132,12 +132,12 @@ line-height: normal;
 `
 const TipContainer=styled.div`
 position: absolute;
-top: 19rem;
- display: flex;
+    top: 18rem;
+    left: 2.5rem;
+    display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 2rem;
+    gap: 3rem;
+}
 `
 const Tip=styled.div`
     position: relative;
@@ -188,11 +188,10 @@ background: #FFE500;
 `
 const Container=styled.div`
 display: flex;
-height: 12.8rem;
 flex-direction: column;
 justify-content: center;
 width: 80.5rem;
-gap: 1rem;
+gap: 1.5rem;
 `
 const Name=styled.div`
 color: var(--Main-Color, #6BA6FF);
@@ -212,7 +211,7 @@ line-height: normal;
 `
 const TwoTutor=styled.div`
 position: absolute;
-top: 193.2rem;
+top: 196.2rem;
 display: flex;
 justify-content: center;
 `
@@ -228,6 +227,15 @@ const TwoTutorContainer=styled.div`
 `
 
 const TestFinish = () => {
+  //TestContent로 받아온 쿼리파라미터속 정보 찾아주는 훅
+  const location=useLocation();
+  const {answers}=location.state || {};
+  //[1,1,1,1] 배열을 id로 변환
+console.log(Array.isArray(resultdata)); // true여야 합니다
+console.log(resultdata);
+  const resultId=answers.join('');
+  const result=resultdata.find(data=>data.id===parseInt(resultId,10));
+  console.log(result);
   return (
     <TestFinishContainer>
     <HeaderForPages/>
@@ -239,18 +247,17 @@ const TestFinish = () => {
       <TypeIcon/>
       <TypeContent>
         <Content1>
-        당신은 활기가 넘쳐흐르는 즉흥러 유형입니다
+        당신은 {result.type} 유형입니다
         </Content1>
         <Content2>
-        당신은 흥미롭고 적극적인 운동에 뛰어들지만 집중력이 다소 부족하며,
-        엄격한 규율을 싫어하는 유형이기 때문에 자율적인 운동을 선호합니다.
+       {result.description}
         </Content2>
         <HashTag>
           <FirstTag>
-          # 분위기 메이커
+          # {result.tag[0]}
           </FirstTag>
           <SecondTag>
-          # 풍부한 상상력
+          # {result.tag[1]}
           </SecondTag>
         </HashTag>
       </TypeContent>
@@ -261,10 +268,10 @@ const TestFinish = () => {
 </svg>
       <TipTitle>당신을 위한 운동꿀팁!</TipTitle>
       <TipContainer>
-        <Tip>1. 엄격한 규율이 있는 운동은 피하자</Tip>
-        <Tip>2. 자율적인 운동을 위주로 해야 즐거움</Tip>
-        <Tip>3. 즐거움을 추구하는 운동을 선호</Tip>
-        <Tip>4. 최대한 반복적이지 않은 운동 추천</Tip>
+        <Tip>1. {result.tips[0]}</Tip>
+        <Tip>2. {result.tips[1]}</Tip>
+        <Tip>3. {result.tips[2]}</Tip>
+        <Tip>4. {result.tips[3]}</Tip>
       </TipContainer> 
     </Tips>
     <ThreeSports>
@@ -272,22 +279,22 @@ const TestFinish = () => {
       <Sport1>
         <Img></Img>
         <Container>
-          <Name>하이킹</Name>
-          <Content>특정 규칙이나 틀에 얽매이지 않은채 자신의 페이스에 맞춰 운동할 수 있고, 다양한 경로를 탐험할 수 있는 하이킹이 큰 즐거움을 줄 수 있습니다.</Content>
+          <Name>{result.exercises[0].name}</Name>
+          <Content>{result.exercises[0].description}</Content>
         </Container>
       </Sport1>
       <Sport2>
         <Img></Img>
         <Container>
-          <Name>댄스</Name>
-          <Content>즐거운 음악에 맞추어 몸을 움직이며 큰 흥미와 재미를 느낄 수 있는 댄스가 자유로운 당신에게 맞춤 운동입니다.</Content>
+          <Name>{result.exercises[1].name}</Name>
+          <Content>{result.exercises[1].description}</Content>
         </Container>
       </Sport2>
       <Sport3>
         <Img></Img>
         <Container>
-          <Name>농구</Name>
-          <Content>여러명이서 팀을 나누고 농구공을 쟁탈하는 활동을 통해 큰 성취감을 느끼고 활기를 되찾을 수 있습니다.</Content>
+          <Name>{result.exercises[2].name}</Name>
+          <Content>{result.exercises[2].description}</Content>
         </Container>
       </Sport3>
     </ThreeSports>
