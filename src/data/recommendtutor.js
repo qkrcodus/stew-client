@@ -1,4 +1,4 @@
-export const tutorData = [
+export const recommendedtutorexport=[
     {
         id: 1,
         name: '김숭실 튜터',
@@ -29,21 +29,4 @@ export const tutorData = [
         reviewNum: 42,
         gyminfo: '산책하다 보니 여름 바람이 정말 상쾌하네요. 나무 사이로 비치는 햇살과 푸른 하늘이 마음을 평온하게 해줍니다. 작은 행복을 느끼는 순간입니다.산책하다 보니 여름 바람이 정말 상쾌하네요. 나무 사이로 비치는 햇살과 푸른 하늘이 마음을 평온하게 해줍니다. 작은 행복을 느끼는 순간입니다.을 평온하게 해줍니다. 작',
     },
-    {
-        id: 3,
-        name: '최숭실 튜터',
-        gender: '여자',
-        age: 28,
-        location: '서울시 성북구',
-        type: '수영',
-        price: '10,000원',
-        experience: '수영 5년차',
-        introduction: '강박 없이! 스트레스 없이!!!!!!!!!11',
-        bio: '안녕하세요 저는 성북구에 살고 있는 최숭실이고 나이는 28살입니다.',
-        rating: 2,
-        reviewNum: 420,
-        gyminfo: '호흡법부터 헬스장 기구 다루는 방법까지 알려드려요',
-    }
-];
-  
-
+]

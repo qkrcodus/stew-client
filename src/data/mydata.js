@@ -61,18 +61,18 @@ export const mydata = [
                 },
         ]
     },
-    {
+    {   
         id: 2,
         registereddate:'2024.07.20',
         name: '박채연 튜터',
         gender: '여자',
         age: 32,
         location: '서울시 마포구',
-        type: '필라테스',
+        type: '필라테',
         price: '20,000원',
         experience: '필라테스 7년차',
-        introduction: '균형 잡힌 몸매를 위한 필라테스',
-        bio: '안녕하세요, 필라테스 전문가 이혜진입니다. 7년의 경험을 통해 개인 맞춤형 필라테스 프로그램을 제공합니다.',
+        introduction: '균형 잡힌 몸매를 위한',
+        bio: '안녕하세요 저는 성북구에 살고 있는 박숭실이고 나이는 30살입',
         rating: 4,
         reviewNum: 30,
         gyminfo: '정확한 필라테스 동작과 자세 교정을 도와드립니다.',

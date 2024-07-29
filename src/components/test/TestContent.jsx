@@ -73,18 +73,19 @@ const TestContent = () => {
         {question:'내가 추구하는 운동 루틴은', answer1:'체계적으로\n일정 계획',answer2:'원할때마다\n자유롭게'},  
     ];
     const [currentStep,setCurrentStep]=useState(0);
-    const [selectedAnswer, setSelectedAnswer] = useState(null);
+    const [selectedAnswer, setSelectedAnswer] = useState([null,null,null,null]);
     const navigate=useNavigate();
     const handleNext=()=>{
         if( currentStep <qnas.length -1){
             setCurrentStep(currentStep+1);
-            setSelectedAnswer(null);
         }else{
-            navigate('/testfinish');
+            navigate('/testfinish',{state:{answers:selectedAnswer}});
         }
     }
     const handleAnswerClick = (answerIndex) => {
-        setSelectedAnswer(answerIndex);
+        const updatedAnswers=[...selectedAnswer];
+        updatedAnswers[currentStep]=answerIndex;
+        setSelectedAnswer(updatedAnswers);
     };
     const isSpecialStep= currentStep===0 || currentStep===3;
    
@@ -95,7 +96,7 @@ const TestContent = () => {
         <h1 className="question">{qnas[currentStep].question}</h1>
         <Buttonwrapper>
         <ButtonAnswer $isSpecialStep={isSpecialStep}
-          $isSelected={selectedAnswer === 1}
+          $isSelected={selectedAnswer[currentStep] === 1}
           onClick={() => handleAnswerClick(1)}>
             {qnas[currentStep].answer1.split('\n').map((line,index)=>(
                 <React.Fragment key={index}>
@@ -105,7 +106,7 @@ const TestContent = () => {
             ))}
         </ButtonAnswer>
         <ButtonAnswer $isSpecialStep={isSpecialStep}
-          $isSelected={selectedAnswer === 2}
+          $isSelected={selectedAnswer[currentStep] === 2}
           onClick={() => handleAnswerClick(2)}>
             {qnas[currentStep].answer2.split('\n').map((line,index)=>(
                 <React.Fragment key={index}>
@@ -115,7 +116,7 @@ const TestContent = () => {
             ))}
         </ButtonAnswer>
         </Buttonwrapper>
-        <Button  $isAnswerSelected={selectedAnswer !== null}onClick={handleNext}>
+        <Button  $isAnswerSelected={selectedAnswer[currentStep] !== null}onClick={handleNext}>
         <div className='test-next-btn' >다음</div>
         </Button>
        

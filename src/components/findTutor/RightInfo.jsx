@@ -51,7 +51,8 @@ const GymIntro=styled.div`
     align-items: center;
     }
     textarea {
-        padding: 2.9rem;
+        height: 40rem;
+        padding: 3.7rem;
         box-sizing: border-box;
         resize: none;
         border: none;
