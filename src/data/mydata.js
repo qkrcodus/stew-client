@@ -16,7 +16,7 @@ export const mydata = [
         gyminfo: '전문적인 요가 자세와 호흡법을 알려드립니다.',
         submittedApplications: [
             {
-              title: "일이삼사오육칠팔구십일이삼사오육칠",
+              title: "일이삼사오육칠팔구십일이삼사오육칠팔구십",
               nickname: "신유정",
               gender: "여자",
               age: 30,

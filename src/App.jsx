@@ -9,6 +9,7 @@ import ReceivedApplications from './pages/ReceivedApplications';
 import FindTutor from './pages/FindTutor';
 import TutorDetail from './pages/TutorDetail';
 import MyDetail from './pages/MyDetail';
+import CreateMyClass from './pages/CreateMyClass';
 const App = () => {
   return (
     <>
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="/tutordetail/:id" element={<TutorDetail/>} />
         <Route path="/mydetail/:id" element={<MyDetail/>} />
         <Route path='/postmanagement' element={<PostManagement />} />
+        <Route path='/createmyclass' element={<CreateMyClass/>} />
         <Route path='/sentapplications' element={<SentApplications />} />
         <Route path='/receivedapplications' element={<ReceivedApplications/>} />
       </Routes>
