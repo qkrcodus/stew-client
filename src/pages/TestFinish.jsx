@@ -133,7 +133,7 @@ line-height: normal;
 const TipContainer=styled.div`
 position: absolute;
     top: 18rem;
-    left: 2.5rem;
+    justify-content: center;
     display: flex;
     flex-direction: column;
     gap: 3rem;

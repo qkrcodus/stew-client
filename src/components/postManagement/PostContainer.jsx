@@ -53,7 +53,7 @@ const Name = styled.div`
 `;
 
 const Type = styled.span`
-  width: 7.0482rem;
+  width: 8.1rem;
   height: 3.4323rem; 
   flex-shrink: 0;
   border-radius: 2.2384rem; 

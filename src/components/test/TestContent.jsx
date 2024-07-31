@@ -2,6 +2,13 @@ import React from 'react'
 import styled from 'styled-components';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Step1 from '../../assets/images/Step1.png';
+import Step2 from '../../assets/images/Step2.png';
+import Step3 from '../../assets/images/Step3.png';
+import Step4 from '../../assets/images/Step4.png';
+
+
+
 const TestItem=styled.div`
     position: relative;
     display: flex;
@@ -18,6 +25,12 @@ const TestItem=styled.div`
         text-align: center;
         color: var(--font-color-sub);
     }
+    .progress-bar{
+    width: 59.8rem;
+    height: 5.8rem;
+    position: absolute;
+    top: 8.9rem;
+        }
 `
 const Buttonwrapper=styled.div`
     display:flex;
@@ -88,11 +101,12 @@ const TestContent = () => {
         setSelectedAnswer(updatedAnswers);
     };
     const isSpecialStep= currentStep===0 || currentStep===3;
-   
+    const progressImages = [Step1, Step2, Step3, Step4];
   return (
     <>
     <TestItem key={currentStep}>
-        <div className='progress-bar'></div>
+        <div className='progress-bar'
+        style={{ backgroundImage: `url(${progressImages[currentStep]})` }}></div>
         <h1 className="question">{qnas[currentStep].question}</h1>
         <Buttonwrapper>
         <ButtonAnswer $isSpecialStep={isSpecialStep}

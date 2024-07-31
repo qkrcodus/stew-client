@@ -1,5 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useState } from 'react'
+import Modal from '../modal/Modal'
 import { sentapplication } from '../../data/sentapplication'
 const SentApplicationsContainer=styled.div`
   top: 27.7rem;
@@ -108,10 +110,13 @@ box-shadow: 0px 0px 2rem 0px rgba(51, 62, 94, 0.30);
   
 `
 const SentApplicationsList = () => {
+  const [isModalOpen,setModalOpen]=useState(false);
+  const closeModal= () => setModalOpen(false);
   return (
     <SentApplicationsContainer>
       {sentapplication.map((data,index)=>(
-         <SentApplication key={index}>
+        <>
+         <SentApplication key={index} onClick={()=>{setModalOpen(true)}}>
          <div></div>
          <div></div>
          <div>튜터명</div>
@@ -120,6 +125,8 @@ const SentApplicationsList = () => {
          <div>수락대기</div>
          <div>{data.date}</div>
          </SentApplication>
+         <Modal isOpen={isModalOpen} closeModal={closeModal}/>
+         </>
       ))}
        
     </SentApplicationsContainer>
