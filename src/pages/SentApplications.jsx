@@ -15,14 +15,20 @@ const SentApplicationsContainer=styled.div`
     top: 34rem;
     right: 18.3rem;
 `
+const BottomofHeader=styled.div`
+background: #ECF1F9;
+height: 199.9rem;
+`
 const SentApplications = () => {
   return (
     <>
     <HeaderForPages forSentApplications={true}/>
+    <BottomofHeader>
     <SentApplicationsContainer>
     <Navbar1/>
     <SentApplicationsList/>
     </SentApplicationsContainer>
+    </BottomofHeader>
     </>
   )
 }

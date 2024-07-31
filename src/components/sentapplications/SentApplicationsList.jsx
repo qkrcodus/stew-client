@@ -115,7 +115,6 @@ const SentApplicationsList = () => {
   return (
     <SentApplicationsContainer>
       {sentapplication.map((data,index)=>(
-        <>
          <SentApplication key={index} onClick={()=>{setModalOpen(true)}}>
          <div></div>
          <div></div>
@@ -125,10 +124,8 @@ const SentApplicationsList = () => {
          <div>수락대기</div>
          <div>{data.date}</div>
          </SentApplication>
-         <Modal isOpen={isModalOpen} closeModal={closeModal}/>
-         </>
       ))}
-       
+    <Modal isOpen={isModalOpen} closeModal={closeModal}/>
     </SentApplicationsContainer>
   )
 }
