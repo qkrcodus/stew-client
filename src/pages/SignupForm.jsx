@@ -1,7 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import stars from '../../assets/images/star-fill.png';
-import { mydata } from '../../data/mydata'
+import stars from '../assets/images/star-fill.png';
+import { mydata } from '../data/mydata'
+
 const Overlay=styled.div`
 display: ${(props)=>(props.isOpen ? 'block' : 'none')};
 position: fixed;
@@ -269,8 +270,8 @@ position: absolute;
     justify-content: center;
     align-items: center;
     }`
-const Modal = ({isOpen, closeModal,data}) => {
-  
+const SignupForm = ({isOpen, closeModal,data}) => {
+
   return (
     <>
     <Overlay isOpen={isOpen} onClick={closeModal} />
@@ -355,4 +356,4 @@ const Modal = ({isOpen, closeModal,data}) => {
   )
 }
 
-export default Modal
+export default SignupForm

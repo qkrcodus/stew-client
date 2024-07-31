@@ -6,6 +6,8 @@ import { tutorData } from '../data/tutordata'
 import stars from '../assets/images/star-fill.png';
 import LeftInfo from '../components/findTutor/LeftInfo'
 import RightInfo from '../components/findTutor/RightInfo'
+import ModalForm from '../components/modal/ModalForm'
+import { useState } from 'react'
 const TutorDetailContainer=styled.div`
     position: relative;
     display: flex;
@@ -70,6 +72,8 @@ right: 26.8rem;
 const TutorDetail = () => {
   const {id}=useParams();
   const tutor=tutorData.find(t=>t.id===parseInt(id));
+  const [isModalOpen,setModalOpen]=useState(false);
+  const closeModal= () => setModalOpen(false);
   return (
     <TutorDetailContainer>
     <HeaderForPages/>
@@ -88,9 +92,10 @@ const TutorDetail = () => {
     </TutorThumbnail>
     <LeftInfo data={tutorData}/>
     <RightInfo data={tutorData}/>
-    <SignupBtn>
+    <SignupBtn onClick={()=>{setModalOpen(true)}}>
         신청하기
     </SignupBtn>
+    <ModalForm data={tutorData} isOpen={isModalOpen} closeModal={closeModal}/>
     </TutorDetailContainer>
   )
 }

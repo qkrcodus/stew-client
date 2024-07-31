@@ -1,6 +1,8 @@
 import React from 'react';
+import { useState } from 'react'
 import styled from 'styled-components';
 import { mydata } from '../../data/mydata'
+import Modal from '../modal/Modal'
 
 const ReceivedApplicationsContainer = styled.div`
   top: 27.2rem;
@@ -163,6 +165,8 @@ const ApplicationsListContainer = styled.div`
 `;
 
 const ReceivedApplicationsList = () => {
+  const [isModalOpen,setModalOpen]=useState(false);
+  const closeModal= () => setModalOpen(false);
   return (
     <ReceivedApplicationsContainer>
     {mydata.map((tutor) => (
@@ -180,7 +184,7 @@ const ReceivedApplicationsList = () => {
         </ContentContainer>
         <ApplicationsListContainer>
         {tutor.submittedApplications.map((tuti, index) => (
-        <SubmittedApplicationsContainer key={index}>
+        <SubmittedApplicationsContainer key={index} onClick={()=>{setModalOpen(true)}}>
             <div></div>
             <div>{tuti.nickname}</div>
             <div>{tuti.title}</div>
@@ -191,6 +195,7 @@ const ReceivedApplicationsList = () => {
          </ApplicationsListContainer>
       </MyClassContainer>
      ))}
+     <Modal data={mydata} isOpen={isModalOpen} closeModal={closeModal}/>
     </ReceivedApplicationsContainer>
   );
 };

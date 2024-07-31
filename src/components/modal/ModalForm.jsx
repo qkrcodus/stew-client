@@ -33,7 +33,7 @@ const ModalContent=styled.div`
     background: #FFF;
     position: absolute;
     z-index: 1000000000;
-    top: -20rem;
+    top: 32.7rem;
 `
 const TutorThumbnail=styled.div`
     position: absolute;
@@ -269,7 +269,7 @@ position: absolute;
     justify-content: center;
     align-items: center;
     }`
-const Modal = ({isOpen, closeModal,data}) => {
+const ModalForm = ({isOpen, closeModal,data}) => {
   
   return (
     <>
@@ -355,4 +355,4 @@ const Modal = ({isOpen, closeModal,data}) => {
   )
 }
 
-export default Modal
+export default ModalForm

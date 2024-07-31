@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Modal from '../modal/Modal'
 import { sentapplication } from '../../data/sentapplication'
 import { tutorData } from '../../data/tutordata'
+import { useNavigate } from 'react-router-dom';
 const SentApplicationsContainer=styled.div`
   top: 27.7rem;
   position: absolute;
