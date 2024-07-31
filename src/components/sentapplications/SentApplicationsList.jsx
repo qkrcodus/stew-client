@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { useState } from 'react'
 import Modal from '../modal/Modal'
 import { sentapplication } from '../../data/sentapplication'
+import { tutorData } from '../../data/tutordata'
 const SentApplicationsContainer=styled.div`
   top: 27.7rem;
   position: absolute;
@@ -125,7 +126,7 @@ const SentApplicationsList = () => {
          <div>{data.date}</div>
          </SentApplication>
       ))}
-    <Modal isOpen={isModalOpen} closeModal={closeModal}/>
+    <Modal data={tutorData} isOpen={isModalOpen} closeModal={closeModal}/>
     </SentApplicationsContainer>
   )
 }
