@@ -136,6 +136,7 @@ color: #666;
 `;
 
 const SentApplicationsList = () => {
+  // 값이 바뀌는 요소들을 useState로 선언한다. 
   const [applications, setApplications] = useState([]);
   const [isModalOpen,setModalOpen]=useState(false);
   const [selectedAppId, setSelectedAppId] = useState(null);
