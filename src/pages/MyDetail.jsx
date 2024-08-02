@@ -34,12 +34,17 @@ const TutorThumbnail=styled.div`
     font-weight: 500;
     line-height: normal;
     }
+        padding: 0px 5rem;
+    box-sizing: border-box;
 `
 const TutorImg=styled.div`
     width: 9.7rem;
     height: 10.7rem;
     flex-shrink: 0;
-    background: #D9D9D9;
+   background-image: url(${(props) => props.$imgurl});
+  background-size: cover;
+    background-position: center;
+  background-repeat: no-repeat;
 `
 const RatingImage = styled.img`
   width: 2.4rem;
@@ -124,7 +129,7 @@ const MyDetail = () => {
       <TutorDetailContainer>
         <HeaderForPages />
         <TutorThumbnail>
-          <TutorImg />
+          <TutorImg $imgurl={tutor.imgUrl}/>
           <div>
             <div>
               {tutor.name} / {tutor.sportName}

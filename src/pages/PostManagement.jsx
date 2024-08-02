@@ -5,6 +5,7 @@ import PostContainer from '../components/postManagement/PostContainer'
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+const BASE_URL=import.meta.env.VITE_BASE_URL;
 const PostManagementContainer=styled.div`
     position: relative;
     display: flex;
@@ -19,7 +20,6 @@ const PostManagement = () => {
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const userId = 1; // 우린 로그인 기능이 없으니 1번 유저가 로그인했다고 가정함
-    const BASE_URL = 'https://api.likelion-stew.shop/api';
 
     const fetchData = async (page) => {
         try {

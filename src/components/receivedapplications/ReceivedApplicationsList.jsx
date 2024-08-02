@@ -65,6 +65,7 @@ const TitleText = styled.p`
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+      width: 110rem;
 `;
 
 const DateLabel = styled.p`
@@ -227,12 +228,17 @@ const ReceivedApplicationsList = () => {
     }
   };
 
+  const handleOpenModal = (appId) => {
+    setSelectedApp(appId);
+    setModalOpen(true);
+  };
+
   return (
     <ReceivedApplicationsContainer>
       {receivedApplications.map((tutor, index) => (
         <MyClassContainer key={index}>
           <IconContainer></IconContainer>
-          <GrayBox style={{ backgroundImage: `url(${tutor.img_url})`, backgroundSize: 'cover' }}></GrayBox>
+          <GrayBox style={{ backgroundImage: `url(${tutor.img_url})`, backgroundSize: 'cover', backgroundPosition: 'center' }}></GrayBox>
           <ContentContainer>
             <TitleText>{tutor.intro}</TitleText>
             <InfoContainer>
@@ -242,7 +248,7 @@ const ReceivedApplicationsList = () => {
           </ContentContainer>
           <ApplicationsListContainer>
             {tutor.applications.map((tuti, idx) => (
-              <SubmittedApplicationsContainer key={idx} onClick={() => setModalOpen(true)}>
+              <SubmittedApplicationsContainer key={idx} onClick={() => handleOpenModal(tuti.application_id)}>
                 <div></div>
                 <div>{tuti.user_name}</div>
                 <div>{tuti.title}</div>
@@ -255,7 +261,7 @@ const ReceivedApplicationsList = () => {
           </ApplicationsListContainer>
         </MyClassContainer>
       ))}
-      <Modal data={selectedApp} isOpen={isModalOpen} closeModal={closeModal} />
+      <Modal appId={selectedApp} isOpen={isModalOpen} closeModal={closeModal} />
       <PaginationContainer>
         <DisabledButton onClick={() => handlePageChange(page - 1)} disabled={page === 1}>
           이전

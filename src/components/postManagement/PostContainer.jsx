@@ -35,7 +35,10 @@ const Thumbnail = styled.div`
   height: 14.4rem; 
   flex-shrink: 0;
   border-radius: 3rem; 
-  background: #d9d9d9;
+  background-image: url(${(props) => props.$imgurl});
+  background-size: cover;
+    background-position: center;
+  background-repeat: no-repeat;
 `;
 
 const Name = styled.div`
@@ -299,7 +302,7 @@ const PostContainer = ({ data, isMyData, onPageChange, currentPage, totalPages, 
             return (
               <Rectangle key={box.tutorId} onClick={() => handleBoxClick(box.tutorId)}>
                 <BoxContent>
-                  <Thumbnail />
+                  <Thumbnail $imgurl={box.imgUrl}/>
                   <Name>{box.name}<Type>{box.sportName}</Type></Name>
                   <Info>
                     <div>{box.location}</div>
