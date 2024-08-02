@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import { useParams } from 'react-router-dom';
+import React, { useState , useEffect} from 'react'
 import styled from 'styled-components';
 
 const LeftInfoContainer = styled.div`
@@ -272,7 +271,13 @@ const LeftInfo = ({data}) => {
     console.log("leftinfo",tutor);
     const [self_intro, setSelfIntro] = useState(tutor.self_intro);
     const [charCount, setCharCount] = useState(tutor.intro.length);
-
+    useEffect(() => {
+        if (tutor) {
+          setSelfIntro(tutor.self_intro);
+          setCharCount(tutor.intro.length);
+        }
+      }, [tutor]);
+    
     const handleSelfIntroChange = (e) => {
         setSelfIntro(e.target.value);
         setCharCount(e.target.value.length);

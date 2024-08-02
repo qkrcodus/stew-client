@@ -150,11 +150,10 @@ const CharCount = styled.div`
     left: 48.6rem;
 `;
 const RightInfo = ({data}) => {
-  const { id } = useParams();
-  const tutor = data.find(t => t.id === parseInt(id));
-
-  const [gyminfo, setGyminfo] = useState(tutor.gyminfo);
-  const [charCount, setCharCount] = useState(tutor.gyminfo.length);
+  const tutor = data;
+  console.log("rightinfo",tutor);
+  const [gyminfo, setGyminfo] = useState(tutor.sports_intro);
+  const [charCount, setCharCount] = useState(tutor.sports_intro.length);
 
   const handleGyminfoChange = (e) => {
       setGyminfo(e.target.value);
@@ -174,12 +173,11 @@ const RightInfo = ({data}) => {
     </GymIntro>
     <Portfolio>
     <h3>포트폴리오</h3>
-       <div></div>
-       <div></div>
-       <div></div>
-       <div></div>
-       <div></div>
-       <div></div>
+    {tutor.portfolio && tutor.portfolio.map((url, index) => (
+            <div key={index}>
+              <img src={url} alt={`Portfolio ${index}`} style={{ width: '100%', height: 'auto' }} />
+            </div>
+          ))}
     </Portfolio>
     <Review>
     <h3>리뷰</h3>
