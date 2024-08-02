@@ -1,10 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useState } from 'react'
+import { useState , useEffect} from 'react'
 import Modal from '../modal/Modal'
-import { sentapplication } from '../../data/sentapplication'
-import { tutorData } from '../../data/tutordata'
-import { useNavigate } from 'react-router-dom';
+import axios from 'axios'
 const SentApplicationsContainer=styled.div`
   top: 27.7rem;
   position: absolute;
@@ -75,27 +73,8 @@ box-shadow: 0px 0px 2rem 0px rgba(51, 62, 94, 0.30);
   position: absolute;
   font-weight: 700;
   }
-  div:nth-child(6) {
-  color: var(--Sub-Color, #333E5E);
-  font-family: var(--font-family-pretendard);
-  font-size: 2.8rem;
-  border-radius: 3rem;
-  border: 0.2rem solid #606575;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  left: 102.6rem;
-  top: 6.5rem;
-  position: absolute;
-  width: 14.1rem;
-  height: 4.2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  }
   div:nth-child(7) {
   flex-shrink: 0;
-  color: var(--Sub-Color, #333E5E);
   width: 12.9rem;
   font-family: var(--font-family-pretendard);
   font-size: 28px;
@@ -109,25 +88,120 @@ box-shadow: 0px 0px 2rem 0px rgba(51, 62, 94, 0.30);
   top: 7rem;
   position: absolute;
   }
-  
 `
+const StatusBtn = styled.div`
+  font-family: var(--font-family-pretendard);
+  font-size: 2.8rem;
+  border-radius: 3rem;
+  border: 0.2rem solid ${({isstatus})=>{isstatus ? 'var(--Main-Color, #6BA6FF)' : '#606575'; }};
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  left: 102.6rem;
+  top: 6.5rem;
+  position: absolute;
+  width: 14.1rem;
+  height: 4.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3rem;
+  background: ${({ isstatus }) => (isstatus ? 'var(--Main-Color, #6BA6FF)' : 'transparent')};
+  color: ${({ isstatus }) => (isstatus ? '#FFF' : 'inherit')};
+`;
+
+const PaginationContainer = styled.div`
+display: flex;
+justify-content: center;
+margin-top: 20px;
+`;
+
+const PageButton = styled.button`
+margin: 0 5px;
+border: none;
+background: none;
+color: ${({ isActive }) => (isActive ? '#333E5E' : '#000')};
+cursor: pointer;
+font-size: 2.8rem;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+font-family: var(--font-family-pretendard);
+`;
+
+const DisabledButton = styled(PageButton)`
+cursor: not-allowed;
+background-color: none;
+color: #666;
+`;
+
 const SentApplicationsList = () => {
+  const [applications, setApplications] = useState([]);
   const [isModalOpen,setModalOpen]=useState(false);
+  const [selectedAppId, setSelectedAppId] = useState(null);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const userId = 1;
   const closeModal= () => setModalOpen(false);
+  const openModal = (appId) => {
+    setSelectedAppId(appId);
+    setModalOpen(true);
+  };
+ 
+  useEffect(() => {
+    const fetchSentApplications = async () => {
+      try {
+        const response = await axios.get(`https://api.likelion-stew.shop/api/apps/${userId}/sent`, {
+          params: { page }
+        });
+        setApplications(response.data.data.applicationList);
+        setTotalPages(response.data.data.totalPage);
+      } catch (error) {
+        console.error('보낸 신청서 데이터 불러오는데 실패했습니다', error);
+      }
+    };
+
+    fetchSentApplications();
+  }, [page]);
+
+  const handlePageChange = (newPage) => {
+    if (newPage > 0 && newPage <= totalPages) {
+      setPage(newPage);
+    }
+  };
   return (
     <SentApplicationsContainer>
-      {sentapplication.map((data,index)=>(
-         <SentApplication key={index} onClick={()=>{setModalOpen(true)}}>
+      {applications.map((data,index)=>(
+         <SentApplication key={index} onClick={()=>{ openModal(data.application_id)}}>
          <div></div>
-         <div></div>
-         <div>튜터명</div>
-         <div>{data.nickname}</div>
-         <div>{data.messageToTutor}</div>
-         <div>수락대기</div>
-         <div>{data.date}</div>
+         <div style={{ backgroundImage: `url(${data.img_url})`, backgroundSize: 'cover' }}></div>
+         <div>{data.tutor_name}</div>
+         <div>{data.user_name}</div>
+         <div>{data.title}</div>
+         <StatusBtn isstatus={data.status}>
+          {data.status ? '수락완료' : '수락대기'}
+         </StatusBtn>
+         <div>{new Date(data.created_at).toLocaleDateString()}</div>
          </SentApplication>
       ))}
-    <Modal data={tutorData} isOpen={isModalOpen} closeModal={closeModal}/>
+     {selectedAppId && <Modal appId={selectedAppId} isOpen={isModalOpen} closeModal={closeModal} />}
+     <PaginationContainer>
+        <DisabledButton onClick={() => handlePageChange(page - 1)} disabled={page === 1}>
+          이전
+        </DisabledButton>
+        {Array.from({ length: totalPages }, (_, index) => (
+          <PageButton
+            key={index + 1}
+            isActive={index + 1 === page}
+            onClick={() => handlePageChange(index + 1)}
+          >
+            {index + 1}
+          </PageButton>
+        ))}
+        <DisabledButton onClick={() => handlePageChange(page + 1)} disabled={page === totalPages}>
+          다음
+        </DisabledButton>
+      </PaginationContainer>
     </SentApplicationsContainer>
   )
 }
