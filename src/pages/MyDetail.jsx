@@ -6,6 +6,7 @@ import stars from '../assets/images/star-fill.png';
 import LeftInfo from '../components/findTutor/LeftInfo'
 import RightInfo from '../components/findTutor/RightInfo'
 import axios from 'axios'
+const BASE_URL=import.meta.env.VITE_BASE_URL;
 const TutorDetailContainer=styled.div`
     position: relative;
     display: flex;
@@ -97,7 +98,7 @@ const MyDetail = () => {
       console.log('useEffect 호출됨');  // useEffect 호출 여부 확인
       const fetchTutorDetail = async () => {
         try {
-          const response = await axios.get(`https://api.likelion-stew.shop/api/tutors/${tutorid}`);
+          const response = await axios.get(`${BASE_URL}/tutors/${tutorid}`);
           console.log('API 응답:', response.data.data);  // API 응답 로그
           setTutor(response.data.data);
         } catch (error) {

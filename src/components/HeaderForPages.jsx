@@ -58,7 +58,8 @@ const HeaderForPages=({ forPostManagement, forSentApplications, forReceivedAppli
       navigate(`/sentapplications/${userId}`)
   }
   const handleReceivedApplicationsClick=()=>{
-      navigate('/receivedapplications')
+      const userId = 1;
+      navigate(`/receivedapplications/${userId}`)
   }
     return(
       <HeaderContainer>

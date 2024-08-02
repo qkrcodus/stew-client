@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import stars from '../../assets/images/star-fill.png';
 import axios from 'axios';
-
+const BASE_URL=import.meta.env.VITE_BASE_URL;
 const Overlay = styled.div`
   display: ${(props) => (props.$isOpen ? 'block' : 'none')};
   position: fixed;
@@ -296,7 +296,7 @@ const Modal = ({ isOpen, closeModal, appId }) => {
   useEffect(() => {
     const fetchModalDetails = async () => {
       try {
-        const response = await axios.get(`https://api.likelion-stew.shop/api/apps/detail/${appId}`);
+        const response = await axios.get(`${BASE_URL}/apps/detail/${appId}`);
         setApplicationDetail(response.data.data);
       } catch (error) {
         console.error('모달디테일 데이터를 불러오는데 실패했습니다', error);

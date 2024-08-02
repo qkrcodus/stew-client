@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import stars from '../../assets/images/star-fill.png';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+const BASE_URL=import.meta.env.VITE_BASE_URL;
 const PostBox = styled.div`
   position: absolute;
   top: 30rem;
@@ -12,7 +12,6 @@ const PostBox = styled.div`
   gap: 6.4rem;
   justify-items: center;
 `;
-
 const BoxContent = styled.div`
   position: relative;
 `;
@@ -206,7 +205,7 @@ const PostContainer = ({ data, isMyData, onPageChange, currentPage, totalPages, 
     if (isMyData) {
       const fetchTutors = async () => {
         try {
-          const response = await axios.get(`https://api.likelion-stew.shop/api/users/${userId}/tutors`, {
+          const response = await axios.get(`${BASE_URL}/users/${userId}/tutors`, {
             params: { page: currentPage }
           });
           setTutors(response.data.data.tutorList);

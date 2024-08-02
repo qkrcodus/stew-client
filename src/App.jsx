@@ -23,7 +23,7 @@ const App = () => {
         <Route path='/postmanagement/:user_id' element={<PostManagement />} />
         <Route path='/createmyclass/:user_id' element={<CreateMyClass/>} />
         <Route path='/sentapplications/:user_id' element={<SentApplications />} />
-        <Route path='/receivedapplications' element={<ReceivedApplications/>} />
+        <Route path='/receivedapplications/:user_id' element={<ReceivedApplications/>} />
       </Routes>
 
     

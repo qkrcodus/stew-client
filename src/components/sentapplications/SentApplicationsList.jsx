@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { useState , useEffect} from 'react'
 import Modal from '../modal/Modal'
 import axios from 'axios'
+const BASE_URL=import.meta.env.VITE_BASE_URL;
 const SentApplicationsContainer=styled.div`
   top: 27.7rem;
   position: absolute;
@@ -117,7 +118,7 @@ margin-top: 20px;
 `;
 
 const PageButton = styled.button`
-margin: 0 5px;
+margin: 0 0.5rem;
 border: none;
 background: none;
 color: ${({ isActive }) => (isActive ? '#333E5E' : '#000')};
@@ -152,7 +153,7 @@ const SentApplicationsList = () => {
   useEffect(() => {
     const fetchSentApplications = async () => {
       try {
-        const response = await axios.get(`https://api.likelion-stew.shop/api/apps/${userId}/sent`, {
+        const response = await axios.get(`${BASE_URL}/apps/${userId}/sent`, {
           params: { page }
         });
         setApplications(response.data.data.applicationList);

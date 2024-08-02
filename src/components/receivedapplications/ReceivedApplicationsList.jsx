@@ -1,9 +1,8 @@
-import React from 'react';
-import { useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { mydata } from '../../data/mydata'
-import Modal from '../modal/Modal'
-
+import Modal from '../modal/Modal';
+import axios from 'axios';
+const BASE_URL=import.meta.env.VITE_BASE_URL;
 const ReceivedApplicationsContainer = styled.div`
   top: 27.2rem;
   position: absolute;
@@ -86,6 +85,7 @@ const DateText = styled.p`
   line-height: normal;
   padding: 0 0 0 3rem;
 `;
+
 const SubmittedApplicationsContainer = styled.div`
   display: flex;
   align-items: center;
@@ -122,11 +122,32 @@ const SubmittedApplicationsContainer = styled.div`
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    width: 43.2rem;
+    width: 60.2rem;
   }
 
-  div:nth-child(4) {
-    margin-left: 25.2rem;
+
+
+  div:nth-child(5) {
+    margin-left: 4.4rem;
+    color: #A6A6A6;
+    text-align: right;
+    font-family: var(--font-family-pretendard);
+    font-size: 2.8rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+`;
+
+const ApplicationsListContainer = styled.div`
+  position: absolute;
+  top: 20.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+`;
+
+const StatusBtn = styled.div`
+    margin-left: 8.2rem;
     color: #606575;
     text-align: center;
     width: 14.1rem;
@@ -142,60 +163,116 @@ const SubmittedApplicationsContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-
-  div:nth-child(5) {
-    margin-left: 4.4rem;
-    color: #A6A6A6;
-    text-align: right;
-    font-family: var(--font-family-pretendard);
-    font-size: 2.8rem;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-
+  background: ${({ $isstatus }) => ($isstatus ? 'var(--Main-Color, #6BA6FF)' : 'transparent')};
+  color: ${({ $isstatus }) => ($isstatus ? '#FFF' : 'var(--Sub-Color, #333E5E)')};
 `;
 
-const ApplicationsListContainer = styled.div`
-  position: absolute;
-  top: 20.6rem;
+const PageButton = styled.button`
+  margin: 0 0.5rem;
+  border: none;
+  color: ${({ $isActive }) => ($isActive ? '#333E5E' : '#000')};
+  cursor: pointer;
+font-size: 2.8rem;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+font-family: var(--font-family-pretendard);
+background: none;
+`;
+
+const PaginationContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  gap: 3rem;
+  justify-content: center;
+  margin-top: 2rem;
+`;
+
+const DisabledButton = styled(PageButton)`
+cursor: not-allowed;
+background-color: none;
+color: #666;
 `;
 
 const ReceivedApplicationsList = () => {
-  const [isModalOpen,setModalOpen]=useState(false);
-  const closeModal= () => setModalOpen(false);
+  const [isModalOpen, setModalOpen] = useState(false);
+  const closeModal = () => setModalOpen(false);
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [receivedApplications, setReceivedApplications] = useState([]);
+  const [selectedApp, setSelectedApp] = useState(null);
+  const userId = 1;
+
+  useEffect(() => {
+    const fetchReceivedApplications = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/apps/${userId}/received`, {
+          params: { page }
+        });
+        const profiles = response.data.data.tutorProfiles.map(profile => ({
+          ...profile,
+          applications: profile.applicationList
+        }));
+        setReceivedApplications(profiles);
+        setTotalPages(response.data.data.totalPage);
+      } catch (error) {
+        console.error("받은 신청서 데이터를 불러올 수 없습니다", error);
+      }
+    };
+
+    fetchReceivedApplications();
+  }, [page]);
+
+  const handlePageChange = (newPage) => {
+    if (newPage > 0 && newPage <= totalPages) {
+      setPage(newPage);
+    }
+  };
+
   return (
     <ReceivedApplicationsContainer>
-    {mydata.map((tutor) => (
-      <MyClassContainer key={tutor.id}>
-        <IconContainer></IconContainer>
-        <GrayBox></GrayBox>
-        <ContentContainer>
-          <TitleText>
-          {tutor.introduction}
-          </TitleText>
-          <InfoContainer>
-            <DateLabel>등록 날짜</DateLabel>
-            <DateText>{tutor.registereddate}</DateText>
-          </InfoContainer>
-        </ContentContainer>
-        <ApplicationsListContainer>
-        {tutor.submittedApplications.map((tuti, index) => (
-        <SubmittedApplicationsContainer key={index} onClick={()=>{setModalOpen(true)}}>
-            <div></div>
-            <div>{tuti.nickname}</div>
-            <div>{tuti.title}</div>
-            <div>수락대기</div>
-            <div>{tuti.date}</div>
-        </SubmittedApplicationsContainer>
+      {receivedApplications.map((tutor, index) => (
+        <MyClassContainer key={index}>
+          <IconContainer></IconContainer>
+          <GrayBox style={{ backgroundImage: `url(${tutor.img_url})`, backgroundSize: 'cover' }}></GrayBox>
+          <ContentContainer>
+            <TitleText>{tutor.intro}</TitleText>
+            <InfoContainer>
+              <DateLabel>등록 날짜</DateLabel>
+              <DateText>{new Date(tutor.created_at).toLocaleDateString()}</DateText>
+            </InfoContainer>
+          </ContentContainer>
+          <ApplicationsListContainer>
+            {tutor.applications.map((tuti, idx) => (
+              <SubmittedApplicationsContainer key={idx} onClick={() => setModalOpen(true)}>
+                <div></div>
+                <div>{tuti.user_name}</div>
+                <div>{tuti.title}</div>
+                <StatusBtn $isstatus={tuti.status}>
+                  {tuti.status ? '수락완료' : '수락대기'}
+                </StatusBtn>
+                <div>{new Date(tuti.createdAt).toLocaleDateString()}</div>
+              </SubmittedApplicationsContainer>
+            ))}
+          </ApplicationsListContainer>
+        </MyClassContainer>
+      ))}
+      <Modal data={selectedApp} isOpen={isModalOpen} closeModal={closeModal} />
+      <PaginationContainer>
+        <DisabledButton onClick={() => handlePageChange(page - 1)} disabled={page === 1}>
+          이전
+        </DisabledButton>
+        {Array.from({ length: totalPages }, (_, index) => (
+          <PageButton
+            key={index + 1}
+            $isActive={index + 1 === page}
+            onClick={() => handlePageChange(index + 1)}
+          >
+            {index + 1}
+          </PageButton>
         ))}
-         </ApplicationsListContainer>
-      </MyClassContainer>
-     ))}
-     <Modal data={mydata} isOpen={isModalOpen} closeModal={closeModal}/>
+        <DisabledButton onClick={() => handlePageChange(page + 1)} disabled={page === totalPages}>
+          다음
+        </DisabledButton>
+      </PaginationContainer>
     </ReceivedApplicationsContainer>
   );
 };
