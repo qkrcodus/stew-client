@@ -18,10 +18,11 @@ const App = () => {
         <Route path="/test" element={<Test />} />
         <Route path="/testfinish" element={<TestFinish />} />
         <Route path="/findtutor" element={<FindTutor/>} />
+        {/* 백엔드 api 명세서 따라서 /:user_id로 바꿔야 하나? */}
         <Route path="/tutordetail/:id" element={<TutorDetail/>} />
         <Route path="/mydetail/:id" element={<MyDetail/>} />
-        <Route path='/postmanagement' element={<PostManagement />} />
-        <Route path='/createmyclass' element={<CreateMyClass/>} />
+        <Route path='/postmanagement/:user_id' element={<PostManagement />} />
+        <Route path='/createmyclass/:user_id' element={<CreateMyClass/>} />
         <Route path='/sentapplications' element={<SentApplications />} />
         <Route path='/receivedapplications' element={<ReceivedApplications/>} />
       </Routes>

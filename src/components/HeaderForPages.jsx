@@ -43,13 +43,15 @@ const HeaderContainer=styled.div`
 
 `
 
-const HeaderForPages=(props)=>{
+const HeaderForPages=({ forPostManagement, forSentApplications, forReceivedApplications, userId })=>{
   const navigate = useNavigate();
+  console.log("userId: ", userId);
   const handleTestClick = () => {
     navigate('/');
   };
   const handlePostManagementClick=()=>{
-    navigate('/postmanagement')
+      const userId = 1;
+      navigate(`/postmanagement/${userId}`);
   }
   const handleSentApplicationsClick=()=>{
     navigate('/sentapplications')
@@ -61,9 +63,9 @@ const HeaderForPages=(props)=>{
       <HeaderContainer>
       <Headerwrapper>
       <Logo onClick={handleTestClick}>스튜</Logo>
-      <Nav $forPostManagement={props.forPostManagement}
-           $forSentApplications={props.forSentApplications}
-           $forReceivedApplications={props.forReceivedApplications}>
+      <Nav $forPostManagement={forPostManagement}
+           $forSentApplications={forSentApplications}
+           $forReceivedApplications={forReceivedApplications}>
         <div onClick={handlePostManagementClick}>게시글 관리</div>
         <div onClick={handleSentApplicationsClick}>보낸 신청서</div>
         <div onClick={handleReceivedApplicationsClick}>받은 신청서</div>

@@ -2,12 +2,14 @@ import React from 'react'
 import HeaderForPages from '../components/HeaderForPages'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
-import { tutorData } from '../data/tutordata'
 import stars from '../assets/images/star-fill.png';
 import LeftInfo from '../components/findTutor/LeftInfo'
 import RightInfo from '../components/findTutor/RightInfo'
 import ModalForm from '../components/modal/ModalForm'
-import { useState } from 'react'
+import { useState , useEffect} from 'react'
+import axios from 'axios';
+
+const BASE_URL=import.meta.env.VITE_BASE_URL;
 const TutorDetailContainer=styled.div`
     position: relative;
     display: flex;
@@ -70,32 +72,55 @@ right: 26.8rem;
 `
 
 const TutorDetail = () => {
-  const {id}=useParams();
-  const tutor=tutorData.find(t=>t.id===parseInt(id));
+  //modal 
   const [isModalOpen,setModalOpen]=useState(false);
   const closeModal= () => setModalOpen(false);
+  //api 연동
+  const [tutordetail,setTutorDetail]=useState([]);
+  const [error,setError]=useState(null);
+  const {tutorId}=useParams();
+  const fetchTutorDetails= async()=>{
+    setError(null);
+    try{
+        const response =await axios.get(`${BASE_URL}/tutors/${tutorId}`)
+        if( response.status===200){
+            setTutorDetail(Array.isArray(response.data) ? response.data :[]);
+        }
+        }catch(error){
+            if( error.response && error.response.status === 404){
+                setError('튜터를 찾을 수 없습니다');
+            }else{
+                setError('튜터 디테일을 불러오는데 실패했습니다');
+            }
+        }
+    }
+
+    useEffect(()=>{
+        fetchTutorDetails();
+    },[tutorId]);
+  
   return (
     <TutorDetailContainer>
     <HeaderForPages/>
     <TutorThumbnail>
         <TutorImg/>
         <div>
-            <div>{tutor.name} / {tutor.type}
+            <div>{tutordetail.name} / {tutordetail.sports_id}
             <Space />
-                {Array.from({ length: tutor.rating }, (_, index) => (
+                {Array.from({ length: tutordetail.review_score }, (_, index) => (
                 <RatingImage key={index} src={stars} alt="stars" />
-                ))} ({tutor.reviewNum})
+                ))} ({tutordetail.total_review_count})
             </div>
-            <div>{tutor.introduction}</div>
-            <div>{tutor.price}</div>
+            <div>{tutordetail.self_intro}</div>
+            <div>{tutordetail.price}</div>
         </div>
     </TutorThumbnail>
-    <LeftInfo data={tutorData}/>
-    <RightInfo data={tutorData}/>
+    <LeftInfo data={tutordetail}/>
+    <RightInfo data={tutordetail}/>
     <SignupBtn onClick={()=>{setModalOpen(true)}}>
         신청하기
     </SignupBtn>
-    <ModalForm data={tutorData} isOpen={isModalOpen} closeModal={closeModal}/>
+    <ModalForm data={tutordetail} isOpen={isModalOpen} closeModal={closeModal}/>
     </TutorDetailContainer>
   )
 }

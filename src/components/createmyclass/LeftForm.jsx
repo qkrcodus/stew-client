@@ -79,6 +79,7 @@ const TutorImg = styled.div`
   flex-shrink: 0;
   fill: #F2F3F5;
   box-sizing: border-box;
+  border-radius: 50%;
 `;
 
 const InfoContainer = styled.div`
@@ -286,17 +287,17 @@ const SubmitButton = styled.button`
 `;
 
 const LeftForm = ({ onSubmit }) => {
-  const [formData, setFormData] = useState({
-    name: '',
-    age: '',
-    gender: '',
-    location: '',
-    type: '',
-    price: '',
-    experience: '',
-    introduction: '',
-    bio: '',
-  });
+  // const [formData, setFormData] = useState({
+  //   name: '',
+  //   age: '',
+  //   gender: '',
+  //   location: '',
+  //   type: '',
+  //   price: '',
+  //   experience: '',
+  //   introduction: '',
+  //   bio: '',
+  // });
 
   const [charCount, setCharCount] = useState(0);
 
@@ -317,13 +318,16 @@ const LeftForm = ({ onSubmit }) => {
 //       onSubmit(formData); 
 //     }
 //   };
-
+// const handleSvgClick=
   return (
     <LeftFormContainer>
       <TutorDetailContainerLeft>
         <TutorThumbnail>
           <TutorFirstLine>
-            <TutorImg>
+            <TutorImg onClick={handleSvgClick}>
+              {/* {imageSrc ? 
+              <img src={imageSrc} alt="업로드된 이미지" style={{width: '100%' ,height: '100%', objectFit='cover'}}/> 
+              : */}
               <svg xmlns="http://www.w3.org/2000/svg" width="191" height="191" viewBox="0 0 191 191" fill="none">
                 <circle cx="95.5" cy="95.5" r="95.5" fill="#F2F3F5" />
                 <g transform="translate(39 39)">
@@ -333,6 +337,7 @@ const LeftForm = ({ onSubmit }) => {
                   </svg>
                 </g>
               </svg>
+              {/* } */}
             </TutorImg>
             <div>
               <InfoRow>

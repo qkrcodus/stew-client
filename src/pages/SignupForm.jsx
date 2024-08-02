@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import stars from '../assets/images/star-fill.png';
-import { mydata } from '../data/mydata'
 
 const Overlay=styled.div`
 display: ${(props)=>(props.isOpen ? 'block' : 'none')};
