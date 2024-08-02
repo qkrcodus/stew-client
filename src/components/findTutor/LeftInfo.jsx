@@ -268,14 +268,13 @@ const CharCount = styled.div`
 `;
 
 const LeftInfo = ({data}) => {
-    const { id } = useParams();
-    const tutor = data.find(t => t.id === parseInt(id));
+    const tutor = data;
+    console.log("leftinfo",tutor);
+    const [self_intro, setSelfIntro] = useState(tutor.self_intro);
+    const [charCount, setCharCount] = useState(tutor.intro.length);
 
-    const [bio, setBio] = useState(tutor.bio);
-    const [charCount, setCharCount] = useState(tutor.bio.length);
-
-    const handleBioChange = (e) => {
-        setBio(e.target.value);
+    const handleSelfIntroChange = (e) => {
+        setSelfIntro(e.target.value);
         setCharCount(e.target.value.length);
     };
   return (
@@ -319,7 +318,7 @@ const LeftInfo = ({data}) => {
         </TutorFirstLine>
         <TutorSecondLine>
             <div>종목</div>
-            <div>{tutor.type}</div>
+            <div>{tutor.sportName}</div>
             <div>가격</div>
             <div>{tutor.price}</div>
         </TutorSecondLine>
@@ -328,18 +327,18 @@ const LeftInfo = ({data}) => {
     <h3>한줄소개</h3>
         <Intro1>
             <div>경력사항</div>
-            <div>{tutor.experience}</div>
+            <div>{tutor.career}</div>
         </Intro1>
         <Intro2>
             <div>소개</div>
-            <div>{tutor.introduction}</div>
+            <div>{tutor.intro}</div>
         </Intro2>
     </InfoContainer>
     <BioContainer>
     <h3>자기소개</h3>
         <textarea
-            value={bio}
-            onChange={handleBioChange}
+            value={self_intro}
+            onChange={handleSelfIntroChange}
             maxLength={140}
         />
         <CharCount>({charCount}/140)</CharCount>

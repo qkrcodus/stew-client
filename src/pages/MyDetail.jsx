@@ -137,7 +137,7 @@ const MyDetail = () => {
           </div>
         </TutorThumbnail>
         <LeftInfo data={tutor} />
-        <RightInfo data={tutor} />
+        {/* <RightInfo data={tutor} /> */}
         <UpdateBtn>수정</UpdateBtn>
         <DeleteBtn>삭제</DeleteBtn>
       </TutorDetailContainer>
