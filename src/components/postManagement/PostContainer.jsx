@@ -221,11 +221,11 @@ const PostContainer = ({ data, isMyData, onPageChange, currentPage, totalPages, 
     }
   }, [data, isMyData, userId, currentPage]);
 
-  const handleBoxClick = (id) => {
+  const handleBoxClick = (tutorId) => {
     if (isMyData) {
-      navigate(`/mydetail/${id}`);
+      navigate(`/mydetail/${tutorId}`);
     } else {
-      navigate(`/tutordetail/${id}`);
+      navigate(`/tutordetail/${tutorId}`);
     }
   };
 
@@ -287,7 +287,7 @@ const PostContainer = ({ data, isMyData, onPageChange, currentPage, totalPages, 
       {dataWithPlus.map((box) => {
           if (box.name === 'plus') {
             return (
-              <PlusButton key={box.id} onClick={handlePlusButtonClick}>
+              <PlusButton key={box.tutorId} onClick={handlePlusButtonClick}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="4.1rem" height="4.1rem" viewBox="0 0 41 41" fill="none">
                   <path d="M20.5 0.5C21.8807 0.5 23 1.61929 23 3V18H38C39.3807 18 40.5 19.1193 40.5 20.5C40.5 21.8807 39.3807 23 38 23H23V38C23 39.3807 21.8807 40.5 20.5 40.5C19.1193 40.5 18 39.3807 18 38V23H3C1.61929 23 0.5 21.8807 0.5 20.5C0.5 19.1193 1.61929 18 3 18H18V3C18 1.61929 19.1193 0.5 20.5 0.5Z" fill="#6BA6FF"/>
                 </svg>
@@ -298,7 +298,7 @@ const PostContainer = ({ data, isMyData, onPageChange, currentPage, totalPages, 
             const [careerBeforeComma, careerAfterComma] = box.career.split(',');
 
             return (
-              <Rectangle key={box.id} onClick={() => handleBoxClick(box.id)}>
+              <Rectangle key={box.tutorId} onClick={() => handleBoxClick(box.tutorId)}>
                 <BoxContent>
                   <Thumbnail />
                   <Name>{box.name}<Type>{box.sportName}</Type></Name>

@@ -18,7 +18,7 @@ const PostManagement = () => {
     const [error, setError] = useState(null);
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
-    const userId = 1; // 임의 설정
+    const userId = 1; // 우린 로그인 기능이 없으니 1번 유저가 로그인했다고 가정함
     const BASE_URL = 'https://api.likelion-stew.shop/api';
 
     const fetchData = async (page) => {
