@@ -37,7 +37,9 @@ const TypeIcon=styled.div`
 width: 29.5256rem;
 height: 29.7173rem;
 flex-shrink: 0;
-background: #FFE500;
+background-image: url(${props => props.imgUrl});
+  background-size: cover;
+  background-position: center;
 `
 const TypeContent=styled.div`
 display: flex;
@@ -155,7 +157,7 @@ display: flex;
 flex-direction: column;
 justify-content: center;
 align-items: center;
-gap: 2rem;
+gap: 3rem;
 
 `
 const Title=styled.div`
@@ -179,13 +181,14 @@ const Sport3=styled.div`
 display: flex;
 gap: 8.2rem;
 `
-const Img=styled.div`
-height: 15.5rem;
-width: 15.5rem;
-align-self: stretch;
-border-radius: 15.5rem;
-background: #FFE500;
+const Img = styled.div`
+  height: 15.5rem;
+  width: 15.5rem;
+  align-self: stretch;
+  border-radius: 15.5rem;
+  background: url(${props => props.imgUrl}) no-repeat center/cover;
 `
+
 const Container=styled.div`
 display: flex;
 flex-direction: column;
@@ -227,84 +230,83 @@ const TwoTutorContainer=styled.div`
 `
 
 const TestFinish = () => {
-  //TestContent로 받아온 쿼리파라미터속 정보 찾아주는 훅
-  const location=useLocation();
-  const {answers}=location.state || {};
-  //[1,1,1,1] 배열을 id로 변환
-console.log(Array.isArray(resultdata)); // true여야 합니다
-console.log(resultdata);
-  const resultId=answers.join('');
-  const result=resultdata.find(data=>data.id===parseInt(resultId,10));
+  // TestContent로 받아온 쿼리파라미터 속 정보 찾아주는 훅
+  const location = useLocation();
+  const { answers } = location.state || {};
+  // [1,1,1,1] 배열을 id로 변환
+  console.log(Array.isArray(resultdata)); // true여야
+  console.log(resultdata);
+  const resultId = answers.join('');
+  const result = resultdata.find(data => data.id === parseInt(resultId, 10));
   console.log(result);
+
   return (
     <TestFinishContainer>
-    <HeaderForPages/>
-    {/* 2초 로딩후 
-    <CenteredContainer>
-    <h2>당신의 운동 유형을 분석하고 있어요</h2>
-    </CenteredContainer> */}
-    <TypeResult>
-      <TypeIcon/>
-      <TypeContent>
-        <Content1>
-        당신은 {result.type} 유형입니다
-        </Content1>
-        <Content2>
-       {result.description}
-        </Content2>
-        <HashTag>
-          <FirstTag>
-          # {result.tag[0]}
-          </FirstTag>
-          <SecondTag>
-          # {result.tag[1]}
-          </SecondTag>
-        </HashTag>
-      </TypeContent>
-    </TypeResult>
-    <Tips>
-    <svg xmlns="http://www.w3.org/2000/svg" width="7.1rem" height="12.6rem" viewBox="0 0 71 126" fill="none">
-  <path d="M24.3387 0.44828L28.4989 3.94828L33.9989 2.94828L38.4989 5.94828L43.9989 4.94828L47.9989 7.94828L53.0002 6.4483L56.5001 9.44831L62 7.94828L65.5 10.9483L70.6824 10.2536L46.3439 125.286L0.000228345 115.481L24.3387 0.44828Z" fill="#D9D9D9"/>
-</svg>
-      <TipTitle>당신을 위한 운동꿀팁!</TipTitle>
-      <TipContainer>
-        <Tip>1. {result.tips[0]}</Tip>
-        <Tip>2. {result.tips[1]}</Tip>
-        <Tip>3. {result.tips[2]}</Tip>
-        <Tip>4. {result.tips[3]}</Tip>
-      </TipContainer> 
-    </Tips>
-    <ThreeSports>
-      <Title>이런 운동은 어때요?</Title>
-      <Sport1>
-        <Img></Img>
-        <Container>
-          <Name>{result.exercises[0].name}</Name>
-          <Content>{result.exercises[0].description}</Content>
-        </Container>
-      </Sport1>
-      <Sport2>
-        <Img></Img>
-        <Container>
-          <Name>{result.exercises[1].name}</Name>
-          <Content>{result.exercises[1].description}</Content>
-        </Container>
-      </Sport2>
-      <Sport3>
-        <Img></Img>
-        <Container>
-          <Name>{result.exercises[2].name}</Name>
-          <Content>{result.exercises[2].description}</Content>
-        </Container>
-      </Sport3>
-    </ThreeSports>
-    <TwoTutor>
-      <TwoTutorTitle>당신에게 추천하는 스포츠 튜터!</TwoTutorTitle>
-      <TwoTutorContainer>
-
-      </TwoTutorContainer>
-    </TwoTutor>
-    
+      <HeaderForPages />
+      {/* 2초 로딩후 
+      <CenteredContainer>
+      <h2>당신의 운동 유형을 분석하고 있어요</h2>
+      </CenteredContainer> */}
+      <TypeResult>
+        <TypeIcon imgUrl={result.imgUrl} />
+        <TypeContent>
+          <Content1>
+            당신은 {result.type} 유형입니다
+          </Content1>
+          <Content2>
+            {result.description}
+          </Content2>
+          <HashTag>
+            <FirstTag>
+              # {result.tag[0]}
+            </FirstTag>
+            <SecondTag>
+              # {result.tag[1]}
+            </SecondTag>
+          </HashTag>
+        </TypeContent>
+      </TypeResult>
+      <Tips>
+        <svg xmlns="http://www.w3.org/2000/svg" width="7.1rem" height="12.6rem" viewBox="0 0 71 126" fill="none">
+          <path d="M24.3387 0.44828L28.4989 3.94828L33.9989 2.94828L38.4989 5.94828L43.9989 4.94828L47.9989 7.94828L53.0002 6.4483L56.5001 9.44831L62 7.94828L65.5 10.9483L70.6824 10.2536L46.3439 125.286L0.000228345 115.481L24.3387 0.44828Z" fill="#D9D9D9"/>
+        </svg>
+        <TipTitle>당신을 위한 운동꿀팁!</TipTitle>
+        <TipContainer>
+          <Tip>1. {result.tips[0]}</Tip>
+          <Tip>2. {result.tips[1]}</Tip>
+          <Tip>3. {result.tips[2]}</Tip>
+          <Tip>4. {result.tips[3]}</Tip>
+        </TipContainer> 
+      </Tips>
+      <ThreeSports>
+        <Title>이런 운동은 어때요?</Title>
+        <Sport1>
+          <Img imgUrl={result.exercises[0].imgUrl} />
+          <Container>
+            <Name>{result.exercises[0].name}</Name>
+            <Content>{result.exercises[0].description}</Content>
+          </Container>
+        </Sport1>
+        <Sport2>
+          <Img imgUrl={result.exercises[1].imgUrl} />
+          <Container>
+            <Name>{result.exercises[1].name}</Name>
+            <Content>{result.exercises[1].description}</Content>
+          </Container>
+        </Sport2>
+        <Sport3>
+          <Img imgUrl={result.exercises[2].imgUrl} />
+          <Container>
+            <Name>{result.exercises[2].name}</Name>
+            <Content>{result.exercises[2].description}</Content>
+          </Container>
+        </Sport3>
+      </ThreeSports>
+      <TwoTutor>
+        <TwoTutorTitle>당신에게 추천하는 스포츠 튜터!</TwoTutorTitle>
+        <TwoTutorContainer>
+        </TwoTutorContainer>
+      </TwoTutor>
     </TestFinishContainer>
   )
 }
