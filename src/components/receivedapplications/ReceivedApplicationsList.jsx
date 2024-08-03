@@ -155,7 +155,7 @@ const StatusBtn = styled.div`
     height: 4.2rem;
     flex-shrink: 0;
     border-radius: 3rem;
-    border: 0.2rem solid #606575;
+ border: 0.2rem solid ${({isstatus})=>{isstatus ? 'var(--Main-Color, #6BA6FF)' : '#606575'; }};
     font-family: var(--font-family-pretendard);
     font-size: 2.8rem;
     font-style: normal;
@@ -171,7 +171,7 @@ const StatusBtn = styled.div`
 const PageButton = styled.button`
   margin: 0 0.5rem;
   border: none;
-  color: ${({ $isActive }) => ($isActive ? '#333E5E' : '#000')};
+color: ${({ $isActive }) => ($isActive ? '#333E5E' : '#A6A6A6')};
   cursor: pointer;
 font-size: 2.8rem;
 font-style: normal;

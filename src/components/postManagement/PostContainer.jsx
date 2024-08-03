@@ -54,7 +54,7 @@ const Name = styled.div`
   line-height: normal;
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 5.7rem;
 `;
 
 const Type = styled.span`

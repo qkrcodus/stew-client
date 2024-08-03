@@ -8,8 +8,6 @@ import RightInfo from '../components/findTutor/RightInfo'
 import ModalForm from '../components/modal/ModalForm'
 import { useState , useEffect} from 'react'
 import axios from 'axios';
-
-const BASE_URL=import.meta.env.VITE_BASE_URL;
 const TutorDetailContainer=styled.div`
     position: relative;
     display: flex;
@@ -42,7 +40,10 @@ const TutorImg=styled.div`
     width: 9.7rem;
     height: 10.7rem;
     flex-shrink: 0;
-    background: #D9D9D9;
+ background-image: url(${(props) => props.$imgurl});
+  background-size: cover;
+    background-position: center;
+  background-repeat: no-repeat;
 `
 const RatingImage = styled.img`
   width: 2.4rem;
@@ -70,32 +71,26 @@ position: absolute;
 top: 177.4rem;
 right: 26.8rem;
 `
-
+const BASE_URL=import.meta.env.VITE_BASE_URL;
 const TutorDetail = () => {
   //modal 
   const [isModalOpen,setModalOpen]=useState(false);
   const closeModal= () => setModalOpen(false);
   //api 연동
+  const {tutorId}=useParams();
   const [tutordetail,setTutorDetail]=useState([]);
   const [error,setError]=useState(null);
-  const {tutorId}=useParams();
-  const fetchTutorDetails= async()=>{
-    setError(null);
-    try{
-        const response =await axios.get(`${BASE_URL}/tutors/${tutorId}`)
-        if( response.status===200){
-            setTutorDetail(Array.isArray(response.data) ? response.data :[]);
-        }
-        }catch(error){
-            if( error.response && error.response.status === 404){
-                setError('튜터를 찾을 수 없습니다');
-            }else{
-                setError('튜터 디테일을 불러오는데 실패했습니다');
-            }
-        }
-    }
 
     useEffect(()=>{
+        const fetchTutorDetails=async()=>{
+            try{
+                const response= await axios.get(`${BASE_URL}/tutors/${tutorId}`)
+                setTutorDetail[response.data.data]
+            }catch(error){
+                setError("튜터 데이터 디테일 불러오는데 실패하였습니다.")
+                console.error(error);
+            }
+        }
         fetchTutorDetails();
     },[tutorId]);
   
@@ -103,15 +98,15 @@ const TutorDetail = () => {
     <TutorDetailContainer>
     <HeaderForPages/>
     <TutorThumbnail>
-        <TutorImg/>
+        <TutorImg  $imgurl={tutordetail.imgUrl}/>
         <div>
-            <div>{tutordetail.name} / {tutordetail.sports_id}
+            <div>{tutordetail.name} / {tutordetail.sportName}
             <Space />
-                {Array.from({ length: tutordetail.review_score }, (_, index) => (
+                {Array.from({ length: tutordetail.total_review_score }, (_, index) => (
                 <RatingImage key={index} src={stars} alt="stars" />
                 ))} ({tutordetail.total_review_count})
             </div>
-            <div>{tutordetail.self_intro}</div>
+            <div>{tutordetail.intro}</div>
             <div>{tutordetail.price}</div>
         </div>
     </TutorThumbnail>
@@ -120,7 +115,7 @@ const TutorDetail = () => {
     <SignupBtn onClick={()=>{setModalOpen(true)}}>
         신청하기
     </SignupBtn>
-    <ModalForm data={tutordetail} isOpen={isModalOpen} closeModal={closeModal}/>
+    <ModalForm $isOpen={isModalOpen} $closeModal={closeModal}/>
     </TutorDetailContainer>
   )
 }

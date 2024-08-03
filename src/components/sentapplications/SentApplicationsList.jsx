@@ -118,16 +118,16 @@ margin-top: 20px;
 `;
 
 const PageButton = styled.button`
-margin: 0 0.5rem;
-border: none;
-background: none;
-color: ${({ isActive }) => (isActive ? '#333E5E' : '#000')};
-cursor: pointer;
+  margin: 0 0.5rem;
+  border: none;
+color: ${({ $isActive }) => ($isActive ? '#333E5E' : '#A6A6A6')};
+  cursor: pointer;
 font-size: 2.8rem;
 font-style: normal;
 font-weight: 700;
 line-height: normal;
 font-family: var(--font-family-pretendard);
+background: none;
 `;
 
 const DisabledButton = styled(PageButton)`
@@ -194,7 +194,7 @@ const SentApplicationsList = () => {
         {Array.from({ length: totalPages }, (_, index) => (
           <PageButton
             key={index + 1}
-            isActive={index + 1 === page}
+            $isActive={index + 1 === page}
             onClick={() => handlePageChange(index + 1)}
           >
             {index + 1}

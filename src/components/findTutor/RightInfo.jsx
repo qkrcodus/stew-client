@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-import { tutorData } from '../../data/tutordata';
 
 const RightInfoContainer=styled.div`
   position: absolute;
