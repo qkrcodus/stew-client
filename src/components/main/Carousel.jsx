@@ -1,76 +1,253 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-// Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
-
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
+import axios from 'axios';
+
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
+const StyledBox = styled.div`
+  height: 52.8rem;
+  width: 46.3rem;
+
+  & .group {
+    height: 52.8rem;
+  
+    width: 47.1rem;
+  }
+
+  & .overlap {
+    height: 52.8rem;
+    position: relative;
+    width: 46.3rem;
+  }
+
+  & .rectangle {
+    background-color: #6ba6ffcc;
+    border-radius: 5rem;
+    box-shadow: 0px 0px 2rem #333e5e4c;
+    height: 46.3rem;
+    left: -3.2rem;
+    position: absolute;
+    top: 3.2rem;
+    transform: rotate(-90deg);
+    width: 52.8rem;
+  }
+
+  & .image {
+    background-color: #d9d9d9;
+    border-radius: 3rem;
+    height: 15.3rem;
+    left: 17.5rem;
+    position: absolute;
+    top: 2.2rem;
+    width: 11.3rem;
+    background-size: cover;
+    background-position: center;
+  }
+
+  & .overlap-group-wrapper {
+    height: 4.6rem;
+    left: 25.6rem;
+    position: absolute;
+    top: 19.6rem;
+  
+  }
+
+  & .overlap-group {
+    background-color: #ffffff;
+    border-radius: 3rem;
+    height: 4.6rem;
+    position: relative;
+    width: 12rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  & .text-wrapper {
+    color: #333e5e;
+    font-family: var(--font-family-pretendard);
+    font-size: 2.8rem;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: normal;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  & .div {
+    color: #ffffff;
+    font-family:  var(--font-family-pretendard);
+    font-size: 2.8rem;
+    font-weight: 700;
+    height: 3rem;
+    left: 18rem;
+    transform: translateX(-50%);
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 20.4rem;
+    white-space: nowrap;
+    width: 12.8rem;
+  }
+
+  & .text-wrapper-2 {
+    color: #ffffff;
+    font-family: var(--font-family-pretendard);
+    font-size: 2.8rem;
+    font-weight: 700;
+    height: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 46.3rem;
+    white-space: nowrap;
+    width: 26.6rem;
+  }
+
+  & .element {
+    color: #0d2d4b;
+    font-family:  var(--font-family-pretendard);
+    font-size: 2.8rem;
+    font-weight: 500;
+    height: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 26.1rem;
+    width: 35.7rem;
+  }
+
+  & .p {
+    color: #0d2d4b;
+    font-family:  var(--font-family-pretendard);
+    font-size: 2.8rem;
+    font-weight: 500;
+    height: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 37.8rem;
+    width: 35.7rem;
+  }
+
+  & .line {
+    height: 0.1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    object-fit: cover;
+    position: absolute;
+    top: 36.8rem;
+    width: 37.9rem;
+  }
+`;
+
+const CarouselContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+const Box = ({ tutor }) => {
+  const formattedCareer = tutor.career.split(',').map((line, index) => (
+    <span key={index}>
+      {line}
+      <br />
+    </span>
+  ));
+  const introText = tutor.intro.length > 28 ? `${tutor.intro.substring(0, 28)}...` : tutor.intro;
+
+  return (
+    <StyledBox>
+      <div className="group">
+        <div className="overlap">
+          <div className="rectangle" />
+          <div className="image" style={{ backgroundImage: `url(${tutor.imgUrl})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
+          <div className="overlap-group-wrapper">
+            <div className="overlap-group">
+              <div className="text-wrapper">{tutor.sportName}</div>
+            </div>
+          </div>
+          <div className="div">{tutor.name} 튜터</div>
+          <div className="text-wrapper-2">시간당 {tutor.price}원~</div>
+          <p className="element">
+            {tutor.location}
+            <br />
+            {formattedCareer}
+          </p>
+          <p className="p">{introText}</p>
+          <img className="line" alt="Line" src="https://c.animaapp.com/fhGGeiFx/img/line-9.svg" />
+        </div>
+      </div>
+    </StyledBox>
+  );
+};
 
 const Carousel = () => {
-    const reviews=[
-        {
-            id: 1,
-            name: '김재식',
-            age: '31세',
-            rating: 5,
-            comment: '코치님의 전문적인 지도 덕분에 운동에 대한 자신감이 생겼어요. 정말 감사합니다!',
-          },
-          {
-            id: 2,
-            name: '박소영',
-            age: '29세',
-            rating: 4,
-            comment: '운동을 시작하고 나서 체력이 많이 좋아졌어요. 좋은 경험이었어요!',
-          },
-          {
-            id: 3,
-            name: '이준혁',
-            age: '27세',
-            rating: 5,
-            comment: '트레이너님 덕분에 운동에 재미를 붙이게 되었어요. 너무 좋아요!',
-          },
-          {
-            id: 4,
-            name: '최민지',
-            age: '26세',
-            rating: 5,
-            comment: '운동 프로그램이 체계적이고 효과적이에요. 정말 추천합니다!',
-          },
-    ]
+  const [todayTutors, setTodayTutors] = useState([]);
+
+  useEffect(() => {
+    const fetchTodayTutors = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/tutors/today-tutor`);
+        setTodayTutors(response.data.data);
+      } catch (error) {
+        console.error('오늘의 튜터 데이터를 불러오지 못했습니다.', error);
+      }
+    };
+    fetchTodayTutors();
+  }, []);
+
   return (
-    <Swiper
-      modules={[EffectCoverflow, Navigation, Pagination, Scrollbar, A11y]}
-      effect="coverflow"
-      grabCursor={true}
-      centeredSlides={true}
-      slidesPerView="auto"
-      coverflowEffect={{
-        rotate: 50,
-        stretch: 0,
-        depth: 100,
-        modifier: 1,
-        slideShadows: true,
-      }}
-      navigation
-      pagination={{ clickable: true }}
-      scrollbar={{ draggable: true }}
-    >
-      {reviews.map((review) => (
-        <SwiperSlide key={review.id}>
-          <div style={{ padding: '20px', background: '#d0e5ff', borderRadius: '10px', textAlign: 'left' }}>
-            <h3>{review.name}, {review.age}</h3>
-            <div>{'★'.repeat(review.rating)}</div>
-            <p>{review.comment}</p>
-          </div>
-        </SwiperSlide>
-      ))}
-    </Swiper>
+    <CarouselContainer>
+      <Swiper
+        modules={[EffectCoverflow, Navigation, Pagination, Scrollbar, A11y]}
+        effect="coverflow"
+        grabCursor={true}
+        centeredSlides={true}
+        slidesPerView="auto"
+        coverflowEffect={{
+          rotate: 50,
+          stretch: 0,
+          depth: 100,
+          modifier: 1,
+          slideShadows: true,
+        }}
+        navigation
+        pagination={{ clickable: true }}
+        scrollbar={{ draggable: true }}
+        style={{ width: '80%', paddingTop: '2rem', paddingBottom: '2rem' }}
+      >
+        {todayTutors.map((tutor) => (
+          <SwiperSlide key={tutor.tutorId}>
+            <Box tutor={tutor} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </CarouselContainer>
   )
 }
 
-export default Carousel
+export default Carousel;
