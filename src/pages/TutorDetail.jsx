@@ -72,52 +72,68 @@ top: 177.4rem;
 right: 26.8rem;
 `
 const BASE_URL=import.meta.env.VITE_BASE_URL;
-const TutorDetail = () => {
-  //modal 
-  const [isModalOpen,setModalOpen]=useState(false);
-  const closeModal= () => setModalOpen(false);
-  //api 연동
-  const {tutorId}=useParams();
-  const [tutordetail,setTutorDetail]=useState([]);
-  const [error,setError]=useState(null);
 
-    useEffect(()=>{
-        const fetchTutorDetails=async()=>{
-            try{
-                const response= await axios.get(`${BASE_URL}/tutors/${tutorId}`)
-                setTutorDetail[response.data.data]
-            }catch(error){
-                setError("튜터 데이터 디테일 불러오는데 실패하였습니다.")
-                console.error(error);
-            }
-        }
-        fetchTutorDetails();
-    },[tutorId]);
+const TutorDetail = () => {
+    const [isModalOpen, setModalOpen] = useState(false);
+    const closeModal = () => setModalOpen(false);
+    const { tutorId } = useParams();
+    const [tutordetail, setTutorDetail] = useState(null);
+    const [error, setError] = useState(null);
   
+    useEffect(() => {
+      console.log("useEffect 호출됨");
+      console.log("tutorId:", tutorId);
+  
+      const fetchTutorDetails = async () => {
+        try {
+          const response = await axios.get(`${BASE_URL}/tutors/${tutorId}`);
+          setTutorDetail(response.data.data);
+          console.log(response.data.data); // 응답 데이터를 로그로 출력
+        } catch (error) {
+          setError("튜터 데이터 디테일 불러오는데 실패하였습니다.");
+          console.error(error);
+        }
+      };
+  
+      fetchTutorDetails();
+    }, [tutorId]);
+  
+    useEffect(() => {
+      console.log("TutorDetail 상태 업데이트:", tutordetail);
+    }, [tutordetail]);
+  
+    if (error) {
+      return <div>{error}</div>;
+    }
+  
+    if (!tutordetail) {
+      return <div>로딩 중...</div>;
+    }
+  
+    console.log("TutorDetail 컴포넌트 렌더링됨");
   return (
     <TutorDetailContainer>
     <HeaderForPages/>
     <TutorThumbnail>
-        <TutorImg  $imgurl={tutordetail.imgUrl}/>
-        <div>
-            <div>{tutordetail.name} / {tutordetail.sportName}
-            <Space />
-                {Array.from({ length: tutordetail.total_review_score }, (_, index) => (
-                <RatingImage key={index} src={stars} alt="stars" />
-                ))} ({tutordetail.total_review_count})
-            </div>
-            <div>{tutordetail.intro}</div>
-            <div>{tutordetail.price}</div>
+      <TutorImg $imgurl={tutordetail.imgUrl}/>
+      <div>
+        <div>{tutordetail.name} / {tutordetail.sportName}
+          <Space />
+          {Array.from({ length: tutordetail.total_review_score }, (_, index) => (
+            <RatingImage key={index} src={stars} alt="stars" />
+          ))} ({tutordetail.total_review_count})
         </div>
+        <div>{tutordetail.intro}</div>
+        <div>{tutordetail.price}</div>
+      </div>
     </TutorThumbnail>
     <LeftInfo data={tutordetail}/>
     <RightInfo data={tutordetail}/>
-    <SignupBtn onClick={()=>{setModalOpen(true)}}>
-        신청하기
+    <SignupBtn onClick={() => { setModalOpen(true) }}>
+      신청하기
     </SignupBtn>
     <ModalForm $isOpen={isModalOpen} $closeModal={closeModal}/>
-    </TutorDetailContainer>
-  )
+  </TutorDetailContainer>
+);
 }
-
 export default TutorDetail

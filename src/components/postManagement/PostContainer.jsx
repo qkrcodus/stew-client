@@ -219,6 +219,7 @@ const PostContainer = ({ data, isMyData, onPageChange, currentPage, totalPages, 
 
       fetchTutors();
     } else {
+      console.log("setTutors에 전달된 data:", data);
       setTutors(data);
     }
   }, [data, isMyData, userId, currentPage]);
