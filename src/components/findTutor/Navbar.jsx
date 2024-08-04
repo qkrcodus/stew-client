@@ -77,12 +77,13 @@ const SubmenuItem = styled.div`
   width: 14.2rem;
   height: 3.3rem;
   margin-bottom: 0.5rem;
-  color: #a6a6a6;
   text-align: center;
   font-family: Pretendard;
   font-size: 2.4rem;
   font-weight: 700;
   line-height: normal;
+  cursor: pointer;
+  color: ${({isSelected})=>(isSelected ?  '#333e5e' : '#a6a6a6')}
 `;
 
 const FilterContainer = styled.div`
@@ -176,7 +177,7 @@ const SelectedItem = styled.div`
   justify-content: center;
 `;
 
-const Navbar = () => {
+const Navbar = ({ onSportSelect }) => {
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [selectedItems, setSelectedItems] = useState([]);
 
@@ -209,6 +210,12 @@ const Navbar = () => {
     setSelectedItems([...selectedItems, { filterIndex, option }]);
     setActiveDropdown(null);
   };
+  const [selectedSport, setSelectedSport] = useState(null);
+
+  const handleSportSelect = (id) => {
+    setSelectedSport(id);
+    onSportSelect(id);
+  };
 
   return (
     <>
@@ -225,40 +232,40 @@ const Navbar = () => {
       </NavbarContainer>
       <SubmenuContainer>
         <Submenu>
-          <div>
-            <SubmenuItem>축구</SubmenuItem>
-            <SubmenuItem>농구</SubmenuItem>
-            <SubmenuItem>배구</SubmenuItem>
-          </div>
-          <div>
-            <SubmenuItem>배드민턴</SubmenuItem>
-            <SubmenuItem>테니스</SubmenuItem>
-          </div>
-          <div>
-            <SubmenuItem>수영</SubmenuItem>
-            <SubmenuItem>서핑</SubmenuItem>
-          </div>
-          <div>
-            <SubmenuItem>헬스</SubmenuItem>
-            <SubmenuItem>요가</SubmenuItem>
-            <SubmenuItem>필라테스</SubmenuItem>
-          </div>
-          <div>
-            <SubmenuItem>러닝</SubmenuItem>
-            <SubmenuItem>하이킹</SubmenuItem>
-            <SubmenuItem>사이클</SubmenuItem>
-          </div>
-          <div>
+        <div>
+        <SubmenuItem isSelected={selectedSport === 1} onClick={() => handleSportSelect(1)}>축구</SubmenuItem>
+        <SubmenuItem isSelected={selectedSport === 3} onClick={() => handleSportSelect(3)}>농구</SubmenuItem>
+        <SubmenuItem isSelected={selectedSport === 4} onClick={() => handleSportSelect(4)}>배구</SubmenuItem>
+      </div>
+      <div>
+        <SubmenuItem isSelected={selectedSport === 5} onClick={() => handleSportSelect(5)}>배드민턴</SubmenuItem>
+        <SubmenuItem isSelected={selectedSport === 6} onClick={() => handleSportSelect(6)}>테니스</SubmenuItem>
+      </div>
+      <div>
+        <SubmenuItem isSelected={selectedSport === 7} onClick={() => handleSportSelect(7)}>수영</SubmenuItem>
+        <SubmenuItem isSelected={selectedSport === 8} onClick={() => handleSportSelect(8)}>서핑</SubmenuItem>
+      </div>
+      <div>
+        <SubmenuItem isSelected={selectedSport === 9} onClick={() => handleSportSelect(9)}>헬스</SubmenuItem>
+        <SubmenuItem isSelected={selectedSport === 10} onClick={() => handleSportSelect(10)}>요가</SubmenuItem>
+        <SubmenuItem isSelected={selectedSport === 11} onClick={() => handleSportSelect(11)}>필라테스</SubmenuItem>
+      </div>
+      <div>
+        <SubmenuItem isSelected={selectedSport === 12} onClick={() => handleSportSelect(12)}>러닝</SubmenuItem>
+        <SubmenuItem isSelected={selectedSport === 13} onClick={() => handleSportSelect(13)}>하이킹</SubmenuItem>
+        <SubmenuItem isSelected={selectedSport === 14} onClick={() => handleSportSelect(14)}>사이클</SubmenuItem>
+      </div>
+      <div>
             <SubmenuItem>태권도</SubmenuItem>
             <SubmenuItem>펜싱</SubmenuItem>
             <SubmenuItem>양궁</SubmenuItem>
             <SubmenuItem>사격</SubmenuItem>
             <SubmenuItem>피겨</SubmenuItem>
-          </div>
-          <div>
-            <SubmenuItem>댄스</SubmenuItem>
-            <SubmenuItem>클라이밍</SubmenuItem>
-          </div>
+      </div>
+      <div>
+        <SubmenuItem isSelected={selectedSport === 15} onClick={() => handleSportSelect(15)}>댄스</SubmenuItem>
+        <SubmenuItem isSelected={selectedSport === 16} onClick={() => handleSportSelect(16)}>클라이밍</SubmenuItem>
+      </div>
         </Submenu>
       </SubmenuContainer>
       <FilterContainer>

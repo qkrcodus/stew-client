@@ -7,6 +7,7 @@ import TodayTutor from '../components/main/TodayTutor'
 import Advertisement from '../components/main/Advertisement'
 import Reviews from '../components/main/Reviews'
 import styled from 'styled-components'
+import { useState } from 'react'
 
 const MainPageContainer=styled.div`
   width: 100vw;
@@ -16,10 +17,15 @@ const MainPageContainer=styled.div`
 `;
 
 const MainPage = () => {
+  const [selectedSport, setSelectedSport] = useState(null);
+  const handleSportSelect = (id) => {
+    setSelectedSport(id);
+    // 필요한 경우 추가 작업 수행
+  };
   return (
     <MainPageContainer>
     <Header/>
-    <Categories/>
+    <Categories onSportSelect={handleSportSelect}/>
     <TodayTutor/>
     <Advertisement/>
     <Reviews/>

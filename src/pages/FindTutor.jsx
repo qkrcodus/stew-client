@@ -46,17 +46,21 @@ const FindTutor = () => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [tutorData, setTutorData] = useState([]);
+  const [sportsId, setSportsId] = useState(null);
   const handlePageChange = (newPage) => {
     if (newPage > 0 && newPage <= totalPages) {
       setPage(newPage);
     }
   };
-
+  const handleSportSelect = (id) => {
+    setSportsId(id);
+    setPage(1); 
+  };
   useEffect(() => {
     const fetchTutors = async () => {
       try {
         const response = await axios.get(`${BASE_URL}/tutors`, {
-          params: { page }
+          params: { page, sportsId  }
         });
         setTutorData(response.data.data.tutorList);
         setTotalPages(response.data.data.totalPage);
@@ -65,12 +69,12 @@ const FindTutor = () => {
       }
     };
     fetchTutors();
-  }, [page]);
+  }, [page, sportsId]);
   return (
     <>
     <FindTutorContainer>
     <HeaderForPages/>
-    <Navbar/>
+    <Navbar onSportSelect={handleSportSelect} />
     <ShowTutor>
     <PostContainer data={tutorData}  isMyData={false}  />
     </ShowTutor>

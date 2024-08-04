@@ -113,27 +113,28 @@ const TutorDetail = () => {
     console.log("TutorDetail 컴포넌트 렌더링됨");
   return (
     <TutorDetailContainer>
-    <HeaderForPages/>
-    <TutorThumbnail>
-      <TutorImg $imgurl={tutordetail.imgUrl}/>
-      <div>
-        <div>{tutordetail.name} / {tutordetail.sportName}
-          <Space />
-          {Array.from({ length: tutordetail.total_review_score }, (_, index) => (
-            <RatingImage key={index} src={stars} alt="stars" />
-          ))} ({tutordetail.total_review_count})
-        </div>
-        <div>{tutordetail.intro}</div>
-        <div>{tutordetail.price}</div>
-      </div>
-    </TutorThumbnail>
-    <LeftInfo data={tutordetail}/>
-    <RightInfo data={tutordetail}/>
-    <SignupBtn onClick={() => { setModalOpen(true) }}>
-      신청하기
-    </SignupBtn>
-    <ModalForm $isOpen={isModalOpen} $closeModal={closeModal}/>
-  </TutorDetailContainer>
-);
+            <HeaderForPages />
+            <TutorThumbnail>
+                <TutorImg $imgurl={tutordetail.imgUrl} />
+                <div>
+                    <div>{tutordetail.name} / {tutordetail.sportName}
+                        <Space />
+                        {Array.from({ length: tutordetail.total_review_score }, (_, index) => (
+                            <RatingImage key={index} src={stars} alt="stars" />
+                        ))} ({tutordetail.total_review_count})
+                    </div>
+                    <div>{tutordetail.intro}</div>
+                    <div>{tutordetail.price}</div>
+                </div>
+            </TutorThumbnail>
+            <LeftInfo data={tutordetail} />
+            <RightInfo data={tutordetail} />
+            <SignupBtn onClick={() => { setModalOpen(true) }}>
+                신청하기
+            </SignupBtn>
+            <ModalForm  data={tutordetail} isOpen={isModalOpen} onClose={closeModal} />
+        </TutorDetailContainer>
+    );
 }
-export default TutorDetail
+
+export default TutorDetail;
