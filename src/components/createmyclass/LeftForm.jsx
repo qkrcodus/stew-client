@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+
 const LeftFormContainer = styled.div`
   position: absolute;
   top: 45.4rem;
@@ -48,28 +49,26 @@ const TutorSecondLine = styled.div`
   position: absolute;
   top: 32rem;
   left: 4.4rem;
-  & > div{
-  display: flex;
-  width: 28rem;
-  align-items: center;
-  gap: 1.7rem;
+  & > div {
+    display: flex;
+    width: 28rem;
+    align-items: center;
+    gap: 1.7rem;
   }
-  div> div{
-
+  div > div {
   }
-    input {
-      width: 20.4rem;
-      height: 5rem;
-      background: none;
-      color: var(--Sub-Color, #333E5E);
-      font-family: var(--font-family-pretendard);
-      font-size: 2.4rem;
-      font-style: normal;
-      font-weight: 500;
-      line-height: normal;
-      border-radius: 3rem;
-border: 0.1rem solid var(--Sub-Color, #333E5E);
-    }
+  input, select {
+    width: 20.4rem;
+    height: 5rem;
+    background: none;
+    color: var(--Sub-Color, #333E5E);
+    font-family: var(--font-family-pretendard);
+    font-size: 2.4rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    border-radius: 3rem;
+    border: 0.1rem solid var(--Sub-Color, #333E5E);
   }
 `;
 
@@ -132,7 +131,7 @@ const InfoRow = styled.div`
     height: 2.5rem;
     background: #A6A6A6;
   }
- & >input {
+  & > input, & > select {
     color: var(--Sub-Color, #333E5E);
     font-family: var(--font-family-pretendard);
     font-size: 2rem;
@@ -140,11 +139,23 @@ const InfoRow = styled.div`
     font-weight: 500;
     line-height: normal;
     width: 9.3rem;
-    height: 2rem;
+    height: 2.5rem;
     border-radius: 1rem;
     border: 0.1rem solid var(--Sub-Color, #333E5E);
-    padding-left: 2rem;
-    }
+    
+    display: flex;
+    justify-content: center;
+
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    width: 9.3rem;
+    height: 2.5rem;
+    border-radius: 1rem;
+    border: 0.1rem solid
+
+  }
 `;
 
 const Intro1 = styled.div`
@@ -193,7 +204,7 @@ const Intro2 = styled.div`
     left: 3.9rem;
     top: 12.3rem;
   }
-  & > input{
+  & > input {
     width: 51.8rem;
     height: 5rem;
     flex-shrink: 0;
@@ -260,14 +271,16 @@ const BioContainer = styled.div`
 `;
 
 const CharCount = styled.div`
+  color: #A6A6A6;
   text-align: right;
-  color: var(--Sub-Color, #333E5E);
   font-family: var(--font-family-pretendard);
-  font-size: 2rem;
+  font-size: 2.4rem;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 500;
   line-height: normal;
-  margin-top: 0.5rem;
+  position: absolute;
+  top: 27.8rem;
+  left: 48.6rem;
 `;
 
 const SubmitButton = styled.button`
@@ -286,48 +299,54 @@ const SubmitButton = styled.button`
   margin-top: 1rem;
 `;
 
-const LeftForm = ({ onSubmit }) => {
-  // const [formData, setFormData] = useState({
-  //   name: '',
-  //   age: '',
-  //   gender: '',
-  //   location: '',
-  //   type: '',
-  //   price: '',
-  //   experience: '',
-  //   introduction: '',
-  //   bio: '',
-  // });
+const genderOptions = [
+  '남자', '여자'
+];
 
+const locationOptions = [
+  '강남구', '강동구', '강북구', '강서구', '관악구', '광진구', '구로구', '금천구', '노원구', '도봉구', '동대문구', '동작구', '마포구', '서대문구', '서초구', '성동구', '성북구', '송파구', '양천구', '영등포구', '용산구', '은평구', '종로구', '중구', '중랑구'
+];
+
+const sportsOptions = [
+  { value: 1, label: '축구' },
+  { value: 3, label: '농구' },
+  { value: 4, label: '배구' },
+  { value: 5, label: '배드민턴' },
+  { value: 6, label: '테니스' },
+  { value: 7, label: '수영' },
+  { value: 8, label: '서핑' },
+  { value: 9, label: '헬스' },
+  { value: 10, label: '요가' },
+  { value: 11, label: '필라테스' },
+  { value: 12, label: '러닝' },
+  { value: 13, label: '하이킹' },
+  { value: 14, label: '사이클' },
+  { value: 15, label: '댄스' },
+  { value: 16, label: '클라이밍' },
+  // { value: 17, label: '태권도' },
+  // { value: 18, label: '펜싱' },
+  // { value: 19, label: '양궁' },
+  // { value: 20, label: '사격' },
+  // { value: 21, label: '피겨' }
+];
+
+const LeftForm = ({ formData, handleChange }) => {
   const [charCount, setCharCount] = useState(0);
 
-  const handleChange = (e) => {
+  const handleBioChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
+    handleChange(e);
     if (name === 'bio') {
       setCharCount(value.length);
     }
   };
 
-//   const handleSubmit = (e) => {
-//     e.preventDefault();
-//     if (onSubmit) {
-//       onSubmit(formData); 
-//     }
-//   };
-// const handleSvgClick=
   return (
     <LeftFormContainer>
       <TutorDetailContainerLeft>
         <TutorThumbnail>
           <TutorFirstLine>
-            <TutorImg onClick={handleSvgClick}>
-              {/* {imageSrc ? 
-              <img src={imageSrc} alt="업로드된 이미지" style={{width: '100%' ,height: '100%', objectFit='cover'}}/> 
-              : */}
+            <TutorImg>
               <svg xmlns="http://www.w3.org/2000/svg" width="191" height="191" viewBox="0 0 191 191" fill="none">
                 <circle cx="95.5" cy="95.5" r="95.5" fill="#F2F3F5" />
                 <g transform="translate(39 39)">
@@ -337,7 +356,6 @@ const LeftForm = ({ onSubmit }) => {
                   </svg>
                 </g>
               </svg>
-              {/* } */}
             </TutorImg>
             <div>
               <InfoRow>
@@ -353,12 +371,15 @@ const LeftForm = ({ onSubmit }) => {
               <InfoRow>
                 <div>성별</div>
                 <div></div>
-                <input
-                  type="text"
+                <select
                   name="gender"
                   value={formData.gender}
                   onChange={handleChange}
-                />
+                >
+                  {genderOptions.map((option, index) => (
+                    <option key={index} value={option}>{option}</option>
+                  ))}
+                </select>
               </InfoRow>
               <InfoRow>
                 <div>나이</div>
@@ -373,24 +394,30 @@ const LeftForm = ({ onSubmit }) => {
               <InfoRow>
                 <div>지역</div>
                 <div></div>
-                <input
-                  type="text"
+                <select
                   name="location"
                   value={formData.location}
                   onChange={handleChange}
-                />
+                >
+                  {locationOptions.map((option, index) => (
+                    <option key={index} value={option}>{option}</option>
+                  ))}
+                </select>
               </InfoRow>
             </div>
           </TutorFirstLine>
           <TutorSecondLine>
             <div>
               <div>종목</div>
-              <input
-                type="text"
+              <select
                 name="type"
                 value={formData.type}
                 onChange={handleChange}
-              />
+              >
+                {sportsOptions.map((option, index) => (
+                  <option key={index} value={option.value}>{option.label}</option>
+                ))}
+              </select>
             </div>
             <div>
               <div>가격</div>
@@ -434,7 +461,7 @@ const LeftForm = ({ onSubmit }) => {
           <textarea
             name="bio"
             value={formData.bio}
-            onChange={handleChange}
+            onChange={handleBioChange}
             maxLength={140}
             placeholder="자기소개 글을 입력해주세요"
           />

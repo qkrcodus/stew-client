@@ -233,7 +233,7 @@ const PostContainer = ({ data, isMyData, onPageChange, currentPage, totalPages, 
   };
 
   const handlePlusButtonClick = () => {
-    navigate(`/createmyclass`);
+    navigate(`/createmyclass/${userId}`);
   };
 
   const dataWithPlus = isMyData ? [...tutors, { name: 'plus', id: 'plus' }] : tutors;
