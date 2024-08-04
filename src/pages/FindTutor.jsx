@@ -4,6 +4,8 @@ import HeaderForPages from '../components/HeaderForPages'
 import styled from 'styled-components'
 import PostContainer from '../components/postManagement/PostContainer'
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
+
 const FindTutorContainer=styled.div`
     position: relative;
 `
@@ -43,41 +45,48 @@ color: #666;
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const FindTutor = () => {
+  const location = useLocation();
+  const { sportsId } = location.state || {};
+  console.log('잘 받아왔나', sportsId); // 안되는데
+
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [tutorData, setTutorData] = useState([]);
-  const [sportsId, setSportsId] = useState(null);
+  const [selectedSport, setSelectedSport] = useState(sportsId || null);
+
   const handlePageChange = (newPage) => {
     if (newPage > 0 && newPage <= totalPages) {
       setPage(newPage);
     }
   };
   const handleSportSelect = (id) => {
-    setSportsId(id);
-    setPage(1); 
+    setSelectedSport(id);
+    setPage(1);
   };
+ 
   useEffect(() => {
     const fetchTutors = async () => {
       try {
         const response = await axios.get(`${BASE_URL}/tutors`, {
-          params: { page, sportsId  }
+          params: { page, sportsId: selectedSport },
         });
         setTutorData(response.data.data.tutorList);
         setTotalPages(response.data.data.totalPage);
       } catch (error) {
-        console.error("튜터 데이터를 불러오지 못했습니다.", error);
+        console.error('튜터 데이터를 불러오지 못했습니다.', error);
       }
     };
     fetchTutors();
-  }, [page, sportsId]);
+  }, [page, selectedSport]);
+
   return (
     <>
     <FindTutorContainer>
-    <HeaderForPages/>
-    <Navbar onSportSelect={handleSportSelect} />
-    <ShowTutor>
-    <PostContainer data={tutorData}  isMyData={false}  />
-    </ShowTutor>
+    <HeaderForPages />
+      <Navbar onSportSelect={handleSportSelect} selectedSport={selectedSport} />
+      <ShowTutor>
+        <PostContainer data={tutorData} isMyData={false} />
+      </ShowTutor>
     </FindTutorContainer>
        <PaginationContainer>
        <DisabledButton onClick={() => handlePageChange(page - 1)} disabled={page === 1}>

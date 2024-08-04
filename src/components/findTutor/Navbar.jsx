@@ -177,7 +177,7 @@ const SelectedItem = styled.div`
   justify-content: center;
 `;
 
-const Navbar = ({ onSportSelect }) => {
+const Navbar = ({ onSportSelect , selectedSport}) => {
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [selectedItems, setSelectedItems] = useState([]);
 
@@ -210,13 +210,10 @@ const Navbar = ({ onSportSelect }) => {
     setSelectedItems([...selectedItems, { filterIndex, option }]);
     setActiveDropdown(null);
   };
-  const [selectedSport, setSelectedSport] = useState(null);
 
   const handleSportSelect = (id) => {
-    setSelectedSport(id);
     onSportSelect(id);
   };
-
   return (
     <>
     <Navbarwrapper>

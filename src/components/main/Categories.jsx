@@ -35,28 +35,28 @@ const IconLabel = styled.p`
   line-height: normal;
   color: var(--font-color-sub);
 `;
-const Categories = ({ onSportSelect}) => {
-    const icons = [
-        { src: img1, label: '헬스', id:9 },
-        { src: img2, label: '요가', id:10  },
-        { src: img3, label: '필라테스', id:11  },
-        { src: img4, label: '클라이밍', id:16  },
-        { src: img5, label: '사이클', id:14  },
-        { src: img6, label: '테니스', id:6  },
-        { src: img7, label: '더보기' },
-      ];
-   
-  return (
-   <IconListContainer>
-    {icons.map((icon, index) => (
-      <IconItem key={index} 
-      onClick={() => onSportSelect(icon.id)}>
-        <IconImage src={icon.src} alt={icon.label} />
-        <IconLabel>{icon.label}</IconLabel>
-      </IconItem>
-    ))}
-  </IconListContainer>
-  )
-}
 
-export default Categories
+const Categories = ({ onSportSelect }) => {
+  const icons = [
+    { src: img1, label: '헬스', id: 9 },
+    { src: img2, label: '요가', id: 10 },
+    { src: img3, label: '필라테스', id: 11 },
+    { src: img4, label: '클라이밍', id: 16 },
+    { src: img5, label: '사이클', id: 14 },
+    { src: img6, label: '테니스', id: 6 },
+    { src: img7, label: '더보기' },
+  ];
+
+  return (
+    <IconListContainer>
+      {icons.map((icon, index) => (
+        <IconItem key={index} onClick={() => onSportSelect(icon.id)}>
+          <IconImage src={icon.src} alt={icon.label} />
+          <IconLabel>{icon.label}</IconLabel>
+        </IconItem>
+      ))}
+    </IconListContainer>
+  );
+};
+
+export default Categories;
