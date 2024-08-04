@@ -4,7 +4,8 @@ import HeaderForPages from '../HeaderForPages';
 import introImage from '../../assets/images/jogging.png';
 import searchbtn from '../../assets/images/search.png';
 import { useNavigate } from 'react-router-dom';
-
+import { useState } from 'react';
+import axios from 'axios';
 const StyledHeader = styled.div`
   width: 100vw;
   height: 100vh;
@@ -105,7 +106,6 @@ const SearchSection = styled.div`
     border: none;
     width: 100%;
     height: 7.5rem;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     box-sizing: border-box;
     text-align: center;
     line-height: 7.5rem; 
@@ -118,15 +118,18 @@ const SearchSection = styled.div`
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+     z-index: 1001;
     &::placeholder {
       font-size: 2.5rem;
       color: #a5a5a5;
       font-family: var(--font-family-pretendard);
       font-weight: var(--font-weight-bold);
       font-style: normal;
-      text-align: center;
+
       cursor: pointer;
     }
+        outline: none;
+
   }
 
   .search-button {
@@ -135,9 +138,36 @@ const SearchSection = styled.div`
     width: 4rem;
     height: 4rem;
     cursor: pointer;
+    z-index: 1001;
+  }
+
+  .suggestions {
+    position: absolute;
+    top: 4.3rem;
+    width: 100%;
+    background: white;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 0 0 4rem 4rem;
+    z-index: 1000;
+
+  }
+
+  .suggestion-item {
+    padding: 3rem 0 1rem ;
+    cursor: pointer;
+ 
+    font-size: 2.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+     color: #000000;
+    font-family: var(--font-family-pretendard);
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
   }
 `;
-
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 const Header = () => {
   const navigate = useNavigate();
 
@@ -145,28 +175,74 @@ const Header = () => {
     navigate('/test');
   };
   const handleTutorClick=()=>{
-    navigate('/findtutor');
+    navigate('/findtutor', { state: { sportsId: selectedSport } });
   }
+  //검색창 
+  const [query, setQuery] = useState('');
+  const [suggestions, setSuggestions] = useState([]);
+  const [selectedSport, setSelectedSport] = useState(null);
+
+  const handleInputChange = async (e) => {
+    const value = e.target.value;
+    setQuery(value);
+
+    if (value.length >= 1) {
+      try {
+        const response = await axios.get(`${BASE_URL}/sports`, {
+          params: { kw: value }
+        });
+        setSuggestions(response.data.data.sportsList);
+      } catch (error) {
+        console.error('스포츠 자동검색 실패', error);
+      }
+    } else {
+      setSuggestions([]);
+    }
+  };
+
+  const handleSuggestionClick = (sport) => {
+    setQuery(sport.name);
+    setSelectedSport(sport.sports_id);
+    setSuggestions([]);
+  };
   return (
     <StyledHeader>
-      <HeaderForPages />
-      <IntroSection>
-        <h1>AI 맞춤형 운동추천부터<br />스포츠 튜터 매칭까지 한 번에</h1>
-        <div className="buttons">
-          <button className="btn-left" onClick={handleTestClick}>테스트 하러가기</button>
-          <button className="btn-right" onClick={handleTutorClick}>튜터 둘러보기</button>
-        </div>
-        <img src={introImage} alt="Intro" />
-      </IntroSection>
-      <SearchSection>
-        <h2>어떤 운동을 찾고 계세요?</h2>
-        <div className="search-bar">
-          <input type="text" placeholder="원하시는 운동명을 입력하세요" />
-          <img src={searchbtn} className="search-button" alt="search"/>
-        </div>
-      </SearchSection>
-    </StyledHeader>
-  );
+    <HeaderForPages />
+    <IntroSection>
+      <h1>AI 맞춤형 운동추천부터<br />스포츠 튜터 매칭까지 한 번에</h1>
+      <div className="buttons">
+        <button className="btn-left" onClick={handleTestClick}>테스트 하러가기</button>
+        <button className="btn-right" onClick={handleTutorClick}>튜터 둘러보기</button>
+      </div>
+      <img src={introImage} alt="Intro" />
+    </IntroSection>
+    <SearchSection>
+      <h2>어떤 운동을 찾고 계세요?</h2>
+      <div className="search-bar">
+        <input 
+          type="text" 
+          placeholder="원하시는 운동명을 입력하세요" 
+          value={query}
+          onChange={handleInputChange}
+        />
+        <img src={searchbtn} className="search-button" alt="search" onClick={handleTutorClick} />
+        {suggestions.length > 0 && (
+          <div className="suggestions">
+            {suggestions.map((sport) => (
+              <div 
+                key={sport.sports_id} 
+                className="suggestion-item"
+                onClick={() => handleSuggestionClick(sport)}
+              >
+                {sport.name}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </SearchSection>
+  </StyledHeader>
+);
 }
 
 export default Header;
