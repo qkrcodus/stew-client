@@ -8,7 +8,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import axios from 'axios';
-
+import { useNavigate } from 'react-router-dom';
 const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const StyledBox = styled.div`
@@ -74,7 +74,7 @@ const StyledBox = styled.div`
     color: #333e5e;
     font-family: var(--font-family-pretendard);
     font-size: 2.8rem;
-    font-weight: 500;
+    font-weight: 700;
     letter-spacing: 0;
     line-height: normal;
     text-align: center;
@@ -164,7 +164,6 @@ const CarouselContainer = styled.div`
   align-items: center;
   width: 100%;
   height: auto;
-
 .swiper-scrollbar {
     display: none; 
   }
@@ -216,7 +215,7 @@ const Box = ({ tutor }) => {
 };
 
 const Carousel = () => {
-
+  const navigate = useNavigate();
 
     const [todayTutors, setTodayTutors] = useState([]);
   
@@ -259,7 +258,8 @@ const Carousel = () => {
         >
           {todayTutors.map((tutor) => (
             <SwiperSlide 
-            style={{display: 'flex', justifyContent: 'center'}}key={tutor.tutorId}>
+            onClick={() => navigate(`/tutordetail/${tutor.tutorId}`)}
+            style={{display: 'flex', justifyContent: 'center', cursor:'pointer'}}key={tutor.tutorId}>
               <Box tutor={tutor} />
             </SwiperSlide>
           ))}

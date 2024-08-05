@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import stars from '../../assets/images/star-fill.png';
-
+import person from '../../assets/images/person-fill.png';
 const ReviewContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -22,16 +23,20 @@ const ReviewBox = styled.div`
   &:nth-child(even) {
     margin-top: -7.7rem;
   }
+  cursor: pointer;
 `;
 
 const Profile = styled.div`
   width: 8rem;
   height: 8rem;
   border-radius: 50%;
-  background-color: #d9d9d9;
+  background-color: #F2F3F5;
   position: absolute;
   top: 3.9rem;
   left: 4rem;
+   display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const ReviewerName = styled.div`
@@ -104,9 +109,15 @@ const ReviewContent = styled.div`
     text-decoration: underline;
   }
   line-height: 1.2;
+  
 `;
+const ProfileImage = styled.img`
+  width: 6rem;
+  height: 6rem;
+`
 
 const ReviewList = () => {
+  const navigate = useNavigate();
   const Reviews = [
     {
       reviewer: "신유정",
@@ -115,7 +126,8 @@ const ReviewList = () => {
       class: "런닝",
       age: 23,
       rating: 5,
-      review: "처음에는 다이어트 목적으로 박지민 튜터님의 런닝 클래스를 신청했습니다. 3달간 튜터님과 달리면서 건강한 체중감량은 이루었고 무엇보다 런닝이라는 걱정"
+      review: "처음에는 다이어트 목적으로 박지민 튜터님의 런닝 클래스를 신청했습니다. 3달간 튜터님과 달리면서 건강한 체중감량은 이루었고 무엇보다 런닝이라는 걱정",
+      link: "/tutordetail/19"
     },
     {
       reviewer: "고영명",
@@ -124,16 +136,18 @@ const ReviewList = () => {
       class: "수영",
       age: 23,
       rating: 5,
-      review: "원래 물을 무서워했는데, 숭실님에게 수영을 배우고 수영에 입문하게 되었어요! 앞으로 꾸준히 수업 받고 이번 여름에 바다에서 수영하고 싶어요. 게다가 제"
+      review: "원래 물을 무서워했는데, 숭실님에게 수영을 배우고 수영에 입문하게 되었어요! 앞으로 꾸준히 수업 받고 이번 여름에 바다에서 수영하고 싶어요. 게다가 제",
+      link: "/tutordetail/21"
     },
     {
       reviewer: "유태연",
       location: "동작구",
-      name: "이사자",
+      name: "박준호",
       class: "테니스",
       age: 21,
       rating: 5,
-      review: "테니스에 예전부터 관심을 가지고 있었는데, 남자 회원들과 즐겁게 테니스를 배우면서 친구도 만나게 되었습니다. 특히 사자가 튜터님을 만나게 되어 정말 행복"
+      review: "테니스에 예전부터 관심을 가지고 있었는데, 남자 회원들과 즐겁게 테니스를 배우면서 친구도 만나게 되었습니다. 특히 사자가 튜터님을 만나게 되어 정말 행복",
+      link: "/tutordetail/16"
     },
     {
       reviewer: "이상은",
@@ -142,15 +156,18 @@ const ReviewList = () => {
       class: "요가",
       age: 22,
       rating: 5,
-      review: "처음에는 단순히 취미 운동을 만들고 싶어서 도전하게 된 튜터링이었는데, 재혁쌤이 지금 제 몸 상태에 필요한 요가 자세를 알맞게 가르쳐주셔서 건강까지 "
+      review: "처음에는 단순히 취미 운동을 만들고 싶어서 도전하게 된 튜터링이었는데, 재혁쌤이 지금 제 몸 상태에 필요한 요가 자세를 알맞게 가르쳐주셔서 건강까지 ",
+      link: "/tutordetail/14"
     }
   ];
 
   return (
     <ReviewContainer>
       {Reviews.map((review, index) => (
-        <ReviewBox key={index}>
-          <Profile />
+        <ReviewBox key={index}  onClick={() => navigate(review.link)}>
+             <Profile>
+             <ProfileImage src={person} alt="Profile" />
+             </Profile>
           <ReviewerName>{review.reviewer}</ReviewerName>
           <ReviewerLocation>{review.location},{review.age}세</ReviewerLocation>
           <RatingStars>

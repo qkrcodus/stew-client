@@ -27,13 +27,13 @@ const NavItem = styled.div`
   display: flex;
   justify-content: space-evenly;
   flex-shrink: 0;
-  color: #a6a6a6;
   text-align: center;
   font-family: Pretendard;
   font-size: 2.8rem;
   font-weight: 700;
   line-height: normal;
   cursor: pointer;
+  color: ${({isSelected})=>(isSelected ?  '#333e5e' : '#a6a6a6')}
 `;
 
 const SubmenuContainer = styled.div`
@@ -218,7 +218,7 @@ const Navbar = ({ onSportSelect , selectedSport}) => {
     <>
     <Navbarwrapper>
       <NavbarContainer>
-        <NavItem>전체보기</NavItem>
+        <NavItem isSelected={selectedSport===null} onClick={() => handleSportSelect(null)}>전체보기</NavItem>
         <NavItem>구기 종목</NavItem>
         <NavItem>라켓 스포츠</NavItem>
         <NavItem>수상 스포츠</NavItem>
@@ -253,11 +253,11 @@ const Navbar = ({ onSportSelect , selectedSport}) => {
         <SubmenuItem isSelected={selectedSport === 14} onClick={() => handleSportSelect(14)}>사이클</SubmenuItem>
       </div>
       <div>
-            <SubmenuItem>태권도</SubmenuItem>
-            <SubmenuItem>펜싱</SubmenuItem>
-            <SubmenuItem>양궁</SubmenuItem>
-            <SubmenuItem>사격</SubmenuItem>
-            <SubmenuItem>피겨</SubmenuItem>
+            <SubmenuItem isSelected={selectedSport === 17} onClick={() => handleSportSelect(17)}>태권도</SubmenuItem>
+            <SubmenuItem isSelected={selectedSport === 18} onClick={() => handleSportSelect(18)}>펜싱</SubmenuItem>
+            <SubmenuItem isSelected={selectedSport === 19} onClick={() => handleSportSelect(19)}>양궁</SubmenuItem>
+            <SubmenuItem isSelected={selectedSport === 20} onClick={() => handleSportSelect(20)}>사격</SubmenuItem>
+            <SubmenuItem isSelected={selectedSport === 21} onClick={() => handleSportSelect(21)}>피겨</SubmenuItem>
       </div>
       <div>
         <SubmenuItem isSelected={selectedSport === 15} onClick={() => handleSportSelect(15)}>댄스</SubmenuItem>

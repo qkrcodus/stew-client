@@ -10,10 +10,13 @@ import FindTutor from './pages/FindTutor';
 import TutorDetail from './pages/TutorDetail';
 import MyDetail from './pages/MyDetail';
 import CreateMyClass from './pages/CreateMyClass';
+import ScrollToTop from './ScrollToTop';
 const App = () => {
   return (
     <>
+    <ScrollToTop />
       <Routes>
+        
         <Route path="/" element={<MainPage/>} />
         <Route path="/test" element={<Test />} />
         <Route path="/testfinish" element={<TestFinish />} />
