@@ -253,11 +253,11 @@ const Navbar = ({ onSportSelect , selectedSport}) => {
         <SubmenuItem isSelected={selectedSport === 14} onClick={() => handleSportSelect(14)}>사이클</SubmenuItem>
       </div>
       <div>
-            <SubmenuItem isSelected={selectedSport === 12} onClick={() => handleSportSelect(12)}>태권도</SubmenuItem>
-            <SubmenuItem isSelected={selectedSport === 12} onClick={() => handleSportSelect(12)}>펜싱</SubmenuItem>
-            <SubmenuItem isSelected={selectedSport === 12} onClick={() => handleSportSelect(12)}>양궁</SubmenuItem>
-            <SubmenuItem isSelected={selectedSport === 12} onClick={() => handleSportSelect(12)}>사격</SubmenuItem>
-            <SubmenuItem isSelected={selectedSport === 12} onClick={() => handleSportSelect(12)}>피겨</SubmenuItem>
+            <SubmenuItem isSelected={selectedSport === 17} onClick={() => handleSportSelect(17)}>태권도</SubmenuItem>
+            <SubmenuItem isSelected={selectedSport === 18} onClick={() => handleSportSelect(18)}>펜싱</SubmenuItem>
+            <SubmenuItem isSelected={selectedSport === 19} onClick={() => handleSportSelect(19)}>양궁</SubmenuItem>
+            <SubmenuItem isSelected={selectedSport === 20} onClick={() => handleSportSelect(20)}>사격</SubmenuItem>
+            <SubmenuItem isSelected={selectedSport === 21} onClick={() => handleSportSelect(21)}>피겨</SubmenuItem>
       </div>
       <div>
         <SubmenuItem isSelected={selectedSport === 15} onClick={() => handleSportSelect(15)}>댄스</SubmenuItem>
