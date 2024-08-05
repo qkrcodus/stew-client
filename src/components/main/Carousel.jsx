@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { EffectCoverflow, Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
+import {  Autoplay, EffectCoverflow, Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/effect-coverflow';
 import 'swiper/css/navigation';
@@ -164,11 +164,21 @@ const CarouselContainer = styled.div`
   align-items: center;
   width: 100%;
   height: auto;
-  overflow: hidden;
-  ::-webkit-scrollbar {
-    display: none;
+
+.swiper-scrollbar {
+    display: none; 
   }
+.swiper-slide-shadow-right {
+  background-color: #6ba6ffcc;
+}
+
+.swiper-slide-shadow-left {
+  background-color: #6ba6ffcc;
+}
+
 `;
+
+
 
 const Box = ({ tutor }) => {
   const formattedCareer = tutor.career.split(',').map((line, index) => (
@@ -206,48 +216,55 @@ const Box = ({ tutor }) => {
 };
 
 const Carousel = () => {
-  const [todayTutors, setTodayTutors] = useState([]);
 
-  useEffect(() => {
-    const fetchTodayTutors = async () => {
-      try {
-        const response = await axios.get(`${BASE_URL}/tutors/today-tutor`);
-        setTodayTutors(response.data.data);
-      } catch (error) {
-        console.error('오늘의 튜터 데이터를 불러오지 못했습니다.', error);
-      }
-    };
-    fetchTodayTutors();
-  }, []);
 
-  return (
-    <CarouselContainer>
-      <Swiper
-        modules={[EffectCoverflow, Navigation, Pagination, Scrollbar, A11y]}
-        effect="coverflow"
-        grabCursor={true}
-        centeredSlides={true}
-        slidesPerView="auto"
-        coverflowEffect={{
-          rotate: 50,
-          stretch: 0,
-          depth: 100,
-          modifier: 1,
-          slideShadows: true,
-        }}
-        navigation
-        pagination={{ clickable: true }}
-        scrollbar={{ draggable: true }}
-        style={{ width: '80%', paddingTop: '2rem', paddingBottom: '2rem' }}
-      >
-        {todayTutors.map((tutor) => (
-          <SwiperSlide key={tutor.tutorId}>
-            <Box tutor={tutor} />
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    </CarouselContainer>
-  )
-}
-
-export default Carousel;
+    const [todayTutors, setTodayTutors] = useState([]);
+  
+    useEffect(() => {
+      const fetchTodayTutors = async () => {
+        try {
+          const response = await axios.get(`${BASE_URL}/tutors/today-tutor`);
+          setTodayTutors(response.data.data);
+        } catch (error) {
+          console.error('오늘의 튜터 데이터를 불러오지 못했습니다.', error);
+        }
+      };
+      fetchTodayTutors();
+    }, []);
+  
+    return (
+      <CarouselContainer>
+        <Swiper
+          modules={[EffectCoverflow, Navigation, Pagination, Scrollbar, A11y, Autoplay]}
+          effect="coverflow"
+          grabCursor={true}
+          centeredSlides={true}
+          slidesPerView="auto"
+          autoplay={{
+            delay: 4000,
+            disableOnInteraction: false
+          }}
+          coverflowEffect={{
+            rotate: 50,
+            stretch: 0,
+            depth: 100,
+            modifier: 1,
+            slideShadows: true,
+          }}
+          navigation
+          pagination={{ clickable: true }}
+          scrollbar={{ draggable: true }}
+          style={{ width: '70%', paddingTop: '2rem', paddingBottom: '4rem' }}
+        >
+          {todayTutors.map((tutor) => (
+            <SwiperSlide 
+            style={{display: 'flex', justifyContent: 'center'}}key={tutor.tutorId}>
+              <Box tutor={tutor} />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </CarouselContainer>
+    )
+  }
+  
+  export default Carousel;
