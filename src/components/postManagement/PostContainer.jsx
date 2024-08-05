@@ -154,7 +154,7 @@ const Price = styled.div`
     color: var(--Sub-Color, #333E5E);
     text-align: center;
     font-family: Pretendard;
-    font-size: 2rem;
+    font-size: 2.4rem;
     font-style: normal;
     font-weight: 600;
     line-height: normal;

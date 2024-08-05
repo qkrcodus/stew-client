@@ -60,7 +60,7 @@ export const resultdata = [
             }
         ],
         imgUrl: typeImg1111
-    },
+        ,sportId: [9,14]    },
     {
         id: 1121,
         type: "배려심 많은 프로 도움러",
@@ -90,6 +90,7 @@ export const resultdata = [
             }
         ],
         imgUrl: typeImg1121
+        ,sportId: [10,11]
     },
     {
         id: 1221,
@@ -120,6 +121,7 @@ export const resultdata = [
             }
         ],
         imgUrl: typeImg1221
+        ,sportId: [16,10]
     },
     {
         id: 1211,
@@ -150,6 +152,7 @@ export const resultdata = [
             }
         ],
         imgUrl: typeImg1211
+        ,sportId: [14,11]
     },
     {
         id: 1112,
@@ -180,6 +183,7 @@ export const resultdata = [
             }
         ],
         imgUrl: typeImg1112
+        ,sportId: [16, 13]
     },
     {
         id: 1122,
@@ -210,6 +214,7 @@ export const resultdata = [
             }
         ],
         imgUrl: typeImg1122
+        ,sportId: [13, 14]
     },
     {
         id: 1222,
@@ -240,6 +245,7 @@ export const resultdata = [
             }
         ],
         imgUrl: typeImg1222
+        ,sportId: [6,11]
     },
     {
         id: 1212,
@@ -270,6 +276,7 @@ export const resultdata = [
             }
         ],
         imgUrl: typeImg1212
+        ,sportId: [16,14]
     },
     {
         id: 2111,
@@ -300,6 +307,7 @@ export const resultdata = [
             }
         ],
         imgUrl: typeImg2111
+        ,sportId: [6,9]
     },
     {
         id: 2121,
@@ -330,6 +338,7 @@ export const resultdata = [
             }
         ],
         imgUrl: typeImg2121
+        ,sportId: [1,5]
     },
     {
         id: 2221,
@@ -360,6 +369,7 @@ export const resultdata = [
             }
         ],
         imgUrl: typeImg2221
+        ,sportId: [6,11]
     },
     {
         id: 2211,
@@ -390,6 +400,7 @@ export const resultdata = [
             }
         ],
         imgUrl: typeImg2211
+        ,sportId: [16,12]
     },
     {
         id: 2112,
@@ -420,6 +431,7 @@ export const resultdata = [
             }
         ],
         imgUrl: typeImg2112
+        ,sportId: [3,16]
     },
     {
         id: 2122,
@@ -450,6 +462,7 @@ export const resultdata = [
             }
         ],
         imgUrl: typeImg2122
+        ,sportId: [1,15]
     },
     {
         id: 2212,
@@ -480,6 +493,7 @@ export const resultdata = [
             }
         ],
         imgUrl: typeImg2212
+        ,sportId: [6,16]
     },
     {
         id: 2222,
@@ -510,6 +524,7 @@ export const resultdata = [
             }
         ],
         imgUrl: typeImg2222
+        ,sportId: [13, 15]
     }
 ];
 

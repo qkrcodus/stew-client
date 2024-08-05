@@ -3,6 +3,9 @@ import HeaderForPages from '../components/HeaderForPages'
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
 import resultdata from '../data/resultdata';
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import axios from 'axios'
 const TestFinishContainer=styled.div`
     position: relative;
     display: flex;
@@ -10,22 +13,155 @@ const TestFinishContainer=styled.div`
     align-items: center;
     height: 245.5rem;
 `
-// const CenteredContainer = styled.div`
-//   position: absolute;
-//   top: 58.6rem;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   justify-content: center;
-//   text-align: center;
-//   h2{
-//     font-family: var(--font-family-pretendard);
-//     font-size: 3.6rem;
-//     font-weight: var(--font-weight-bold);
-//     text-align: center;
-//     color: var(--font-color-sub);
-//   }
-// `;
+const BoxContent = styled.div`
+  position: relative;
+`;
+
+const Rectangle = styled.div`
+  border: 0.3rem solid;
+  border-color: #6ba6ff;
+  border-radius: 3.731rem;
+  box-shadow: 0px 0px 1.492rem #333e5e4c;
+  height: 32.9rem;
+  left: 0;
+  top: 0;
+  width: 37.9rem;
+`;
+
+const Thumbnail = styled.div`
+  position: absolute;
+  top: 3.4rem;
+  left: 3.77rem;
+  width: 10.2rem; 
+  height: 14.4rem; 
+  flex-shrink: 0;
+  border-radius: 3rem; 
+  background-image: url(${(props) => props.$imgurl});
+  background-size: cover;
+    background-position: center;
+  background-repeat: no-repeat;
+`;
+
+const Name1 = styled.div`
+  position: absolute;
+  top: 3.7rem;
+  left: 15.67rem;
+  border-radius: 3rem;
+  color: var(--Sub-Color, #333e5e);
+  font-family: Pretendard;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  display: flex;
+  align-items: center;
+  gap: 5.7rem;
+`;
+
+const Type = styled.span`
+  width: 8.1rem;
+  height: 3.4323rem; 
+  flex-shrink: 0;
+  border-radius: 2.2384rem; 
+  background: var(--Main-Color, #6ba6ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--Sub-Color, #333E5E);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+`;
+
+const Info = styled.div`
+  position: absolute;
+  top: 6.9rem;
+  left: 15.87rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--Sub-Color, #333e5e);
+  font-family: Pretendard;
+  font-size: 2rem; 
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+`;
+
+const RatingContainer = styled.div`
+  position: absolute;
+  top: 15.4rem;
+  left: 15.57rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; 
+  div {
+    color: var(--Sub-Color, #333E5E);
+    font-family: Pretendard;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;    
+  }
+`;
+
+const RatingImage = styled.img`
+  width: 2.4rem;
+  height: 2.4rem;
+`;
+
+const Line = styled.div`
+  width: 31.0611rem; 
+  height: 0.2rem;
+  background: #A6A6A6;
+  position: absolute;
+  top: 19.8rem;
+  left: 50%; 
+  transform: translateX(-50%);
+`;
+
+const Comment = styled.div`
+  position: absolute;
+  top: 21.4rem;
+  display: flex;
+  div { 
+    width: 29.258rem;
+    height: 4.9246rem; 
+  }
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  color: var(--Sub-Color, #333E5E);
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 2rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+`;
+
+const Price = styled.div`
+  position: absolute;
+  top: 27.9rem;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  div {
+    color: var(--Sub-Color, #333E5E);
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 2.4rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+`;
+
 const TypeResult=styled.div`
 position: absolute;
 top: 25rem;
@@ -217,6 +353,10 @@ position: absolute;
 top: 196.2rem;
 display: flex;
 justify-content: center;
+    display: flex;
+    flex-direction: column;
+    gap: 8rem;
+    align-items: center;
 `
 const TwoTutorTitle=styled.div`
 color: var(--Main-Color, #6BA6FF);
@@ -227,8 +367,11 @@ font-weight: 700;
 line-height: normal;
 `
 const TwoTutorContainer=styled.div`
+display: flex;
+gap: 6rem;
+cursor: pointer;
 `
-
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 const TestFinish = () => {
   // TestContent로 받아온 쿼리파라미터 속 정보 찾아주는 훅
   const location = useLocation();
@@ -239,76 +382,130 @@ const TestFinish = () => {
   const resultId = answers.join('');
   const result = resultdata.find(data => data.id === parseInt(resultId, 10));
   console.log(result);
+  // 2개의 sport id 받아옴
+  const [sportsId1, sportsId2] = result.sportId
+  //라우팅
+  const navigate = useNavigate();
 
+ 
+  const [tutorData, setTutorData] = useState([]);
+  const [error, setError] = useState(null);
+  useEffect(() => {
+    const fetchTutors = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/test/tutors`, {
+          params: {
+            sportsId1,
+            sportsId2
+          }
+        });
+        setTutorData(response.data.data);
+      } catch (error) {
+        setError('Failed to load tutors');
+      }
+    };
+
+    fetchTutors();
+  }, [sportsId1, sportsId2]);
+
+  const handleBoxClick = (tutorId) => {
+    navigate(`/tutordetail/${tutorId}`);
+  };
   return (
     <TestFinishContainer>
-      <HeaderForPages />
-      {/* 2초 로딩후 
-      <CenteredContainer>
-      <h2>당신의 운동 유형을 분석하고 있어요</h2>
-      </CenteredContainer> */}
-      <TypeResult>
-        <TypeIcon imgUrl={result.imgUrl} />
-        <TypeContent>
-          <Content1>
-            당신은 {result.type} 유형입니다
-          </Content1>
-          <Content2>
-            {result.description}
-          </Content2>
-          <HashTag>
-            <FirstTag>
-              # {result.tag[0]}
-            </FirstTag>
-            <SecondTag>
-              # {result.tag[1]}
-            </SecondTag>
-          </HashTag>
-        </TypeContent>
-      </TypeResult>
-      <Tips>
-        <svg xmlns="http://www.w3.org/2000/svg" width="7.1rem" height="12.6rem" viewBox="0 0 71 126" fill="none">
+    <HeaderForPages />
+    <TypeResult>
+      <TypeIcon imgUrl={result.imgUrl} />
+      <TypeContent>
+        <Content1>
+          당신은 {result.type} 유형입니다
+        </Content1>
+        <Content2>
+          {result.description}
+        </Content2>
+        <HashTag>
+          <FirstTag>
+            # {result.tag[0]}
+          </FirstTag>
+          <SecondTag>
+            # {result.tag[1]}
+          </SecondTag>
+        </HashTag>
+      </TypeContent>
+    </TypeResult>
+    <Tips>
+    <svg xmlns="http://www.w3.org/2000/svg" width="7.1rem" height="12.6rem" viewBox="0 0 71 126" fill="none">
           <path d="M24.3387 0.44828L28.4989 3.94828L33.9989 2.94828L38.4989 5.94828L43.9989 4.94828L47.9989 7.94828L53.0002 6.4483L56.5001 9.44831L62 7.94828L65.5 10.9483L70.6824 10.2536L46.3439 125.286L0.000228345 115.481L24.3387 0.44828Z" fill="#D9D9D9"/>
         </svg>
-        <TipTitle>당신을 위한 운동꿀팁!</TipTitle>
-        <TipContainer>
-          <Tip>1. {result.tips[0]}</Tip>
-          <Tip>2. {result.tips[1]}</Tip>
-          <Tip>3. {result.tips[2]}</Tip>
-          <Tip>4. {result.tips[3]}</Tip>
-        </TipContainer> 
-      </Tips>
-      <ThreeSports>
-        <Title>이런 운동은 어때요?</Title>
-        <Sport1>
-          <Img imgUrl={result.exercises[0].imgUrl} />
-          <Container>
-            <Name>{result.exercises[0].name}</Name>
-            <Content>{result.exercises[0].description}</Content>
-          </Container>
-        </Sport1>
-        <Sport2>
-          <Img imgUrl={result.exercises[1].imgUrl} />
-          <Container>
-            <Name>{result.exercises[1].name}</Name>
-            <Content>{result.exercises[1].description}</Content>
-          </Container>
-        </Sport2>
-        <Sport3>
-          <Img imgUrl={result.exercises[2].imgUrl} />
-          <Container>
-            <Name>{result.exercises[2].name}</Name>
-            <Content>{result.exercises[2].description}</Content>
-          </Container>
-        </Sport3>
-      </ThreeSports>
-      <TwoTutor>
-        <TwoTutorTitle>당신에게 추천하는 스포츠 튜터!</TwoTutorTitle>
-        <TwoTutorContainer>
-        </TwoTutorContainer>
-      </TwoTutor>
-    </TestFinishContainer>
-  )
-}
+      <TipTitle>당신을 위한 운동꿀팁!</TipTitle>
+      <TipContainer>
+        <Tip>1. {result.tips[0]}</Tip>
+        <Tip>2. {result.tips[1]}</Tip>
+        <Tip>3. {result.tips[2]}</Tip>
+        <Tip>4. {result.tips[3]}</Tip>
+      </TipContainer>
+    </Tips>
+    <ThreeSports>
+      <Title>이런 운동은 어때요?</Title>
+      <Sport1>
+        <Img imgUrl={result.exercises[0].imgUrl} />
+        <Container>
+          <Name>{result.exercises[0].name}</Name>
+          <Content>{result.exercises[0].description}</Content>
+        </Container>
+      </Sport1>
+      <Sport2>
+        <Img imgUrl={result.exercises[1].imgUrl} />
+        <Container>
+          <Name>{result.exercises[1].name}</Name>
+          <Content>{result.exercises[1].description}</Content>
+        </Container>
+      </Sport2>
+      <Sport3>
+        <Img imgUrl={result.exercises[2].imgUrl} />
+        <Container>
+          <Name>{result.exercises[2].name}</Name>
+          <Content>{result.exercises[2].description}</Content>
+        </Container>
+      </Sport3>
+    </ThreeSports>
+    <TwoTutor>
+      <TwoTutorTitle>당신에게 추천하는 스포츠 튜터!</TwoTutorTitle>
+      <TwoTutorContainer>
+        {tutorData.map((box) => {
+          const [careerBeforeComma, careerAfterComma] = box.career.split(',');
+          return (
+            <Rectangle key={box.tutorId} onClick={() => handleBoxClick(box.tutorId)}>
+              <BoxContent>
+                <Thumbnail $imgurl={box.imgUrl} />
+                <Name1>{box.name}<Type>{box.sportName}</Type></Name1>
+                <Info>
+                  <div>{box.location}</div>
+                  <div>{careerBeforeComma}</div>
+                  <div>{careerAfterComma}</div>
+                </Info>
+                <RatingContainer>
+                  {Array.from({ length: box.score }, (_, index) => (
+                    <RatingImage key={index} src={stars} alt="stars" />
+                  ))}
+                  <div>({box.reviewCount})</div>
+                </RatingContainer>
+                <Line />
+                <Comment>
+                  <div>
+                    {box.intro.length > 32 ? `${box.intro.substring(0, 30)} ...` : box.intro}
+                  </div>
+                </Comment>
+                <Price><div>{box.price}~</div></Price>
+              </BoxContent>
+            </Rectangle>
+          );
+        })}
+      </TwoTutorContainer>
+      {error && <div>{error}</div>}
+    </TwoTutor>
+  </TestFinishContainer>
+);
+};
 
-export default TestFinish
+export default TestFinish;

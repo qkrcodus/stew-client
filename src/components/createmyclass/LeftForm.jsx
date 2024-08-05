@@ -343,133 +343,139 @@ const LeftForm = ({ formData, handleChange }) => {
 
   return (
     <LeftFormContainer>
-      <TutorDetailContainerLeft>
-        <TutorThumbnail>
-          <TutorFirstLine>
-            <TutorImg>
-              <svg xmlns="http://www.w3.org/2000/svg" width="191" height="191" viewBox="0 0 191 191" fill="none">
-                <circle cx="95.5" cy="95.5" r="95.5" fill="#F2F3F5" />
-                <g transform="translate(39 39)">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="113" height="113" viewBox="0 0 113 113" fill="none">
-                    <path d="M9.9375 112.375C9.9375 112.375 0.625 112.375 0.625 103.062C0.625 93.75 9.9375 65.8125 56.5 65.8125C103.062 65.8125 112.375 93.75 112.375 103.062C112.375 112.375 103.062 112.375 103.062 112.375H9.9375Z" fill="#A6A6A6"/>
-                    <path d="M56.5 56.5C71.9295 56.5 84.4375 43.992 84.4375 28.5625C84.4375 13.133 71.9295 0.625 56.5 0.625C41.0705 0.625 28.5625 13.133 28.5625 28.5625C28.5625 43.992 41.0705 56.5 56.5 56.5Z" fill="#A6A6A6"/>
-                  </svg>
-                </g>
-              </svg>
-            </TutorImg>
-            <div>
-              <InfoRow>
-                <div>닉네임</div>
-                <div></div>
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                />
-              </InfoRow>
-              <InfoRow>
-                <div>성별</div>
-                <div></div>
-                <select
-                  name="gender"
-                  value={formData.gender}
-                  onChange={handleChange}
-                >
-                  {genderOptions.map((option, index) => (
-                    <option key={index} value={option}>{option}</option>
-                  ))}
-                </select>
-              </InfoRow>
-              <InfoRow>
-                <div>나이</div>
-                <div></div>
-                <input
-                  type="number"
-                  name="age"
-                  value={formData.age}
-                  onChange={handleChange}
-                />
-              </InfoRow>
-              <InfoRow>
-                <div>지역</div>
-                <div></div>
-                <select
-                  name="location"
-                  value={formData.location}
-                  onChange={handleChange}
-                >
-                  {locationOptions.map((option, index) => (
-                    <option key={index} value={option}>{option}</option>
-                  ))}
-                </select>
-              </InfoRow>
-            </div>
-          </TutorFirstLine>
-          <TutorSecondLine>
-            <div>
-              <div>종목</div>
-              <select
-                name="type"
-                value={formData.type}
-                onChange={handleChange}
-              >
-                {sportsOptions.map((option, index) => (
-                  <option key={index} value={option.value}>{option.label}</option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <div>가격</div>
+    <TutorDetailContainerLeft>
+      <TutorThumbnail>
+        <TutorFirstLine>
+          <TutorImg>
+            <svg xmlns="http://www.w3.org/2000/svg" width="191" height="191" viewBox="0 0 191 191" fill="none">
+              <circle cx="95.5" cy="95.5" r="95.5" fill="#F2F3F5" />
+              <g transform="translate(39 39)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="113" height="113" viewBox="0 0 113 113" fill="none">
+                  <path d="M9.9375 112.375C9.9375 112.375 0.625 112.375 0.625 103.062C0.625 93.75 9.9375 65.8125 56.5 65.8125C103.062 65.8125 112.375 93.75 112.375 103.062C112.375 112.375 103.062 112.375 103.062 112.375H9.9375Z" fill="#A6A6A6"/>
+                  <path d="M56.5 56.5C71.9295 56.5 84.4375 43.992 84.4375 28.5625C84.4375 13.133 71.9295 0.625 56.5 0.625C41.0705 0.625 28.5625 13.133 28.5625 28.5625C28.5625 43.992 41.0705 56.5 56.5 56.5Z" fill="#A6A6A6"/>
+                </svg>
+              </g>
+            </svg>
+          </TutorImg>
+          <div>
+            <InfoRow>
+              <div>닉네임</div>
+              <div></div>
               <input
                 type="text"
-                name="price"
-                value={formData.price}
+                name="name"
+                value={formData.name}
                 onChange={handleChange}
-                placeholder=""
               />
-            </div>
-          </TutorSecondLine>
-        </TutorThumbnail>
-        <InfoContainer>
-          <h3>한줄소개</h3>
-          <Intro1>
-            <div>경력사항</div>
-            <div></div>
+            </InfoRow>
+            <InfoRow>
+              <div>성별</div>
+              <div></div>
+              <select
+                name="gender"
+                value={formData.gender}
+                onChange={(e) => {
+                  handleChange(e);
+                  console.log('성별 선택:', e.target.value);
+                }}
+              >
+                {genderOptions.map((option, index) => (
+                  <option key={index} value={option}>{option}</option>
+                ))}
+              </select>
+            </InfoRow>
+            <InfoRow>
+              <div>나이</div>
+              <div></div>
+              <input
+                type="number"
+                name="age"
+                value={formData.age}
+                onChange={handleChange}
+              />
+            </InfoRow>
+            <InfoRow>
+              <div>지역</div>
+              <div></div>
+              <select
+                name="location"
+                value={formData.location}
+                onChange={(e) => {
+                  handleChange(e);
+                  console.log('지역 선택:', e.target.value);
+                }}
+              >
+                {locationOptions.map((option, index) => (
+                  <option key={index} value={option}>{option}</option>
+                ))}
+              </select>
+            </InfoRow>
+          </div>
+        </TutorFirstLine>
+        <TutorSecondLine>
+          <div>
+            <div>종목</div>
+            <select
+              name="type"
+              value={formData.sportsid}
+              onChange={handleChange}
+            >
+              {sportsOptions.map((option, index) => (
+                <option key={index} value={option.value}>{option.label}</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <div>가격</div>
             <input
               type="text"
-              name="experience"
-              value={formData.experience}
+              name="price"
+              value={formData.price}
               onChange={handleChange}
-              placeholder="ex. 헬스 5년차"
+              placeholder=""
             />
-          </Intro1>
-          <Intro2>
-            <div>소개</div>
-            <div></div>
-            <input
-              type="text"
-              name="introduction"
-              value={formData.introduction}
-              onChange={handleChange}
-              placeholder="ex. 스트레스 없이 운동 시작해봐요~"
-            />
-          </Intro2>
-        </InfoContainer>
-        <BioContainer>
-          <h3>자기소개</h3>
-          <textarea
-            name="bio"
-            value={formData.bio}
-            onChange={handleBioChange}
-            maxLength={140}
-            placeholder="자기소개 글을 입력해주세요"
+          </div>
+        </TutorSecondLine>
+      </TutorThumbnail>
+      <InfoContainer>
+        <h3>한줄소개</h3>
+        <Intro1>
+          <div>경력사항</div>
+          <div></div>
+          <input
+            type="text"
+            name="experience"
+            value={formData.career}
+            onChange={handleChange}
+            placeholder="ex. 헬스 5년차"
           />
-          <CharCount>{charCount}/140</CharCount>
-        </BioContainer>
-      </TutorDetailContainerLeft>
-    </LeftFormContainer>
-  );
+        </Intro1>
+        <Intro2>
+          <div>소개</div>
+          <div></div>
+          <input
+            type="text"
+            name="introduction"
+            value={formData.intro}
+            onChange={handleChange}
+            placeholder="ex. 스트레스 없이 운동 시작해봐요~"
+          />
+        </Intro2>
+      </InfoContainer>
+      <BioContainer>
+        <h3>자기소개</h3>
+        <textarea
+          name="bio"
+          value={formData.self_intro}
+          onChange={handleBioChange}
+          maxLength={140}
+          placeholder="자기소개 글을 입력해주세요"
+        />
+        <CharCount>{charCount}/140</CharCount>
+      </BioContainer>
+    </TutorDetailContainerLeft>
+  </LeftFormContainer>
+);
 };
 
 export default LeftForm;

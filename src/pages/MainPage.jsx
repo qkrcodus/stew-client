@@ -32,7 +32,7 @@ const MainPage = () => {
     <TodayTutor/>
     <Advertisement/>
     <Reviews/>
-    <RecommendedSport/>
+    <RecommendedSport onSportSelect={handleSportSelect}/>
     <Footer/>
     </MainPageContainer>
   )

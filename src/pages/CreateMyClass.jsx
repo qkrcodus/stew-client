@@ -69,44 +69,46 @@ const CreateMyClass = () => {
     }
   };
 
-  //폼 제출 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log('handleSubmit 함수가 실행되었습니다.');
   
-    const requestData = new FormData();
-  //서버 필요 객체
-    const requestDto = JSON.stringify({
+    // 서버에 필요한 객체 생성
+    const requestDto = {
       gender: formData.gender,
       price: Number(formData.price),
       name: formData.name,
       sports_intro: formData.sports_intro,
-      intro: formData.introduction,
+      intro: formData.intro,
       location: formData.location,
       self_intro: formData.bio,
       sports_id: Number(formData.type),
       career: formData.experience,
       age: Number(formData.age),
-    });
+    };
   
-
-    requestData.append('requestDto', requestDto);
+    console.log('requestDto:', requestDto);
   
-
+    const requestData = new FormData();
+    requestData.append('requestDto', new Blob([JSON.stringify(requestDto)], { type: 'application/json' }));
+  
     if (formData.profile) {
       requestData.append('profile', formData.profile[0]);
     }
   
- 
     if (formData.portfolio.length > 0) {
       for (const file of formData.portfolio) {
         requestData.append('portfolio', file);
       }
     }
   
- 
+    console.log('FormData 생성 후:');
     for (let [key, value] of requestData.entries()) {
-      console.log(key, value);
+      if (value instanceof Blob) {
+        console.log(`${key}: [Blob]`);
+      } else {
+        console.log(`${key}:`, value);
+      }
     }
   
     try {
@@ -124,10 +126,18 @@ const CreateMyClass = () => {
       console.log('보낼 데이터:', response.data);
       console.log('try문 실행 ');
     } catch (error) {
-      console.error('튜터 등록하는데 실패했습니다:', error);
+      if (error.response) {
+        console.error('튜터 등록하는데 실패했습니다 (서버 응답):', error.response.data);
+        console.log('상태 코드:', error.response.status);
+        console.log('헤더:', error.response.headers);
+      } else {
+        console.error('튜터 등록하는데 실패했습니다:', error.message);
+      }
       console.log('catch문 실행 ');
     }
   };
+  
+  
   
   return (
     <CreateMyClassContainer>

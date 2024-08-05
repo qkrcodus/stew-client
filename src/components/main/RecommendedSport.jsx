@@ -2,10 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import taekwondo from '../../assets/images/taekwondo.png';
 import archery from '../../assets/images/archery.png';
-import surfing from '../../assets/images/surfing.png';
+import 사격 from '../../assets/images/사격.png'
 import fencing from '../../assets/images/fencing.png';
 import figureSkating from '../../assets/images/figureSkating.png';
-import weightlifting from '../../assets/images/weightlifting.png';
 
 const Container = styled.div`
   display: flex;
@@ -48,6 +47,7 @@ const IconItem = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  cursor: pointer;
 `;
 
 const IconImage = styled.img`
@@ -67,11 +67,11 @@ const IconLabel = styled.p`
 const RecommendedSport = ({ onSportSelect }) => {
   const icons=[
     { src: taekwondo, label: '태권도', id: 17 },
-    { src: archery, label: '양궁', id: 18},
-    { src: surfing, label: '서핑', id: 19},
-    { src: fencing, label: '펜싱', id: 20},
+    { src: archery, label: '양궁', id: 19},
+    { src: fencing, label: '펜싱', id: 18},
+    { src: 사격, label: '사격', id:20 },
     { src: figureSkating, label: '피겨', id:21},
-    { src: weightlifting, label: '역도', id:22 },
+
   ];
   return (
     <Container>
@@ -80,8 +80,8 @@ const RecommendedSport = ({ onSportSelect }) => {
     <IconListWrapper>
     <IconListContainer>
       {icons.map((icon, index) => (
-        <IconItem key={index}>
-          <IconImage src={icon.src} alt={icon.label} onClick={() => onSportSelect(icon.id)}/>
+        <IconItem key={index}onClick={() => onSportSelect(icon.id)}>
+          <IconImage src={icon.src} alt={icon.label} />
           <IconLabel>{icon.label}</IconLabel>
         </IconItem>
       ))}
