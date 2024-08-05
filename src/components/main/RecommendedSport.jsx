@@ -64,14 +64,14 @@ const IconLabel = styled.p`
   margin-top: 4.3rem;
   font-weight: var(--font-weight-bold);
 `;
-const RecommendedSport = () => {
+const RecommendedSport = ({ onSportSelect }) => {
   const icons=[
-    { src: taekwondo, label: '태권도' },
-    { src: archery, label: '양궁' },
-    { src: surfing, label: '서핑' },
-    { src: fencing, label: '펜싱' },
-    { src: figureSkating, label: '피겨' },
-    { src: weightlifting, label: '역도' },
+    { src: taekwondo, label: '태권도', id: 17 },
+    { src: archery, label: '양궁', id: 18},
+    { src: surfing, label: '서핑', id: 19},
+    { src: fencing, label: '펜싱', id: 20},
+    { src: figureSkating, label: '피겨', id:21},
+    { src: weightlifting, label: '역도', id:22 },
   ];
   return (
     <Container>
@@ -81,7 +81,7 @@ const RecommendedSport = () => {
     <IconListContainer>
       {icons.map((icon, index) => (
         <IconItem key={index}>
-          <IconImage src={icon.src} alt={icon.label} />
+          <IconImage src={icon.src} alt={icon.label} onClick={() => onSportSelect(icon.id)}/>
           <IconLabel>{icon.label}</IconLabel>
         </IconItem>
       ))}

@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
 import styled from 'styled-components';
+import person from '../../assets/images/person-fill.png';
 import graystars from '../../assets/images/graystars.png';
 import graystar from '../../assets/images/graystar.png';
+import yellowstars from '../../assets/images/yellowstars.png';
+import yellowstar from '../../assets/images/yellow.png';
 const RightInfoContainer=styled.div`
   position: absolute;
   top: 59.2rem;
@@ -115,7 +118,7 @@ const Review=styled.div`
     top: 81.7rem;
     left: 3.8rem;
     width: 58.9rem;
-    height: 28.8rem;
+    height: 30.8rem;
     flex-shrink: 0;
     border: 0.2rem solid #D9D9D9;
     h3{
@@ -149,12 +152,82 @@ const CharCount = styled.div`
     top: 28.7rem;
     left: 46.6rem;
 `;
-const ReviewStars=styled.div`
-`
 const Reviewwrapper=styled.div`
+display: flex;
+align-items: center;
+justify-content: center;
+img{
+top: 1.5rem;
+position: absolute;}
+`
+const Container=styled.div`
+width: 52.6rem;
+height: 19.4rem;
+flex-shrink: 0;
+border: 0.1rem solid var(--Main-Color, #6BA6FF);
+color: var(--Main-Color, #6BA6FF);
+text-align: center;
+font-family: Pretendard;
+font-size: 24px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+display: flex;
+justify-content: center;
+align-items: center;
+position: absolute;
+top: 10.1rem;
+
+`
+const Profile = styled.div`
+  width: 8rem;
+  height: 8rem;
+  border-radius: 50%;
+  background-color: #F2F3F5;
+  position: absolute;
+  left: 2.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const ProfileImage = styled.img`
+  width: 6rem;
+  height: 6rem;
+`
+const ReviewContent=styled.div`
+color: #333E5E;
+font-family: var(--font-family-pretendard);
+font-size: 1.7rem;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+width: 27.1rem;
+position: absolute;
+right: 1rem;
+`
+const ProfileDetail=styled.div`
+position: absolute;
+left: 12.4rem;
+top: 6rem;
+color: var(--Sub-Color, #333E5E);
+font-family: var(--font-family-pretendard);
+font-size: 1.6rem;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+img{
+position: absolute;
+left: 0rem;
+top: 4rem;
+}
+display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
 `
 const RightInfo = ({data}) => {
   const tutor = data;
+  const hasReview = tutor.reviewDto && tutor.reviewDto.review_content;
   console.log("rightinfo",tutor);
   const [gyminfo, setGyminfo] = useState(tutor.sports_intro);
   const [charCount, setCharCount] = useState(tutor.sports_intro.length);
@@ -185,11 +258,32 @@ const RightInfo = ({data}) => {
     </Portfolio>
     <Review>
     <h3>리뷰</h3>
-    <ReviewStars>
-
-    </ReviewStars>
     <Reviewwrapper>
-     <div>리뷰가 없어요</div>
+    {hasReview ? (
+        <>
+          <img src={yellowstars} alt='찬 별' />
+          <Container>
+            <Profile>
+              <ProfileImage src={person} alt="Profile" />
+            </Profile>
+            <ProfileDetail>
+              <div>{tutor.reviewDto.reviewer_name}</div>
+              <div>{tutor.reviewDto.reviewer_location},{tutor.reviewDto.reviewer_age}세</div>
+              <img src={yellowstar}/>
+            </ProfileDetail>
+            <ReviewContent>
+            {tutor.reviewDto.review_content}
+            </ReviewContent>
+          </Container>
+        </>
+      ) : (
+        <>
+          <img src={graystars} alt='빈 별' />
+          <Container>
+            리뷰가 아직 없어요.
+          </Container>
+        </>
+      )}
      </Reviewwrapper>
     </Review>
 

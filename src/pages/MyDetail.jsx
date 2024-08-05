@@ -53,25 +53,6 @@ const RatingImage = styled.img`
 const Space = styled.span`
     margin-left: 2rem; 
 `;
-const UpdateBtn=styled.div`
-width: 12.2086rem;
-height: 5.9453rem;
-border: 0.3rem solid #333E5E;
-border-radius: 4rem;
-flex-shrink: 0;
-display: flex;
-justify-content: center;
-align-items: center;
-color: var(--Sub-Color, #333E5E);
-font-family: Pretendard;
-font-size: 3.6rem;
-font-style: normal;
-font-weight: 700;
-line-height: normal;
-position: absolute;
-top: 177.4rem;
-right: 41.491rem;
-`
 const DeleteBtn=styled.div`
 width: 12.2086rem;
 height: 5.9453rem;
@@ -144,7 +125,6 @@ const MyDetail = () => {
         </TutorThumbnail>
         <LeftInfo data={tutor} />
         <RightInfo data={tutor} />
-        <UpdateBtn>수정</UpdateBtn>
         <DeleteBtn>삭제</DeleteBtn>
       </TutorDetailContainer>
     );

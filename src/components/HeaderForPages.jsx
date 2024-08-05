@@ -71,6 +71,9 @@ const HeaderForPages=({ forPostManagement, forSentApplications, forReceivedAppli
         <div onClick={handlePostManagementClick}>게시글 관리</div>
         <div onClick={handleSentApplicationsClick}>보낸 신청서</div>
         <div onClick={handleReceivedApplicationsClick}>받은 신청서</div>
+        <div style={{ fontSize: '2.5rem' }}>
+      🐯 <span style={{ borderBottom: '0.2rem solid white' }}>이사자님</span>이 로그인 중입니다
+    </div>
       </Nav>
       </Headerwrapper>
       </HeaderContainer>

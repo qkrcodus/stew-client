@@ -76,7 +76,7 @@ box-shadow: 0px 0px 2rem 0px rgba(51, 62, 94, 0.30);
   }
   div:nth-child(7) {
   flex-shrink: 0;
-  width: 12.9rem;
+  width: 14.9rem;
   font-family: var(--font-family-pretendard);
   font-size: 28px;
   color: #A6A6A6;
