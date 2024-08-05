@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import axios from 'axios';
 
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 const BoxContainer = styled.div`
   height: 14.9rem;
   width: 135.8rem;
@@ -38,6 +40,7 @@ const TextWrapper = styled.div`
   left: 17.5rem;
   display: flex;
   align-items: center;
+  cursor: pointer;
 `;
 const Rectangle2 = styled.div`
   border: 0.3rem solid #606574;
@@ -86,21 +89,21 @@ left: 11.4rem;
 `
 
 
-export const Navbar1 = () => {
+const Navbar1 = ({ handleSelectAll, handleDeleteSelected }) => {
   return (
     <BoxContainer>
       <Title>보낸 신청서 목록</Title>
       <Group>
-          <Rectangle />
-          <SvgIcon>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 12" fill="none">
-            <path d="M7.5 12L14.8612 0H0.138784L7.5 12Z" fill="#606575"/>
-            </svg>
-          </SvgIcon>
-          <TextWrapper>삭제</TextWrapper> 
-          <Rectangle2 />
-          <FilterInstance color="#A6A6A6" />
-          <SearchInstance />
+        <Rectangle />
+        <SvgIcon>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 12" fill="none">
+            <path d="M7.5 12L14.8612 0H0.138784L7.5 12Z" fill="#606575" />
+          </svg>
+        </SvgIcon>
+        <TextWrapper onClick={handleDeleteSelected}>삭제</TextWrapper> 
+        <Rectangle2 onClick={handleSelectAll} /> 
+        <FilterInstance color="#A6A6A6" />
+        <SearchInstance />
       </Group>
     </BoxContainer>
   );
