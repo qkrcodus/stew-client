@@ -175,6 +175,9 @@ input{
 `;
 
 const Purpose = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
   position: absolute;
   top: 77.8rem;
   left: 16.1rem;
@@ -308,11 +311,10 @@ const MessageToTutor = styled.div`
 `;
 
 const Btns = styled.div`
-  position: absolute;
+
   display: flex;
   gap: 2rem;
-  top: 3.5rem;
-  left: 5.5rem;
+ 
   cursor: pointer;
 `;
 
