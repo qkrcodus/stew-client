@@ -203,7 +203,7 @@ const SentApplicationsList = () => {
         <DisabledButton onClick={() => handlePageChange(page + 1)} disabled={page === totalPages}>
           다음
         </DisabledButton>
-      </PaginationContainer>
+    </PaginationContainer>
     </SentApplicationsContainer>
   )
 }

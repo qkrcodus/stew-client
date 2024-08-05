@@ -6,7 +6,6 @@ const BoxContainer = styled.div`
   width: 135.8rem;
   position: relative;
 `;
-
 const Group = styled.div`
   position: absolute;
   height: 14.9rem;
@@ -16,7 +15,6 @@ const Group = styled.div`
   display: flex;
   align-items: center;
 `;
-
 const Rectangle = styled.div`
   border-top: 0.2rem solid #a5a5a5;
   border-bottom: 0.2rem solid #a5a5a5;
@@ -25,8 +23,8 @@ const Rectangle = styled.div`
   position: absolute;
   top: 0;
   left: 0;
+  
 `;
-
 const TextWrapper = styled.div`
   color: #a5a5a5;
   font-family: var(--font-family-pretendard);
@@ -41,24 +39,6 @@ const TextWrapper = styled.div`
   display: flex;
   align-items: center;
 `;
-
-const Div = styled.div`
-  display: flex;
-  align-items: center;
-  color: #a5a5a5;
-  font-family: var(--font-family-pretendard);
-  font-size: 2.8rem;
-  font-weight: 500;
-  height: 3.3rem;
-  position: absolute;
-  text-align: center;
-  top: 2.2rem;
-  width: 5.3rem;
-  left: 30.9rem;
-`;
-
-
-
 const Rectangle2 = styled.div`
   border: 0.3rem solid #606574;
   border-radius: 0.5rem;
@@ -67,8 +47,8 @@ const Rectangle2 = styled.div`
   position: absolute;
   top: 2.5rem;
   left: 1.8rem;
+  cursor: pointer;
 `;
-
 const FilterInstance = styled.div`
   height: 3.6rem;
   width: 3.6rem;
@@ -76,10 +56,6 @@ const FilterInstance = styled.div`
   top: 2.1rem;
   left: 54.1rem;
 `;
-
-
-
-
 const SearchInstance = styled.div`
   height: 2.3rem;
   width: 2.3rem;
@@ -94,6 +70,7 @@ const SvgIcon=styled.div`
   position: absolute;
   top: 3.5rem; 
   left: 6rem; 
+  
 `
 
 const Title=styled.div`
