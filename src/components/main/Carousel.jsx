@@ -241,7 +241,7 @@ const Carousel = () => {
           centeredSlides={true}
           slidesPerView="auto"
           autoplay={{
-            delay: 4000,
+            delay: 2800,
             disableOnInteraction: false
           }}
           coverflowEffect={{
@@ -254,7 +254,8 @@ const Carousel = () => {
           navigation
           pagination={{ clickable: true }}
           scrollbar={{ draggable: true }}
-          style={{ width: '70%', paddingTop: '2rem', paddingBottom: '4rem' }}
+          style={{ width: '80%', paddingTop: '2rem', paddingBottom: '4rem', left: '42%', transform: 'translateX(-50%)' }}
+
         >
           {todayTutors.map((tutor) => (
             <SwiperSlide 

@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import stars from '../../assets/images/star-fill.png';
-
+import ReactSlider from 'react-slider';
+import { useState } from 'react';
 const Overlay = styled.div`
   display: ${(props) => (props.isOpen ? 'block' : 'none')};
   position: fixed;
@@ -294,6 +295,143 @@ const MessageToTutor = styled.div`
     align-items: center;
   }
 `;
+const Btns=styled.div`
+position : absolute;
+display: flex;
+gap: 2rem;
+top: 3.5rem;
+left: 5rem;
+cursor: pointer;
+`
+const Diet=styled.div`
+color: var(--Main-Color, #6BA6FF);
+font-family: var(--font-family-pretendard);
+font-size: 2.8rem;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+border-radius: 3rem;
+border: 0.2rem solid var(--Main-Color, #6BA6FF);
+display: inline-flex;
+padding: 0.45rem 2.4rem;
+justify-content: center;
+align-items: center;
+`
+
+const Muscle=styled.div`
+color: var(--Main-Color, #6BA6FF);
+font-family: var(--font-family-pretendard);
+font-size: 2.8rem;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+border-radius: 3rem;
+border: 0.2rem solid var(--Main-Color, #6BA6FF);
+display: inline-flex;
+padding: 0.45rem 2.4rem;
+justify-content: center;
+align-items: center;
+`
+const Stress=styled.div`
+color: var(--Main-Color, #6BA6FF);
+font-family: var(--font-family-pretendard);
+font-size: 2.8rem;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+border-radius: 3rem;
+border: 0.2rem solid var(--Main-Color, #6BA6FF);
+display: inline-flex;
+padding: 0.45rem 2.4rem;
+justify-content: center;
+align-items: center;
+`
+const Hobby=styled.div`
+color: var(--Main-Color, #6BA6FF);
+font-family: var(--font-family-pretendard);
+font-size: 2.8rem;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+border-radius: 3rem;
+border: 0.2rem solid var(--Main-Color, #6BA6FF);
+display: inline-flex;
+padding: 0.45rem 2.4rem;
+justify-content: center;
+align-items: center;
+`
+
+
+const SliderContainer = styled.div`
+  width: 60rem;
+  position: relative;
+  top: 6rem;
+  left: 11rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const StyledSlider = styled(ReactSlider)`
+  width: 100%;
+  height: 0.5rem;
+  background: var(--Main-Color, #6BA6FF);
+  position: relative;
+   cursor: pointer;
+`;
+
+const StyledThumb = styled.div`
+  height: 2rem;
+  width: 2rem;
+  background-color: var(--Main-Color, #6BA6FF);
+  border-radius: 50%;
+  cursor: grab;
+  transition: transform 0.2s ease-in-out; 
+`;
+
+const StyledTrack = styled.div`
+  top: 3rem;
+  bottom: 2rem;
+  background: ${(props) => (props.index === 2 ? '#f00' : props.index === 1 ? '#ddd' : 'var(--Main-Color, #6BA6FF)')};
+  border-radius: 999px;
+  transition: background-color 0.2s ease-in-out; 
+`;
+
+const Label = styled.div`
+  position: absolute;
+  top: 4rem;
+  color: #333e5e;
+  font-family: var(--font-family-pretendard);
+  font-size: 2.6rem;
+  font-weight: 700;
+  line-height: normal;
+    transform: translate(-50%, -50%);
+`;
+
+const labels = ['병아리', '초급', '중급', '고급', '전문가'];
+
+const SliderWithLabels = () => {
+  const [value, setValue] = useState(1);
+
+  return (
+    <SliderContainer>
+      <StyledSlider
+        value={value}
+        onChange={setValue}
+        min={1}
+        max={5}
+        renderThumb={(props, state) => <StyledThumb {...props} />}
+        renderTrack={(props, state) => <StyledTrack {...props} index={state.index} />}
+        step={1}
+      />
+      {labels.map((label, index) => (
+        <Label key={index} style={{ left: `${(index / 4) * 100}%` }}>
+          {label}
+        </Label>
+      ))}
+    </SliderContainer>
+  );
+};
 
 const ModalForm = ({ isOpen, onClose ,data }) => {
   const tutordetail = data;
@@ -326,7 +464,7 @@ const ModalForm = ({ isOpen, onClose ,data }) => {
           <ModalTitle>
             <div>제목</div>
             <div></div>
-            <div>여기</div>
+            <div>여기제목</div>
           </ModalTitle>
           <TutorFirstLine>
               <svg xmlns="http://www.w3.org/2000/svg" width="191" height="191" viewBox="0 0 191 191" fill="none">
@@ -342,32 +480,37 @@ const ModalForm = ({ isOpen, onClose ,data }) => {
               <InfoRow>
                 <div>닉네임</div>
                 <div></div>
-                <div>여기</div>
+                <div>여기닉네임</div>
               </InfoRow>
               <InfoRow>
                 <div>성별</div>
                 <div></div>
-                <div>여기</div>
+                <div>여기성별</div>
               </InfoRow>
               <InfoRow>
                 <div>나이</div>
                 <div></div>
-                <div>여기</div>
+                <div>여기나이</div>
               </InfoRow>
               <InfoRow>
                 <div>지역</div>
                 <div></div>
-                <div>여기</div>
+                <div>여기지역</div>
               </InfoRow>
             </div>
           </TutorFirstLine>
           <Purpose>
             <h3>운동 목적</h3>
-            <textarea />
+            <Btns>
+              <Diet>다이어트</Diet>
+              <Muscle>근력향상</Muscle>
+              <Stress>스트레스 해소</Stress>
+              <Hobby>취미활동</Hobby>
+            </Btns>
           </Purpose>
           <IntensityPreference>
             <h3>운동 선호 강도</h3>
-            <textarea />
+            <SliderWithLabels/>
           </IntensityPreference>
           <MessageToTutor>
             <h3>튜터에게 전할 말</h3>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
-
+import graystars from '../../assets/images/graystars.png';
+import graystar from '../../assets/images/graystar.png';
 const RightInfoContainer=styled.div`
   position: absolute;
   top: 59.2rem;
@@ -28,7 +28,7 @@ const GymIntro=styled.div`
     top: 3.9rem;
     left: 3.8rem;
     width: 58.9rem;
-    height: 26.1rem;
+    height: 32.1rem;
     flex-shrink: 0;
     border: 0.2rem solid #D9D9D9;
     h3{
@@ -50,6 +50,7 @@ const GymIntro=styled.div`
     align-items: center;
     }
     textarea {
+       overflow: hidden;
         height: 40rem;
         padding: 3.7rem;
         box-sizing: border-box;
@@ -74,10 +75,10 @@ const Portfolio=styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     position: absolute;
-    top: 34.5rem;
+    top: 40.5rem;
     left: 3.8rem;
     width: 58.9rem;
-    height: 42.2rem;
+    height: 35.2rem;
     flex-shrink: 0;
     border: 0.2rem solid #D9D9D9;
     h3{
@@ -145,9 +146,13 @@ const CharCount = styled.div`
     font-weight: 500;
     line-height: normal;
     position: absolute;
-    top: 22.7rem;
-    left: 48.6rem;
+    top: 28.7rem;
+    left: 46.6rem;
 `;
+const ReviewStars=styled.div`
+`
+const Reviewwrapper=styled.div`
+`
 const RightInfo = ({data}) => {
   const tutor = data;
   console.log("rightinfo",tutor);
@@ -166,26 +171,26 @@ const RightInfo = ({data}) => {
         <textarea
             value={gyminfo}
             onChange={handleGyminfoChange}
-            maxLength={140}
+            maxLength={300}
         />
-        <CharCount>({charCount}/140)</CharCount>
+        <CharCount>({charCount}/300)</CharCount>
     </GymIntro>
     <Portfolio>
     <h3>포트폴리오</h3>
     {tutor.portfolio && tutor.portfolio.map((url, index) => (
             <div key={index}>
-              <img src={url} alt={`Portfolio ${index}`} style={{ width: '100%', height: 'auto' }} />
+              <img src={url} alt={`Portfolio ${index}`} style={{ width: '100%', height: '100%' }} />
             </div>
           ))}
     </Portfolio>
     <Review>
     <h3>리뷰</h3>
-       <div></div>
-       <div></div>
-       <div></div>
-       <div></div>
-       <div></div>
-       <div></div>
+    <ReviewStars>
+
+    </ReviewStars>
+    <Reviewwrapper>
+     <div>리뷰가 없어요</div>
+     </Reviewwrapper>
     </Review>
 
 

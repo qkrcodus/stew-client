@@ -77,7 +77,7 @@ const Portfolio = styled.div`
   top: 58.2rem;
   left: 3.8rem;
   width: 58.9rem;
-  height: 42.2rem;
+  height: 40.2rem;
   flex-shrink: 0;
   border: 0.2rem solid #D9D9D9;
   h3 {
@@ -132,7 +132,7 @@ const RightForm = ({ formData, handleChange }) => {
             maxLength={140}
             placeholder="운동소개 글을 입력해주세요"
           />
-          <CharCount>{formData.sports_intro.length}/140</CharCount>
+          <CharCount>{formData.sports_intro.length}/300</CharCount>
         </GymIntro>
         <Portfolio>
           <h3>포트폴리오</h3>

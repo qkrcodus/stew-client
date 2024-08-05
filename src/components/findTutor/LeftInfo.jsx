@@ -89,7 +89,7 @@ const InfoContainer = styled.div`
     top: 44.2rem;
     left:3.9rem;
     width: 58.9rem;
-    height: 24.1rem;
+    height: 29.1rem;
     flex-shrink: 0;
     border: 0.2rem solid #D9D9D9;
     h3{
@@ -153,7 +153,7 @@ const Intro1=styled.div`
    }
    & > div:nth-child(2){
    width: 51.8rem;
-   height: 5rem;
+   height: 8rem;
    flex-shrink: 0;
    border-radius: 3rem;
    border: 0.1rem solid var(--Sub-Color, #333E5E);
@@ -183,11 +183,11 @@ const Intro2=styled.div`
    line-height: normal;
    position: absolute;
    left: 3.9rem;
-   top: 12.3rem;
+   top: 15.3rem;
    }
     & > div:nth-child(2){
    width: 51.8rem;
-   height: 5rem;
+   height: 8rem;
    flex-shrink: 0;
    border-radius: 3rem;
    border: 0.1rem solid var(--Sub-Color, #333E5E);
@@ -201,7 +201,7 @@ const Intro2=styled.div`
    line-height: normal;
    position: absolute;
    left: 3.9rem;
-   top: 16.2rem;
+   top: 19.2rem;
    padding-left: 2rem;
    box-sizing: border-box;
     }
@@ -210,7 +210,8 @@ const Intro2=styled.div`
 
 const BioContainer = styled.div`
     position: absolute;
-    top: 74.9rem;
+  
+    top: 78.9rem;
     left: 3.9rem;
     width: 58.9rem;
     height: 31.7rem;
@@ -229,6 +230,7 @@ const BioContainer = styled.div`
         font-weight: 500;
         line-height: normal;
         pointer-events: none; 
+          overflow: hidden;
     }
     textarea:focus {
     outline: none; 

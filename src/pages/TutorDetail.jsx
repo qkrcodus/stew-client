@@ -8,6 +8,7 @@ import RightInfo from '../components/findTutor/RightInfo'
 import ModalForm from '../components/modal/ModalForm'
 import { useState , useEffect} from 'react'
 import axios from 'axios';
+import graystar from '../assets/images/graystar.png';
 const TutorDetailContainer=styled.div`
     position: relative;
     display: flex;
@@ -21,6 +22,7 @@ const TutorThumbnail=styled.div`
     display: flex;
     gap: 3.9rem;
     width: 92.7rem;
+        padding: 0 5rem;
     height: 15.8rem;
     flex-shrink: 0;
     border-top: 0.3rem solid var(--Main-Color, #6BA6FF);
