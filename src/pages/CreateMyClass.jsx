@@ -50,20 +50,33 @@ const CreateMyClass = () => {
     introduction: '',
     bio: '',
     sports_intro: '',
+    profile: null,
+    portfolio: [],
   });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
+    const { name, value, files } = e.target;
+    if (name === 'profile' || name === 'portfolio') {
+      setFormData({
+        ...formData,
+        [name]: files ? files : value, // 파일이 있을 경우 파일 배열로 설정
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
   };
 
+  //폼 제출 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const requestData = {
+    console.log('handleSubmit 함수가 실행되었습니다.');
+  
+    const requestData = new FormData();
+  //서버 필요 객체
+    const requestDto = JSON.stringify({
       gender: formData.gender,
       price: Number(formData.price),
       name: formData.name,
@@ -74,25 +87,48 @@ const CreateMyClass = () => {
       sports_id: Number(formData.type),
       career: formData.experience,
       age: Number(formData.age),
-    };
+    });
+  
 
+    requestData.append('requestDto', requestDto);
+  
+
+    if (formData.profile) {
+      requestData.append('profile', formData.profile[0]);
+    }
+  
+ 
+    if (formData.portfolio.length > 0) {
+      for (const file of formData.portfolio) {
+        requestData.append('portfolio', file);
+      }
+    }
+  
+ 
+    for (let [key, value] of requestData.entries()) {
+      console.log(key, value);
+    }
+  
     try {
+      console.log('axios.post 요청 전');
       const userId = 1; // 임의로 설정
       const response = await axios.post(
         `${BASE_URL}/tutors/${userId}`,
         requestData,
         {
           headers: {
-            'Content-Type': 'application/json', // Content-Type을 설정
+            'Content-Type': 'multipart/form-data',
           },
         }
       );
       console.log('보낼 데이터:', response.data);
+      console.log('try문 실행 ');
     } catch (error) {
       console.error('튜터 등록하는데 실패했습니다:', error);
+      console.log('catch문 실행 ');
     }
   };
-
+  
   return (
     <CreateMyClassContainer>
       <HeaderForPages forPostManagement={true} />
