@@ -209,7 +209,7 @@ const Header = () => {
     <StyledHeader>
     <HeaderForPages />
     <IntroSection>
-      <h1>AI 맞춤형 운동추천부터<br />스포츠 튜터 매칭까지 한 번에</h1>
+      <h1>맞춤형 운동추천부터<br />스포츠 튜터 매칭까지 한 번에</h1>
       <div className="buttons">
         <button className="btn-left" onClick={handleTestClick}>테스트 하러가기</button>
         <button className="btn-right" onClick={handleTutorClick}>튜터 둘러보기</button>

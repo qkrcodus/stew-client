@@ -417,9 +417,9 @@ const TestFinish = () => {
     <TypeResult>
       <TypeIcon imgUrl={result.imgUrl} />
       <TypeContent>
-        <Content1>
-          당신은 {result.type} 유형입니다
-        </Content1>
+      <Content1>
+        당신은 <span style={{ color: 'var(--Main-Color, #6BA6FF)' }}>{result.type}</span> 유형입니다
+      </Content1>
         <Content2>
           {result.description}
         </Content2>

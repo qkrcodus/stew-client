@@ -359,6 +359,7 @@ const StyledThumb = styled.div`
   border-radius: 50%;
   cursor: grab;
   transition: transform 0.2s ease-in-out;
+  transform: translateY(-6px);
 `;
 
 const StyledTrack = styled.div`
@@ -367,17 +368,21 @@ const StyledTrack = styled.div`
   background: ${(props) => (props.index === 2 ? '#f00' : props.index === 1 ? '#ddd' : 'var(--Main-Color, #6BA6FF)')};
   border-radius: 999px;
   transition: background-color 0.2s ease-in-out;
+  position: relative;
 `;
 
 const Label = styled.div`
   position: absolute;
-  top: 4rem;
+  top: 3rem;
+  left: 50%; 
+  transform: translateX(-50%);
   color: #333e5e;
-  font-family: var(--font-family-pretendard);
+  font-family: var(--font-family-pretendard), sans-serif; 
   font-size: 2.6rem;
   font-weight: 700;
-  line-height: normal;
-  transform: translate(-50%, -50%);
+  line-height: 1.2;
+  white-space: nowrap; 
+  text-align: center; 
 `;
 
 const labels = ['병아리', '초급', '중급', '고급', '전문가'];
