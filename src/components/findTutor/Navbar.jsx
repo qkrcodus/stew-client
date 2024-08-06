@@ -75,12 +75,12 @@ const FilterContainer = styled.div`
 
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: right;
   position: absolute;
   top: 35.4rem;
   div {
     display: flex;
-    justify-content: center;
+    justify-content: right;
   }
   cursor: pointer;
 `;
