@@ -178,7 +178,9 @@ const SentApplicationsList = ({
           ></div>
           <div>{data.tutor_name}</div>
           <div>{data.user_name}</div>
-          <div>{data.title}</div>
+          <div>
+          {data.title.length > 19 ? `${data.title.substring(0, 30)} ...` : data.title}
+          </div>
           <StatusBtn isstatus={data.status}>
             {data.status ? '수락완료' : '수락대기'}
           </StatusBtn>
