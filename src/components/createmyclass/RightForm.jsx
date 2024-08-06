@@ -103,6 +103,22 @@ const Portfolio = styled.div`
     height: 14.4rem;
     flex-shrink: 0;
     background: #D9D9D9;
+     position: relative;
+    overflow: hidden;
+    input[type="file"] {
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
   }
 `;
 
@@ -135,13 +151,23 @@ const RightForm = ({ formData, handleChange }) => {
           <CharCount>{formData.sports_intro.length}/300</CharCount>
         </GymIntro>
         <Portfolio>
-          <h3>포트폴리오</h3>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
+        <h3>포트폴리오</h3>
+        {Array.from({ length: 6 }).map((_, index) => (
+            <div key={index}>
+              <input
+                type="file"
+                name="portfolio"
+                accept="image/*"
+                onChange={handleChange}
+              />
+              {formData.portfolio && formData.portfolio[index] && (
+                <img
+                  src={URL.createObjectURL(formData.portfolio[index])}
+                  alt={`포트폴리오 ${index + 1}`}
+                />
+              )}
+            </div>
+          ))}
         </Portfolio>
       </TutorDetailContainerRight>
     </RightFormContainer>

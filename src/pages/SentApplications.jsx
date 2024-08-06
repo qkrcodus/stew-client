@@ -95,6 +95,7 @@ const SentApplications = () => {
       });
       setApplications(response.data.data.applicationList);
       setTotalPages(response.data.data.totalPage);
+      alert("삭제완료되었습니다!")
     } catch (error) {
       console.error('Failed to delete selected applications', error);
     }

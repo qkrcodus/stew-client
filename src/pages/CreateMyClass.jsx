@@ -57,23 +57,20 @@ const CreateMyClass = () => {
   const handleChange = (e) => {
     const { name, value, files } = e.target;
     if (name === 'profile' || name === 'portfolio') {
-      setFormData({
-        ...formData,
-        [name]: files ? files : value, // 파일이 있을 경우 파일 배열로 설정
-      });
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        [name]: files ? Array.from(files) : value,
+      }));
     } else {
-      setFormData({
-        ...formData,
+      setFormData((prevFormData) => ({
+        ...prevFormData,
         [name]: value,
-      });
+      }));
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('handleSubmit 함수가 실행되었습니다.');
-  
-    // 서버에 필요한 객체 생성
     const requestDto = {
       gender: formData.gender,
       price: Number(formData.price),
@@ -86,33 +83,21 @@ const CreateMyClass = () => {
       career: formData.experience,
       age: Number(formData.age),
     };
-  
-    console.log('requestDto:', requestDto);
-  
+
     const requestData = new FormData();
     requestData.append('requestDto', new Blob([JSON.stringify(requestDto)], { type: 'application/json' }));
-  
+
     if (formData.profile) {
       requestData.append('profile', formData.profile[0]);
     }
-  
+
     if (formData.portfolio.length > 0) {
-      for (const file of formData.portfolio) {
+      formData.portfolio.forEach((file) => {
         requestData.append('portfolio', file);
-      }
+      });
     }
-  
-    console.log('FormData 생성 후:');
-    for (let [key, value] of requestData.entries()) {
-      if (value instanceof Blob) {
-        console.log(`${key}: [Blob]`);
-      } else {
-        console.log(`${key}:`, value);
-      }
-    }
-  
+
     try {
-      console.log('axios.post 요청 전');
       const userId = 1; // 임의로 설정
       const response = await axios.post(
         `${BASE_URL}/tutors/${userId}`,
@@ -124,21 +109,18 @@ const CreateMyClass = () => {
         }
       );
       console.log('보낼 데이터:', response.data);
-      console.log('try문 실행 ');
     } catch (error) {
       if (error.response) {
         console.error('튜터 등록하는데 실패했습니다 (서버 응답):', error.response.data);
-        console.log('상태 코드:', error.response.status);
-        console.log('헤더:', error.response.headers);
       } else {
         console.error('튜터 등록하는데 실패했습니다:', error.message);
       }
-      console.log('catch문 실행 ');
+      alert(error.response.data, error.message)
     }
+
+    
   };
-  
-  
-  
+
   return (
     <CreateMyClassContainer>
       <HeaderForPages forPostManagement={true} />

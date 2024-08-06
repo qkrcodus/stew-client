@@ -79,6 +79,19 @@ const TutorImg = styled.div`
   fill: #F2F3F5;
   box-sizing: border-box;
   border-radius: 50%;
+  input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    height: 100%;
+    cursor: pointer;
+  }
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
 `;
 
 const InfoContainer = styled.div`
@@ -322,14 +335,8 @@ const sportsOptions = [
   { value: 13, label: '하이킹' },
   { value: 14, label: '사이클' },
   { value: 15, label: '댄스' },
-  { value: 16, label: '클라이밍' },
-  // { value: 17, label: '태권도' },
-  // { value: 18, label: '펜싱' },
-  // { value: 19, label: '양궁' },
-  // { value: 20, label: '사격' },
-  // { value: 21, label: '피겨' }
-];
-
+  { value: 16, label: '클라이밍' }
+]
 const LeftForm = ({ formData, handleChange }) => {
   const [charCount, setCharCount] = useState(0);
 
@@ -346,17 +353,31 @@ const LeftForm = ({ formData, handleChange }) => {
     <TutorDetailContainerLeft>
       <TutorThumbnail>
         <TutorFirstLine>
-          <TutorImg>
-            <svg xmlns="http://www.w3.org/2000/svg" width="191" height="191" viewBox="0 0 191 191" fill="none">
-              <circle cx="95.5" cy="95.5" r="95.5" fill="#F2F3F5" />
-              <g transform="translate(39 39)">
-                <svg xmlns="http://www.w3.org/2000/svg" width="113" height="113" viewBox="0 0 113 113" fill="none">
-                  <path d="M9.9375 112.375C9.9375 112.375 0.625 112.375 0.625 103.062C0.625 93.75 9.9375 65.8125 56.5 65.8125C103.062 65.8125 112.375 93.75 112.375 103.062C112.375 112.375 103.062 112.375 103.062 112.375H9.9375Z" fill="#A6A6A6"/>
-                  <path d="M56.5 56.5C71.9295 56.5 84.4375 43.992 84.4375 28.5625C84.4375 13.133 71.9295 0.625 56.5 0.625C41.0705 0.625 28.5625 13.133 28.5625 28.5625C28.5625 43.992 41.0705 56.5 56.5 56.5Z" fill="#A6A6A6"/>
+        <TutorImg>
+              <input
+                type="file"
+                name="profile"
+                accept="image/*"
+                onChange={handleChange}
+              />
+              {formData.profile ? (
+                <img
+                  src={URL.createObjectURL(formData.profile[0])}
+                  alt="프로필 이미지"
+                  style={{ width: '100%', height: '100%', borderRadius: '50%' }}
+                />
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" width="191" height="191" viewBox="0 0 191 191" fill="none">
+                  <circle cx="95.5" cy="95.5" r="95.5" fill="#F2F3F5" />
+                  <g transform="translate(39 39)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="113" height="113" viewBox="0 0 113 113" fill="none">
+                      <path d="M9.9375 112.375C9.9375 112.375 0.625 112.375 0.625 103.062C0.625 93.75 9.9375 65.8125 56.5 65.8125C103.062 65.8125 112.375 93.75 112.375 103.062C112.375 112.375 103.062 112.375 103.062 112.375H9.9375Z" fill="#A6A6A6"/>
+                      <path d="M56.5 56.5C71.9295 56.5 84.4375 43.992 84.4375 28.5625C84.4375 13.133 71.9295 0.625 56.5 0.625C41.0705 0.625 28.5625 13.133 28.5625 28.5625C28.5625 43.992 41.0705 56.5 56.5 56.5Z" fill="#A6A6A6"/>
+                    </svg>
+                  </g>
                 </svg>
-              </g>
-            </svg>
-          </TutorImg>
+              )}
+            </TutorImg>
           <div>
             <InfoRow>
               <div>닉네임</div>

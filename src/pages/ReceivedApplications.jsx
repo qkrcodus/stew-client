@@ -65,10 +65,12 @@ const ReceivedApplications = () => {
         axios.patch(`${BASE_URL}/apps/patch/${appId}`)
       ));
       setSelectedIds([]);
-      window.location.reload(); // 페이지 새로고침
+    
     } catch (error) {
       console.error("신청서 수락 중 에러가 발생했습니다.", error);
     }
+    window.location.reload(); // 페이지 새로고침
+    alert("수락완료되었습니다!")
   };
 
   const handlePageChange = (newPage) => {
