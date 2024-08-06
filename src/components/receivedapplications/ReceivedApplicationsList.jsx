@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Modal from '../modal/Modal';
 import axios from 'axios';
-const BASE_URL=import.meta.env.VITE_BASE_URL;
+
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 const ReceivedApplicationsContainer = styled.div`
   top: 27.2rem;
   position: absolute;
@@ -24,22 +26,12 @@ const MyClassContainer = styled.div`
   box-shadow: 0px 0px 2rem 0px rgba(51, 62, 94, 0.30);
 `;
 
-const IconContainer = styled.div`
-  position: absolute;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 0.5rem;
-  border: 0.3rem solid #606575;
-  left: 3.6rem;
-  top: 9.4rem;
-`;
-
 const GrayBox = styled.div`
   position: absolute;
   width: 13rem;
   height: 14.4rem;
   background: #D9D9D9;
-  left: 11.1rem;
+  left: 9.1rem;
   top: 3.5rem;
 `;
 
@@ -65,7 +57,7 @@ const TitleText = styled.p`
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-      width: 110rem;
+  width: 110rem;
 `;
 
 const DateLabel = styled.p`
@@ -78,7 +70,7 @@ const DateLabel = styled.p`
 `;
 
 const DateText = styled.p`
-  color:  var(--Sub-Color, #333E5E);
+  color: var(--Sub-Color, #333E5E);
   font-family: var(--font-family-pretendard);
   font-size: 2.8rem;
   font-style: normal;
@@ -100,6 +92,8 @@ const SubmittedApplicationsContainer = styled.div`
     border-radius: 0.5rem;
     border: 0.3rem solid #606575;
     margin-left: 11.3rem;
+    cursor: pointer;
+    background-color: ${({ isSelected }) => (isSelected ? '#606575' : '#FFF')};
   }
 
   div:nth-child(2) {
@@ -126,8 +120,6 @@ const SubmittedApplicationsContainer = styled.div`
     width: 60.2rem;
   }
 
-
-
   div:nth-child(5) {
     margin-left: 4.4rem;
     color: #A6A6A6;
@@ -148,22 +140,22 @@ const ApplicationsListContainer = styled.div`
 `;
 
 const StatusBtn = styled.div`
-    margin-left: 8.2rem;
-    color: #606575;
-    text-align: center;
-    width: 14.1rem;
-    height: 4.2rem;
-    flex-shrink: 0;
-    border-radius: 3rem;
- border: 0.2rem solid ${({isstatus})=>{isstatus ? 'var(--Main-Color, #6BA6FF)' : '#606575'; }};
-    font-family: var(--font-family-pretendard);
-    font-size: 2.8rem;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  margin-left: 8.2rem;
+  color: #606575;
+  text-align: center;
+  width: 14.1rem;
+  height: 4.2rem;
+  flex-shrink: 0;
+  border-radius: 3rem;
+  border: 0.2rem solid ${({ $isstatus }) => ($isstatus ? 'var(--Main-Color, #6BA6FF)' : '#606575')};
+  font-family: var(--font-family-pretendard);
+  font-size: 2.8rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background: ${({ $isstatus }) => ($isstatus ? 'var(--Main-Color, #6BA6FF)' : 'transparent')};
   color: ${({ $isstatus }) => ($isstatus ? '#FFF' : 'var(--Sub-Color, #333E5E)')};
 `;
@@ -171,14 +163,14 @@ const StatusBtn = styled.div`
 const PageButton = styled.button`
   margin: 0 0.5rem;
   border: none;
-color: ${({ $isActive }) => ($isActive ? '#333E5E' : '#A6A6A6')};
+  color: ${({ $isActive }) => ($isActive ? '#333E5E' : '#A6A6A6')};
   cursor: pointer;
-font-size: 2.8rem;
-font-style: normal;
-font-weight: 700;
-line-height: normal;
-font-family: var(--font-family-pretendard);
-background: none;
+  font-size: 2.8rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  font-family: var(--font-family-pretendard);
+  background: none;
 `;
 
 const PaginationContainer = styled.div`
@@ -188,12 +180,12 @@ const PaginationContainer = styled.div`
 `;
 
 const DisabledButton = styled(PageButton)`
-cursor: not-allowed;
-background-color: none;
-color: #666;
+  cursor: not-allowed;
+  background-color: none;
+  color: #666;
 `;
 
-const ReceivedApplicationsList = () => {
+const ReceivedApplicationsList = ({ selectedIds, setSelectedIds, onSelectAll, onAcceptAll }) => {
   const [isModalOpen, setModalOpen] = useState(false);
   const closeModal = () => setModalOpen(false);
   const [page, setPage] = useState(1);
@@ -233,11 +225,18 @@ const ReceivedApplicationsList = () => {
     setModalOpen(true);
   };
 
+  const handleApplicationClick = (application_id) => {
+    if (selectedIds.includes(application_id)) {
+      setSelectedIds(selectedIds.filter(id => id !== application_id));
+    } else {
+      setSelectedIds([...selectedIds, application_id]);
+    }
+  };
+
   return (
     <ReceivedApplicationsContainer>
       {receivedApplications.map((tutor, index) => (
         <MyClassContainer key={index}>
-          <IconContainer></IconContainer>
           <GrayBox style={{ backgroundImage: `url(${tutor.img_url})`, backgroundSize: 'cover', backgroundPosition: 'center' }}></GrayBox>
           <ContentContainer>
             <TitleText>{tutor.intro}</TitleText>
@@ -248,8 +247,16 @@ const ReceivedApplicationsList = () => {
           </ContentContainer>
           <ApplicationsListContainer>
             {tutor.applications.map((tuti, idx) => (
-              <SubmittedApplicationsContainer key={idx} onClick={() => handleOpenModal(tuti.application_id)}>
-                <div></div>
+              <SubmittedApplicationsContainer
+                key={idx}
+                isSelected={selectedIds.includes(tuti.application_id)}
+                onClick={() => handleOpenModal(tuti.application_id)}
+              >
+                <div
+                 onClick={(e) => {
+                  e.stopPropagation();
+                  handleApplicationClick(tuti.application_id)
+                }}></div>
                 <div>{tuti.user_name}</div>
                 <div>{tuti.title}</div>
                 <StatusBtn $isstatus={tuti.status}>

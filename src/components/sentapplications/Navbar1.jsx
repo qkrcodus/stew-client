@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import axios from 'axios';
 
-const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 const BoxContainer = styled.div`
   height: 14.9rem;
   width: 135.8rem;

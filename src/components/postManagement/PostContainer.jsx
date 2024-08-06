@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import stars from '../../assets/images/star-fill.png';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-const BASE_URL=import.meta.env.VITE_BASE_URL;
+
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 const PostBox = styled.div`
   position: absolute;
   top: 30rem;
@@ -11,7 +12,9 @@ const PostBox = styled.div`
   grid-template-columns: repeat(3, 1fr);
   gap: 6.4rem;
   justify-items: center;
+  cursor: pointer;
 `;
+
 const BoxContent = styled.div`
   position: relative;
 `;
@@ -37,7 +40,7 @@ const Thumbnail = styled.div`
   border-radius: 3rem; 
   background-image: url(${(props) => props.$imgurl});
   background-size: cover;
-    background-position: center;
+  background-position: center;
   background-repeat: no-repeat;
 `;
 

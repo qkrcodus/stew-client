@@ -55,12 +55,7 @@ const FindTutor = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [tutorData, setTutorData] = useState([]);
   const [selectedSport, setSelectedSport] = useState(sportsId || null);
-  const [filters, setFilters] = useState({
-    area: null,
-    minPrice: null,
-    maxPrice: null,
-    gender: null,
-  });
+  const [sortOption, setSortOption] = useState('최신순');
 
   const handlePageChange = (newPage) => {
     if (newPage > 0 && newPage <= totalPages) {
@@ -73,11 +68,8 @@ const FindTutor = () => {
     setPage(1);
   };
 
-  const handleFilterChange = (filterKey, option) => {
-    setFilters((prevState) => ({
-      ...prevState,
-      [filterKey]: option,
-    }));
+  const handleSortChange = (sortOption) => {
+    setSortOption(sortOption);
     setPage(1);
   };
 
@@ -88,10 +80,7 @@ const FindTutor = () => {
           params: {
             page,
             sportsId: selectedSport,
-            area: filters.area,
-            minPrice: filters.minPrice,
-            maxPrice: filters.maxPrice,
-            gender: filters.gender,
+            sort: sortOption,
           },
         });
         setTutorData(response.data.data.tutorList);
@@ -101,7 +90,7 @@ const FindTutor = () => {
       }
     };
     fetchTutors();
-  }, [page, selectedSport, filters]);
+  }, [page, selectedSport, sortOption]);
 
   return (
     <>
@@ -110,7 +99,7 @@ const FindTutor = () => {
         <Navbar
           onSportSelect={handleSportSelect}
           selectedSport={selectedSport}
-          onFilterChange={handleFilterChange}
+          onSortChange={handleSortChange}
         />
         <ShowTutor>
           <PostContainer data={tutorData} isMyData={false} />
