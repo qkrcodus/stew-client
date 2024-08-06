@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import HeaderForPages from '../components/HeaderForPages'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import stars from '../assets/images/star-fill.png';
 import LeftInfo from '../components/findTutor/LeftInfo'
@@ -76,8 +76,9 @@ const MyDetail = () => {
     const { tutorid } = useParams();
     const [tutor, setTutor] = useState(null);
     const [error, setError] = useState(null);
-  
-    console.log('컴포넌트 렌더링됨');  // 컴포넌트 렌더링 여부 확인
+  //삭제후 원래 화면
+    const navigate=useNavigate();
+    console.log('컴포넌트 렌더링됨');  // 컴포넌트 렌더링 됨
     console.log('useParams에서 가져온 id:', tutorid);
   
     useEffect(() => {
@@ -105,7 +106,17 @@ const MyDetail = () => {
     if (!tutor) {
       return <div>Loading...</div>;
     }
-  
+  //삭제
+
+  const handleDelete=async()=>{
+    try{
+      await axios.delete(`${BASE_URL}/tutors/${tutorid}`);
+      alert('게시글이 삭제되었습니다');
+      navigate('/');
+    }catch(error){
+      console.log(error);
+    }
+  }
     return (
       <TutorDetailContainer>
         <HeaderForPages />
@@ -125,7 +136,7 @@ const MyDetail = () => {
         </TutorThumbnail>
         <LeftInfo data={tutor} />
         <RightInfo data={tutor} />
-        <DeleteBtn>삭제</DeleteBtn>
+        <DeleteBtn onClick={handleDelete}>삭제</DeleteBtn>
       </TutorDetailContainer>
     );
   };

@@ -1,4 +1,4 @@
-// CreateMyClass.jsx
+
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import LeftForm from '../components/createmyclass/LeftForm';
