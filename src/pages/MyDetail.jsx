@@ -6,6 +6,7 @@ import stars from '../assets/images/star-fill.png';
 import LeftInfo from '../components/findTutor/LeftInfo'
 import RightInfo from '../components/findTutor/RightInfo'
 import axios from 'axios'
+import graystars from '../assets/images/graystar.png';
 const BASE_URL=import.meta.env.VITE_BASE_URL;
 const TutorDetailContainer=styled.div`
     position: relative;
@@ -126,9 +127,12 @@ const MyDetail = () => {
             <div>
               {tutor.name} / {tutor.sportName}
               <Space />
-              {Array.from({ length: tutor.total_review_score }, (_, index) => (
-                <RatingImage key={index} src={stars} alt="stars" />
-              ))} ({tutor.total_review_count})
+              {Array.from({ length: tutor.total_review_score}, (_, index) => (
+                      <RatingImage key={index} src={stars} alt="stars" />
+                    ))}
+                    {Array.from({ length: 5 - tutor.total_review_score }, (_, index) => (
+                      <RatingImage key={index + tutor.total_review_score} src={graystars} alt="graystars" />
+                    ))}({tutor.total_review_count})
             </div>
             <div>{tutor.intro}</div>
             <div>{tutor.price}</div>

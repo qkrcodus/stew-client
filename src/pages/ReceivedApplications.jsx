@@ -69,8 +69,9 @@ const ReceivedApplications = () => {
     } catch (error) {
       console.error("신청서 수락 중 에러가 발생했습니다.", error);
     }
-    window.location.reload(); // 페이지 새로고침
-    alert("수락완료되었습니다!")
+  
+    alert("수락완료되었습니다!");
+    window.location.reload();
   };
 
   const handlePageChange = (newPage) => {

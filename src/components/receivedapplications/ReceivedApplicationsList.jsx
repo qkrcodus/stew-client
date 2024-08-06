@@ -13,6 +13,7 @@ const ReceivedApplicationsContainer = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 7.7rem;
+
 `;
 
 const MyClassContainer = styled.div`
@@ -84,7 +85,7 @@ const SubmittedApplicationsContainer = styled.div`
   align-items: center;
   width: 100%;
   position: relative;
-  
+    cursor: pointer;
   div:nth-child(1) {
     width: 2.5rem;
     height: 2.5rem;

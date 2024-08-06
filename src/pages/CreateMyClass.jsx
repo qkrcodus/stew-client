@@ -4,9 +4,9 @@ import LeftForm from '../components/createmyclass/LeftForm';
 import RightForm from '../components/createmyclass/RightForm';
 import HeaderForPages from '../components/HeaderForPages';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const BASE_URL = import.meta.env.VITE_BASE_URL;
-
 const CreateMyClassContainer = styled.div`
   position: relative;
   display: flex;
@@ -43,12 +43,12 @@ const CreateMyClass = () => {
     age: '',
     gender: '',
     location: '',
-    sports_id: '',
+    sportsid: '',
     price: '',
     career: '',
     intro: '',
-    self_intro: '',
-    sports_intro: '',
+    selfintro: '',
+    sportsintro: '',
     profile: null,
     portfolio: [],
   });
@@ -69,16 +69,17 @@ const CreateMyClass = () => {
   };
 
   const handleSubmit = async (e) => {
+  
     e.preventDefault();
     const requestDto = {
       gender: formData.gender,
       price: Number(formData.price),
       name: formData.name,
-      sports_intro: formData.sports_intro,
+      sportsintro: formData.sportsintro,
       intro: formData.intro,
       location: formData.location,
-      self_intro: formData.self_intro,
-      sports_id: Number(formData.sports_id),
+      selfintro: formData.selfintro,
+      sportsid: Number(formData.sportsid),
       career: formData.career,
       age: Number(formData.age),
     };
@@ -96,16 +97,11 @@ const CreateMyClass = () => {
         requestData.append('portfolio', file);
       });
     }
-
-    for (let [key, value] of requestData.entries()) {
-      if (value instanceof Blob) {
-        console.log(`${key}: [Blob]`);
-      } else {
-        console.log(`${key}:`, value);
-      }
-    }
+    console.log('이미지 포함된 Request DTO 잘 출력되나', requestDto); 
+    
 
     try {
+      
       const userId = 1; // 임의로 설정
       console.log('Sending request to:', `${BASE_URL}/tutors/${userId}`);//출력됨
       const response = await axios.post(
@@ -119,7 +115,10 @@ const CreateMyClass = () => {
          
         }
       );
+   
       console.log('try문 출력:', response.data);
+      alert('게시글 등록에 성공하였습니다.')
+  
     } catch (error) {
       if (error.response) {
         console.log('튜터 등록하는데 실패했습니다 (서버 응답):', error.response.data);

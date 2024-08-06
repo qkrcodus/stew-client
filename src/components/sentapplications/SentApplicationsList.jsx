@@ -10,6 +10,7 @@ const SentApplicationsContainer = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 3.5rem;
+    cursor: pointer;
 `;
 
 const SentApplication = styled.div`

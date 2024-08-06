@@ -8,7 +8,8 @@ import RightInfo from '../components/findTutor/RightInfo'
 import ModalForm from '../components/modal/ModalForm'
 import { useState , useEffect} from 'react'
 import axios from 'axios';
-import graystar from '../assets/images/graystar.png';
+import graystars from '../assets/images/graystar.png';
+
 const TutorDetailContainer=styled.div`
     position: relative;
     display: flex;
@@ -121,9 +122,12 @@ const TutorDetail = () => {
                 <div>
                     <div>{tutordetail.name} / {tutordetail.sportName}
                         <Space />
-                        {Array.from({ length: tutordetail.total_review_score }, (_, index) => (
-                            <RatingImage key={index} src={stars} alt="stars" />
-                        ))} ({tutordetail.total_review_count})
+                        {Array.from({ length: tutordetail.total_review_score}, (_, index) => (
+                      <RatingImage key={index} src={stars} alt="stars" />
+                    ))}
+                    {Array.from({ length: 5 - tutordetail.total_review_score }, (_, index) => (
+                      <RatingImage key={index + tutordetail.total_review_score} src={graystars} alt="graystars" />
+                    ))}
                     </div>
                     <div>{tutordetail.intro}</div>
                     <div>{tutordetail.price}</div>

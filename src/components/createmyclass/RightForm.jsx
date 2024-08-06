@@ -142,13 +142,13 @@ const RightForm = ({ formData, handleChange }) => {
         <GymIntro>
           <h3>운동소개</h3>
           <textarea
-            name="sports_intro"
-            value={formData.sports_intro}
+            name="sportsintro"
+            value={formData.sportsintro}
             onChange={handleChange}
             maxLength={140}
             placeholder="운동소개 글을 입력해주세요"
           />
-          <CharCount>{formData.sports_intro.length}/300</CharCount>
+          <CharCount>{formData.sportsintro.length}/300</CharCount>
         </GymIntro>
         <Portfolio>
         <h3>포트폴리오</h3>

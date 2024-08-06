@@ -313,14 +313,15 @@ const SubmitButton = styled.button`
 `;
 
 const genderOptions = [
-  '남자', '여자'
+  ' ','남성', '여성'
 ];
 
 const locationOptions = [
-  '강남구', '강동구', '강북구', '강서구', '관악구', '광진구', '구로구', '금천구', '노원구', '도봉구', '동대문구', '동작구', '마포구', '서대문구', '서초구', '성동구', '성북구', '송파구', '양천구', '영등포구', '용산구', '은평구', '종로구', '중구', '중랑구'
+  '','강남구', '강동구', '강북구', '강서구', '관악구', '광진구', '구로구', '금천구', '노원구', '도봉구', '동대문구', '동작구', '마포구', '서대문구', '서초구', '성동구', '성북구', '송파구', '양천구', '영등포구', '용산구', '은평구', '종로구', '중구', '중랑구'
 ];
 
 const sportsOptions = [
+  { value: 0, label: '' },
   { value: 1, label: '축구' },
   { value: 3, label: '농구' },
   { value: 4, label: '배구' },
@@ -343,7 +344,7 @@ const LeftForm = ({ formData, handleChange }) => {
   const handleBioChange = (e) => {
     const { name, value } = e.target;
     handleChange(e);
-    if (name === 'self_intro') {
+    if (name === 'selfintro') {
       setCharCount(value.length);
     }
   };
@@ -437,8 +438,8 @@ const LeftForm = ({ formData, handleChange }) => {
           <div>
             <div>종목</div>
             <select
-              name="sports_id"
-              value={formData.sports_id}
+              name="sportsid"
+              value={formData.sportsid}
               onChange={handleChange}
             >
               {sportsOptions.map((option, index) => (
@@ -490,8 +491,8 @@ const LeftForm = ({ formData, handleChange }) => {
       <BioContainer>
         <h3>자기소개</h3>
         <textarea
-          name="self_intro"
-          value={formData.self_intro}
+          name="selfintro"
+          value={formData.selfintro}
           onChange={handleBioChange}
           maxLength={140}
           placeholder="자기소개 글을 입력해주세요"
