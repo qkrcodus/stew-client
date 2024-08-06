@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import stars from '../../assets/images/star-fill.png';
+import graystars from '../../assets/images/graystar.png';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -316,6 +317,9 @@ const PostContainer = ({ data, isMyData, onPageChange, currentPage, totalPages, 
                   <RatingContainer>
                     {Array.from({ length: box.score }, (_, index) => (
                       <RatingImage key={index} src={stars} alt="stars" />
+                    ))}
+                    {Array.from({ length: 5 - box.score }, (_, index) => (
+                      <RatingImage key={index + box.score} src={graystars} alt="graystars" />
                     ))}
                     <div>({box.reviewCount})</div>
                   </RatingContainer>

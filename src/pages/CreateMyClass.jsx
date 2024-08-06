@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import LeftForm from '../components/createmyclass/LeftForm';
@@ -83,10 +82,11 @@ const CreateMyClass = () => {
       career: formData.experience,
       age: Number(formData.age),
     };
-
+    //formdata객체 생성후 json 문자열로 변환해서 객체에 추가
     const requestData = new FormData();
-    requestData.append('requestDto', new Blob([JSON.stringify(requestDto)], { type: 'application/json' }));
+    requestData.append('requestDto', JSON.stringify(requestDto));
 
+    console.log('Request DTO 잘 출력되나', requestDto); // 잘됨 
     if (formData.profile) {
       requestData.append('profile', formData.profile[0]);
     }
@@ -97,8 +97,17 @@ const CreateMyClass = () => {
       });
     }
 
+    for (let [key, value] of requestData.entries()) {
+      if (value instanceof Blob) {
+        console.log(`${key}: [Blob]`);
+      } else {
+        console.log(`${key}:`, value);
+      }
+    }
+
     try {
       const userId = 1; // 임의로 설정
+      console.log('Sending request to:', `${BASE_URL}/tutors/${userId}`);
       const response = await axios.post(
         `${BASE_URL}/tutors/${userId}`,
         requestData,
@@ -108,17 +117,16 @@ const CreateMyClass = () => {
           },
         }
       );
-      console.log('보낼 데이터:', response.data);
+      console.log('try문 출력:', response.data);
     } catch (error) {
       if (error.response) {
-        console.error('튜터 등록하는데 실패했습니다 (서버 응답):', error.response.data);
+        console.log('튜터 등록하는데 실패했습니다 (서버 응답):', error.response.data);
+        alert(`서버 응답 에러: ${error.response.data.message}`);
       } else {
-        console.error('튜터 등록하는데 실패했습니다:', error.message);
+        console.log('튜터 등록하는데 실패했습니다:', error.message);
+        alert(`에러 메시지: ${error.message}`);
       }
-      alert(error.response.data, error.message)
     }
-
-    
   };
 
   return (
