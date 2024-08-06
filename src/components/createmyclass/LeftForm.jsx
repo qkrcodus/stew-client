@@ -343,7 +343,7 @@ const LeftForm = ({ formData, handleChange }) => {
   const handleBioChange = (e) => {
     const { name, value } = e.target;
     handleChange(e);
-    if (name === 'bio') {
+    if (name === 'self_intro') {
       setCharCount(value.length);
     }
   };
@@ -437,8 +437,8 @@ const LeftForm = ({ formData, handleChange }) => {
           <div>
             <div>종목</div>
             <select
-              name="type"
-              value={formData.sportsid}
+              name="sports_id"
+              value={formData.sports_id}
               onChange={handleChange}
             >
               {sportsOptions.map((option, index) => (
@@ -465,7 +465,7 @@ const LeftForm = ({ formData, handleChange }) => {
           <div></div>
           <input
             type="text"
-            name="experience"
+            name="career"
             value={formData.career}
             onChange={handleChange}
             placeholder="ex. 헬스 5년차"
@@ -476,9 +476,13 @@ const LeftForm = ({ formData, handleChange }) => {
           <div></div>
           <input
             type="text"
-            name="introduction"
+            name="intro"
             value={formData.intro}
-            onChange={handleChange}
+            onChange={(e) => {
+              handleChange(e);
+              console.log('intro 값:', e.target.value);
+            
+           }}
             placeholder="ex. 스트레스 없이 운동 시작해봐요~"
           />
         </Intro2>
@@ -486,7 +490,7 @@ const LeftForm = ({ formData, handleChange }) => {
       <BioContainer>
         <h3>자기소개</h3>
         <textarea
-          name="bio"
+          name="self_intro"
           value={formData.self_intro}
           onChange={handleBioChange}
           maxLength={140}

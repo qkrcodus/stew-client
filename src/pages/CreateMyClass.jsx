@@ -43,11 +43,11 @@ const CreateMyClass = () => {
     age: '',
     gender: '',
     location: '',
-    type: '',
+    sports_id: '',
     price: '',
-    experience: '',
-    introduction: '',
-    bio: '',
+    career: '',
+    intro: '',
+    self_intro: '',
     sports_intro: '',
     profile: null,
     portfolio: [],
@@ -77,9 +77,9 @@ const CreateMyClass = () => {
       sports_intro: formData.sports_intro,
       intro: formData.intro,
       location: formData.location,
-      self_intro: formData.bio,
-      sports_id: Number(formData.type),
-      career: formData.experience,
+      self_intro: formData.self_intro,
+      sports_id: Number(formData.sports_id),
+      career: formData.career,
       age: Number(formData.age),
     };
     //formdata객체 생성후 json 문자열로 변환해서 객체에 추가
@@ -107,14 +107,16 @@ const CreateMyClass = () => {
 
     try {
       const userId = 1; // 임의로 설정
-      console.log('Sending request to:', `${BASE_URL}/tutors/${userId}`);
+      console.log('Sending request to:', `${BASE_URL}/tutors/${userId}`);//출력됨
       const response = await axios.post(
         `${BASE_URL}/tutors/${userId}`,
         requestData,
         {
           headers: {
             'Content-Type': 'multipart/form-data',
+             accept: 'application/json'
           },
+         
         }
       );
       console.log('try문 출력:', response.data);
